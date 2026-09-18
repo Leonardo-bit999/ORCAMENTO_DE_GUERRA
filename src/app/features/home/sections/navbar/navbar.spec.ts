@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DadosCarousel } from './dados-carousel';
+import { Navbar } from './navbar';
 
-describe('DadosCarousel', () => {
-  let component: DadosCarousel;
-  let fixture: ComponentFixture<DadosCarousel>;
+describe('Navbar', () => {
+  let component: Navbar;
+  let fixture: ComponentFixture<Navbar>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DadosCarousel]
+      imports: [Navbar]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DadosCarousel);
+    fixture = TestBed.createComponent(Navbar);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

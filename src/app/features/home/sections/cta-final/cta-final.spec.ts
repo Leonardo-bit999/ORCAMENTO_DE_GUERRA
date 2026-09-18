@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Imprevistos } from './imprevistos';
+import { CtaFinal } from './cta-final';
 
-describe('Imprevistos', () => {
-  let component: Imprevistos;
-  let fixture: ComponentFixture<Imprevistos>;
+describe('CtaFinal', () => {
+  let component: CtaFinal;
+  let fixture: ComponentFixture<CtaFinal>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Imprevistos]
+      imports: [CtaFinal]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Imprevistos);
+    fixture = TestBed.createComponent(CtaFinal);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

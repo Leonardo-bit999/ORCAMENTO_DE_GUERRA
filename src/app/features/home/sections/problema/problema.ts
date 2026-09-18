@@ -12,12 +12,12 @@ interface SlideDestaque {
 }
 
 @Component({
-  selector: 'app-dados-carousel',
+  selector: 'app-problema',
   imports: [CommonModule],
-  templateUrl: './dados-carousel.html',
-  styleUrl: './dados-carousel.css'
+  templateUrl: './problema.html',
+  styleUrl: './problema.css'
 })
-export class DadosCarousel implements OnInit, OnDestroy {
+export class Problema implements OnInit, OnDestroy {
   protected readonly activeIndex = signal(0);
 
   protected readonly slides: SlideDestaque[] = [

@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common'; // Necessário para *ngFor e *ng
   templateUrl: './hero.html',
   styleUrls: ['./hero.css']
 })
-export class HeroComponent {
+export class Hero {
 
   // Dados do Card (Mock)
   saldoDisponivel: number = 1240;
