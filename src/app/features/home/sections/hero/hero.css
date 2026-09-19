@@ -1,49 +1,99 @@
 :host {
-  --bg-dark: #0a0a0a;
-  --bg-card: #121214;
-  --primary-green: #a3e635; /* Verde neon */
-  --text-white: #ffffff;
-  --text-gray: #a1a1aa;
-  --border-color: #27272a;
-  --danger-red: #ef4444;
-  --info-cyan: #06b6d4;
-  
   display: block;
   width: 100%;
-  min-height: auto;
-  background: radial-gradient(circle at 50% 0%, #142414 0%, #0a0a0a 60%, #000000 100%);
-
-  background-image: 
-    radial-gradient(circle at 50% 0%, rgba(20, 36, 20, 0.8) 0%, transparent 60%),
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-
-    background-size: 100% 100%, 40px 40px, 40px 40px;
-
-  color: var(--text-white);
-  font-family: 'Inter', sans-serif; 
-  overflow:hidden;
+  position: relative;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  overflow: hidden;
 }
 
+/* ============================================
+   FUNDO — Glow lateral (atrás do card)
+   ============================================ */
+:host::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    /* Glow principal: atrás do dashboard card (lado direito) */
+    radial-gradient(circle at 75% 55%, rgba(168, 240, 0, 0.08) 0%, transparent 50%),
+    /* Glow secundário: canto inferior esquerdo, bem sutil */
+    radial-gradient(circle at 15% 85%, rgba(168, 240, 0, 0.03) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================================
+   SCAN LINE — linha de varredura vertical
+   ============================================ */
+:host::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: linear-gradient(to bottom,
+      transparent 0%,
+      transparent 45%,
+      rgba(168, 240, 0, 0.06) 50%,
+      transparent 55%,
+      transparent 100%);
+  animation: scan 8s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(200%);
+  }
+}
+
+/* ============================================
+   LAYOUT
+   ============================================ */
 .hero-container {
+  position: relative;
+  z-index: 2;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0rem 2rem;
+  padding: 2rem 4rem 6rem;
   align-items: center;
-  min-height: 100vh;
-  box-sizing: border-box;
+  min-height: 50vh;
 }
 
-/* --- Lado Esquerdo --- */
+/* ============================================
+   CONTEÚDO ESQUERDO
+   ============================================ */
 .hero-content {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  justify-self: end; 
-  max-width: 600px;
+  gap: 1.25rem;
+  max-width: 560px;
+  .hero-content {
+      animation: content-enter 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+    }
+  
+    @keyframes content-enter {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+  
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 }
 
 .badge {
@@ -51,11 +101,11 @@
   align-items: center;
   gap: 0.5rem;
   width: fit-content;
-  padding: 0.32rem 0.7rem;
-  border: 1px solid rgba(163, 230, 53, 0.25);
-  border-radius: 999px;
-  background: rgba(163, 230, 53, 0.07);
-  color: var(--primary-green);
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--border-green);
+  border-radius: var(--radius-pill);
+  background: var(--glow-green-soft);
+  color: var(--green);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -64,36 +114,50 @@
 .badge .dot {
   width: 6px;
   height: 6px;
-  background-color: var(--primary-green);
+  background-color: var(--green);
   border-radius: 50%;
+  box-shadow: 0 0 8px var(--glow-green);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
 }
 
 .main-title {
-   margin: 0;
-
-  font-size: clamp(3.2rem, 5vw, 4.5rem);
-  line-height: 0.96;
+  margin: 0;
+  font-size: clamp(3.2rem, 5.5vw, 4.75rem);
+  line-height: 0.95;
   font-weight: 800;
-
   text-transform: uppercase;
   letter-spacing: -0.035em;
+  color: var(--text-primary);
 }
 
 .main-title .highlight {
-  color: var(--primary-green);
+  color: var(--green);
 }
 
 .subtitle {
   font-size: 1.25rem;
   font-weight: 600;
   margin: 0;
+  color: var(--text-primary);
 }
 
 .description {
-  color: var(--text-gray);
+  color: var(--text-secondary);
   font-size: 1rem;
   line-height: 1.6;
-  max-width: 400px;
+  max-width: 440px;
   margin: 0;
 }
 
@@ -101,118 +165,141 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.05em;
-  color: var(--text-gray);
-  margin-top: 1rem;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
 }
 
 .tags .danger {
-  color: var(--danger-red);
+  color: var(--danger);
 }
 
 .tags .separator {
-  color: #3f3f46;
+  color: var(--text-muted);
   font-weight: 400;
 }
 
+/* ============================================
+   AÇÕES / BOTÕES
+   ============================================ */
 .actions {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
   margin-top: 1.5rem;
 }
 
 button {
-  padding: 1rem 1.5rem;
-  border-radius: 999px;
-  font-weight: 800;
+  font-family: inherit;
   font-size: 0.875rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  font-weight: 800;
   text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  border: 0;
+  transition: all 0.2s ease;
 }
 
-.btn-primary {
+.btn-primary,
+.btn-secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.55rem;
+  padding: 0.95rem 1.5rem;
+  border-radius: var(--radius-md);
+}
 
-  padding: 0.95rem 1.4rem;
-
-  border: 1px solid rgba(163, 230, 53, 0.35);
-  border-radius: 10px;
-
-  background-color: var(--primary-green);
-  color: #071006;
-
-  font-weight: 800;
-  text-transform: uppercase;
-
-  cursor: pointer;
-
-  box-shadow:
-    0 0 0 rgba(163, 230, 53, 0),
-    0 8px 24px rgba(163, 230, 53, 0.08);
-
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    filter 0.2s ease;
+.btn-primary {
+  background-color: var(--green);
+  color: var(--bg-base);
+  border: 1px solid var(--green);
+  box-shadow: 0 8px 24px rgba(168, 240, 0, 0.15);
 }
 
 .btn-primary:hover {
-  filter: brightness(1.05);
+  background-color: var(--green-hover);
+  border-color: var(--green-hover);
   transform: translateY(-2px);
-
-  box-shadow:
-    0 0 22px rgba(163, 230, 53, 0.18),
-    0 12px 30px rgba(163, 230, 53, 0.12);
+  box-shadow: 0 12px 32px rgba(168, 240, 0, 0.3);
 }
 
 .btn-primary:active {
   transform: translateY(0);
+  background-color: var(--green-dim);
 }
 
 .btn-primary:focus-visible {
-  outline: 2px solid var(--text-white);
+  outline: 2px solid var(--green);
   outline-offset: 3px;
 }
 
 .btn-secondary {
   background-color: transparent;
-  color: var(--text-white);
-  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border: 1px solid var(--border-strong);
 }
 
 .btn-secondary:hover {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(244, 245, 242, 0.04);
+  border-color: rgba(244, 245, 242, 0.24);
+  transform: translateY(-2px);
 }
 
-/* --- Lado Direito (Dashboard) --- */
+.btn-secondary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary:focus-visible {
+  outline: 2px solid var(--text-primary);
+  outline-offset: 3px;
+}
+
+/* ============================================
+   DASHBOARD CARD — com animação de entrada
+   ============================================ */
+.dashboard-preview {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .dashboard-card {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: 1.5rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    0 0 80px -20px rgba(168, 240, 0, 0.12);
   max-width: 480px;
-  margin-left: auto; /* Empurra para a direita */
+  width: 100%;
+  animation: card-enter 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* Header */
+@keyframes card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Header do card */
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 600;
-  color: var(--text-gray);
+  color: var(--text-secondary);
 }
 
 .month-status {
@@ -224,112 +311,135 @@ button {
 .status-dot {
   width: 8px;
   height: 8px;
-  background-color: var(--primary-green);
+  background-color: var(--green);
   border-radius: 50%;
+  box-shadow: 0 0 8px var(--glow-green);
 }
 
 .day-badge {
-  background-color: #27272a;
+  background-color: var(--bg-elevated);
   padding: 0.25rem 0.75rem;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
+  color: var(--text-primary);
 }
 
-/* Saldo */
+/* Saldo — usando fonte mono para valores */
 .balance-section .label {
-  font-size: 0.75rem;
-  color: var(--text-gray);
+  font-size: 0.72rem;
+  color: var(--text-secondary);
   margin-bottom: 0.25rem;
+  letter-spacing: 0.05em;
 }
 
 .balance-section .value {
-  font-size: 2.5rem;
-  font-weight: 800;
+  font-family: var(--font-mono);
+  font-size: 2.4rem;
+  font-weight: 700;
   margin-bottom: 0.25rem;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
 }
 
 .balance-section .expenses {
+  font-family: var(--font-mono);
   font-size: 0.75rem;
-  color: var(--danger-red);
+  color: var(--danger);
   margin-bottom: 1rem;
+  font-variant-numeric: tabular-nums;
 }
 
 .progress-container {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.35rem;
 }
 
 .progress-bar {
   height: 6px;
-  background-color: #27272a;
-  border-radius: 999px;
+  background-color: var(--bg-elevated);
+  border-radius: var(--radius-pill);
   overflow: hidden;
 }
 
 .progress-fill {
   height: 100%;
-  background-color: var(--primary-green);
+  background-color: var(--green);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 0 12px var(--glow-green);
+  transition: width 0.6s ease;
 }
 
 .progress-labels {
   display: flex;
   justify-content: space-between;
-  font-size: 0.65rem;
-  color: var(--text-gray);
+  font-size: 0.68rem;
+  color: var(--text-secondary);
 }
 
-/* Status Grid */
+/* Grid de status */
 .status-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .status-box {
-  background-color: #18181b;
-  border: 1px solid var(--border-color);
-  border-radius: 1rem;
-  padding: 1rem;
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.9rem;
 }
 
 .status-label {
   font-size: 0.65rem;
-  color: var(--text-gray);
-  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
   font-weight: 600;
+  letter-spacing: 0.05em;
 }
 
 .status-value {
+  font-family: var(--font-mono);
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--info-cyan);
+  color: var(--info);
   margin-bottom: 0.5rem;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
 }
 
 .status-value.red {
-  color: var(--danger-red);
+  color: var(--danger);
 }
 
 .status-value .small {
   font-size: 0.875rem;
-  color: var(--text-gray);
+  color: var(--text-secondary);
+  font-weight: 500;
 }
 
 .bar {
   height: 4px;
-  background-color: #27272a;
-  border-radius: 999px;
+  background-color: var(--bg-base);
+  border-radius: var(--radius-pill);
   overflow: hidden;
 }
 
 .bar .fill {
   height: 100%;
+  border-radius: var(--radius-pill);
 }
 
-.bar.cyan .fill { background-color: var(--info-cyan); }
-.bar.red .fill { background-color: var(--danger-red); }
+.bar.cyan .fill {
+  background-color: var(--info);
+}
 
-/* Lista de Gastos */
+.bar.red .fill {
+  background-color: var(--danger);
+}
+
+/* Lista de gastos */
 .expenses-list {
   display: flex;
   flex-direction: column;
@@ -339,29 +449,31 @@ button {
 .expense-item {
   display: flex;
   justify-content: space-between;
-  background-color: #18181b;
+  background-color: var(--bg-elevated);
   padding: 0.75rem 1rem;
-  border-radius: 0.5rem;
-  font-size: 0.875rem;
-  color: var(--text-gray);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
 }
 
 .expense-item .amount {
-  color: var(--text-white);
+  font-family: var(--font-mono);
+  color: var(--text-primary);
   font-weight: 600;
+  font-variant-numeric: tabular-nums;
 }
 
 /* Alerta */
 .alert-box {
-  background-color: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.2);
-  border-radius: 0.75rem;
+  background-color: rgba(240, 82, 58, 0.08);
+  border: 1px solid rgba(240, 82, 58, 0.25);
+  border-radius: var(--radius-md);
   padding: 1rem;
 }
 
 .alert-title {
-  color: var(--danger-red);
-  font-size: 0.875rem;
+  color: var(--danger);
+  font-size: 0.85rem;
   font-weight: 700;
   margin-bottom: 0.25rem;
   display: flex;
@@ -370,37 +482,32 @@ button {
 }
 
 .alert-desc {
-  color: var(--text-gray);
-  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  line-height: 1.5;
 }
 
+/* ============================================
+   RESPONSIVO
+   ============================================ */
 @media (max-width: 968px) {
   .hero-container {
     grid-template-columns: 1fr;
     gap: 3rem;
-
-    width: 100%;
+    padding: 7rem 2rem 5rem;
     min-height: auto;
-
-    padding: 6rem 1.5rem 4rem;
   }
 
   .hero-content {
-    width: 100%;
-    max-width: 650px;
-
-    justify-self: center;
-
+    max-width: 640px;
+    margin: 0 auto;
     align-items: center;
     text-align: center;
-
-    gap: 1.2rem;
+    gap: 1.15rem;
   }
 
   .main-title {
     font-size: clamp(2.8rem, 9vw, 4rem);
-    line-height: 0.95;
-    letter-spacing: -0.04em;
   }
 
   .description {
@@ -412,25 +519,18 @@ button {
   }
 
   .dashboard-preview {
-    width: 100%;
+    justify-content: center;
   }
 
   .dashboard-card {
-    width: 100%;
-    max-width: 100%;
-
-    margin: 0;
-
-    padding: 1.25rem;
-
-    box-sizing: border-box;
+    max-width: 520px;
   }
 }
 
 @media (max-width: 640px) {
   .hero-container {
     gap: 2.5rem;
-    padding: 5rem 1rem 3rem;
+    padding: 6rem 1.25rem 4rem;
   }
 
   .badge {
@@ -438,7 +538,7 @@ button {
   }
 
   .main-title {
-    font-size: clamp(2.5rem, 10vw, 3.5rem);
+    font-size: clamp(2.5rem, 11vw, 3.5rem);
   }
 
   .subtitle {
@@ -446,101 +546,68 @@ button {
   }
 
   .description {
-    max-width: 340px;
+    max-width: 360px;
     font-size: 0.95rem;
   }
 
-  .hero-prompt {
-    max-width: 320px;
-    font-size: 0.8rem;
-  }
-
   .tags {
-    max-width: 340px;
+    max-width: 360px;
     justify-content: center;
-
     gap: 0.35rem;
-
     font-size: 0.65rem;
     line-height: 1.7;
   }
 
   .actions {
     width: 100%;
-
     flex-direction: column;
     align-items: stretch;
-
-    gap: 0.75rem;
+    gap: 0.65rem;
   }
 
   .btn-primary,
   .btn-secondary {
     width: 100%;
-    justify-content: center;
   }
 
   .dashboard-card {
-    padding: 1rem;
-    gap: 1.1rem;
-
-    border-radius: 1.25rem;
+    padding: 1.25rem;
+    gap: 1.25rem;
+    border-radius: var(--radius-lg);
   }
 
   .balance-section .value {
     font-size: 2rem;
   }
 
-  .balance-section .expenses {
-    font-size: 0.7rem;
-  }
-
   .status-grid {
-    gap: 0.7rem;
+    gap: 0.65rem;
   }
 
   .status-box {
-    padding: 0.85rem;
+    padding: 0.8rem;
   }
 
   .expense-item {
-    padding: 0.7rem 0.8rem;
+    padding: 0.7rem 0.85rem;
     font-size: 0.8rem;
   }
 
   .alert-box {
     padding: 0.85rem;
   }
-
-  .alert-title {
-    font-size: 0.8rem;
-  }
-
-  .alert-desc {
-    font-size: 0.7rem;
-    line-height: 1.4;
-  }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 420px) {
   .status-grid {
     grid-template-columns: 1fr;
   }
 
   .main-title {
-    font-size: 2.45rem;
+    font-size: 2.35rem;
   }
 
   .tags {
-    max-width: 300px;
     font-size: 0.6rem;
-  }
-
-  .card-header {
-    font-size: 0.68rem;
-  }
-
-  .day-badge {
-    padding: 0.2rem 0.6rem;
   }
 }

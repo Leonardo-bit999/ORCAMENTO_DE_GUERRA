@@ -1,0 +1,227 @@
+:host {
+    display: block;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    border-bottom: 1px solid var(--border);
+    background: rgba(11, 13, 15, 0.72);
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 72px;
+    padding: 0 2.5rem;
+    max-width: none;
+}
+
+/* ============================================
+   BRAND
+   ============================================ */
+.brand {
+    display: inline-flex;
+    align-items: center;
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+.brand:hover {
+    opacity: 0.85;
+}
+
+.brand-logo {
+    height: 100px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+    flex: 0 0 auto;
+    filter: drop-shadow(0 0 8px rgba(168, 240, 0, 0.5));
+    transition: filter 0.3s ease;
+}
+
+.brand:hover .brand-logo {
+    filter: drop-shadow(0 0 14px rgba(168, 240, 0, 0.8));
+}
+
+/* ============================================
+   NAV LINKS
+   ============================================ */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.nav-links a:not(.button) {
+    position: relative;
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:not(.button):hover {
+    color: var(--green);
+}
+
+.nav-links a:not(.button)::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 1px;
+    background: var(--green);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.25s ease;
+    box-shadow: 0 0 8px var(--glow-green);
+}
+
+.nav-links a:not(.button):hover::after {
+    transform: scaleX(1);
+}
+
+/* ============================================
+   BOTÃO
+   ============================================ */
+.button-small {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.65rem 1.4rem;
+    border: 1px solid var(--green);
+    border-radius: var(--radius-md);
+    background: var(--green);
+    color: var(--bg-base);
+    font-family: inherit;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow:
+        0 0 0 1px rgba(168, 240, 0, 0.2),
+        0 8px 24px -8px rgba(168, 240, 0, 0.5);
+}
+
+.button-small:hover {
+    background: var(--green-hover);
+    border-color: var(--green-hover);
+    transform: translateY(-1px);
+    box-shadow:
+        0 0 0 1px rgba(168, 240, 0, 0.4),
+        0 12px 32px -8px rgba(168, 240, 0, 0.7);
+}
+
+.button-small:focus-visible {
+    outline: 2px solid var(--green);
+    outline-offset: 3px;
+}
+
+/* ============================================
+   MENU TOGGLE (mobile)
+   ============================================ */
+.menu-toggle {
+    display: none;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.menu-toggle:hover {
+    border-color: var(--border-green-strong);
+    color: var(--green);
+}
+
+.menu-toggle span:not(.sr-only) {
+    display: block;
+    width: 18px;
+    height: 2px;
+    margin: 2px 0;
+    background: currentColor;
+    border-radius: 1px;
+}
+
+/* ============================================
+   MOBILE
+   ============================================ */
+@media (max-width: 700px) {
+    .site-nav {
+        min-height: 60px;
+        padding: 0 1.25rem;
+    }
+
+    .brand-logo {
+        height: 36px;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 60px;
+        right: 12px;
+        left: 12px;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 0.5rem;
+        border: 1px solid var(--border-strong);
+        border-radius: var(--radius-lg);
+        background: var(--bg-surface);
+        backdrop-filter: blur(20px);
+        box-shadow:
+            0 20px 60px -20px rgba(0, 0, 0, 0.8),
+            0 0 60px -20px rgba(168, 240, 0, 0.15);
+    }
+
+    .nav-links.is-open {
+        display: flex;
+    }
+
+    .nav-links a {
+        padding: 0.9rem 1rem;
+        border-radius: var(--radius-sm);
+        transition: background 0.2s ease;
+    }
+
+    .nav-links a:not(.button):hover {
+        background: rgba(168, 240, 0, 0.06);
+    }
+
+    .nav-links a:not(.button)::after {
+        display: none;
+    }
+
+    .nav-links .button {
+        margin-top: 0.4rem;
+        justify-content: center;
+    }
+}
