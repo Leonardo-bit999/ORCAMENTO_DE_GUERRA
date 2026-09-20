@@ -1,25 +1,11 @@
-/* ================================
-   DESTAQUES — seção
-   ================================ */
+/* ============================================
+   SEÇÃO DESTAQUES
+   ============================================ */
 .destaques {
     position: relative;
-    padding: 4rem 0 5rem;
-    background: #000000;
-    /* Preto puro, igual ao final do Hero */
+    padding: 5rem 0 6rem;
+    background: var(--bg-base);
     overflow: hidden;
-}
-
-/* Glow verde sutil no topo, integrando com o Hero */
-.destaques::before {
-    content: '';
-    position: absolute;
-    top: -30%;
-    left: 50%;
-    width: 800px;
-    height: 800px;
-    transform: translateX(-50%);
-    background: radial-gradient(circle, rgba(163, 230, 53, 0.08) 0%, transparent 65%);
-    pointer-events: none;
 }
 
 .destaques .container {
@@ -30,9 +16,9 @@
     padding: 0 2rem;
 }
 
-/* ================================
-   CABEÇALHO
-   ================================ */
+/* ============================================
+   CABEÇALHO DA SEÇÃO
+   ============================================ */
 .destaques__cabecalho {
     max-width: 720px;
     margin-bottom: 2.5rem;
@@ -41,8 +27,7 @@
 .eyebrow {
     display: inline-block;
     margin-bottom: 0.9rem;
-    color: #A3E635;
-    /* Verde neon */
+    color: var(--green);
     font-size: 0.7rem;
     font-weight: 900;
     letter-spacing: 0.22em;
@@ -51,8 +36,7 @@
 
 .destaques h2 {
     margin: 0 0 0.9rem;
-    color: #F4F4F5;
-    /* Branco off */
+    color: var(--text-primary);
     font-size: clamp(1.6rem, 3.2vw, 2.4rem);
     font-weight: 800;
     line-height: 1.1;
@@ -62,27 +46,23 @@
 
 .destaques__cabecalho p {
     margin: 0;
-    color: #A1A1AA;
-    /* Cinza claro */
+    color: var(--text-secondary);
     font-size: 1rem;
     line-height: 1.5;
 }
 
-/* ================================
+/* ============================================
    CARROSSEL
-   ================================ */
+   ============================================ */
 .carousel {
     position: relative;
-    border: 1px solid #27272A;
-    /* Borda cinza escura */
-    border-radius: 20px;
-    background: #121214;
-    /* Fundo do card */
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    background: var(--bg-surface);
     box-shadow:
-        0 0 0 1px rgba(255, 255, 255, 0.02) inset,
+        0 0 0 1px rgba(244, 245, 242, 0.02) inset,
         0 20px 60px -20px rgba(0, 0, 0, 0.8),
-        0 0 80px -20px rgba(163, 230, 53, 0.05);
-    /* Glow verde sutil */
+        0 0 80px -20px rgba(168, 240, 0, 0.06);
     overflow: hidden;
     min-height: 420px;
 }
@@ -110,31 +90,31 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
-    filter: saturate(0.6) contrast(1.1) brightness(0.5);
-    /* Mais escuro para o texto brilhar */
+    filter: saturate(0.7) contrast(1.05) brightness(0.65);
 }
 
+/* Overlay mais leve — deixa a imagem respirar */
 .slide__overlay {
     position: absolute;
     inset: 0;
     z-index: 1;
     background:
-        /* Escurece esquerda pro texto */
+        /* Escurece só a esquerda pro texto */
         linear-gradient(90deg,
-            rgba(0, 0, 0, 0.98) 0%,
-            rgba(0, 0, 0, 0.92) 30%,
-            rgba(0, 0, 0, 0.6) 55%,
-            rgba(0, 0, 0, 0.2) 85%,
-            rgba(0, 0, 0, 0.05) 100%),
+            rgba(11, 13, 15, 0.96) 0%,
+            rgba(11, 13, 15, 0.88) 35%,
+            rgba(11, 13, 15, 0.5) 60%,
+            rgba(11, 13, 15, 0.1) 90%,
+            transparent 100%),
         /* Escurece a base pro rodapé */
         linear-gradient(0deg,
-            rgba(0, 0, 0, 0.95) 0%,
-            rgba(0, 0, 0, 0.5) 10%,
-            transparent 30%),
-        /* Tom verde sutil */
+            rgba(11, 13, 15, 0.9) 0%,
+            rgba(11, 13, 15, 0.4) 12%,
+            transparent 35%),
+        /* Tom verde bem sutil */
         linear-gradient(135deg,
-            rgba(163, 230, 53, 0.05) 0%,
-            transparent 60%);
+            rgba(168, 240, 0, 0.04) 0%,
+            transparent 55%);
 }
 
 .slide__content {
@@ -144,86 +124,87 @@
     flex-direction: column;
     max-width: 620px;
     padding: 3rem 3.5rem 2.5rem 4rem;
-    color: #F4F4F5;
+    color: var(--text-primary);
 }
 
 .slide h3 {
     margin: 0;
-    color: #A3E635;
-    /* Verde neon */
+    font-family: var(--font-mono);
+    color: var(--green);
     font-size: clamp(2.6rem, 5.5vw, 3.8rem);
     font-weight: 800;
     line-height: 1;
-    letter-spacing: -0.02em;
-    text-shadow: 0 0 40px rgba(163, 230, 53, 0.35);
-}
-
-.slide__text {
-    margin: 0.85rem 0 1.5rem;
-    color: #A1A1AA;
-    font-size: 0.85rem;
-    line-height: 1.65;
+    letter-spacing: -0.03em;
+    text-shadow: 0 0 40px rgba(168, 240, 0, 0.35);
+    font-variant-numeric: tabular-nums;
 }
 
 .slide__description {
     margin: 0.75rem 0 0;
-    color: #FFFFFF;
+    color: var(--text-primary);
     font-size: clamp(1rem, 1.5vw, 1.15rem);
     font-weight: 600;
     line-height: 1.35;
 }
 
-/* ================================
-   FONTE
-   ================================ */
+.slide__text {
+    margin: 0.85rem 0 1.5rem;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    line-height: 1.65;
+}
+
+/* ============================================
+   RODAPÉ DO SLIDE (fonte + link)
+   ============================================ */
+.slide__source {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+}
+
 .slide__source-label {
-    flex: 1;
-    color: #71717A;
-    /* Cinza mais escuro */
+    color: var(--text-muted);
     font-size: 0.62rem;
     font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-}
-
-.slide__source {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding-top: 1rem;
-    border-top: 1px solid #27272A;
+    line-height: 1.4;
 }
 
 .slide__source-link {
     display: inline-grid;
     place-items: center;
-    width: 26px;
-    height: 26px;
-    border: 1px solid rgba(6, 182, 212, 0.3);
-    /* Ciano sutil */
-    border-radius: 50%;
-    color: #06B6D4;
-    /* Ciano */
-    background: rgba(6, 182, 212, 0.08);
-    transition: all 0.25s ease;
+    width: 28px;
+    height: 28px;
     flex-shrink: 0;
+    border: 1px solid var(--border-green);
+    border-radius: 50%;
+    background: var(--glow-green-soft);
+    color: var(--green);
+    transition: all 0.25s ease;
+    text-decoration: none;
 }
 
 .slide__source-link .material-symbols-rounded {
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .slide__source-link:hover,
 .slide__source-link:focus-visible {
-    background: rgba(6, 182, 212, 0.2);
-    border-color: #06B6D4;
-    color: #22D3EE;
-    transform: scale(1.1);
+    background: rgba(168, 240, 0, 0.18);
+    border-color: var(--green);
+    color: var(--green-hover);
+    transform: scale(1.08);
+    box-shadow: 0 0 16px var(--glow-green);
 }
 
-/* ================================
-   RODAPÉ DO CARROSSEL
-   ================================ */
+/* ============================================
+   RODAPÉ DO CARROSSEL (controles)
+   ============================================ */
 .carousel__controls {
     position: absolute;
     bottom: 0;
@@ -234,21 +215,23 @@
     align-items: center;
     gap: 0.9rem;
     padding: 1rem 1.5rem;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.98) 0%, rgba(0, 0, 0, 0.85) 100%);
-    border-top: 1px solid #27272A;
+    background: linear-gradient(0deg, rgba(11, 13, 15, 0.98) 0%, rgba(11, 13, 15, 0.85) 100%);
+    border-top: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 }
 
 /* Botões de navegação */
 .carousel__nav {
     display: grid;
     place-items: center;
-    width: 34px;
-    height: 34px;
+    width: 36px;
+    height: 36px;
     padding: 0;
-    border: 1px solid #3F3F46;
+    border: 1px solid var(--border-strong);
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.03);
-    color: #A1A1AA;
+    background: rgba(244, 245, 242, 0.03);
+    color: var(--text-secondary);
     cursor: pointer;
     transition: all 0.25s ease;
 }
@@ -259,14 +242,14 @@
 
 .carousel__nav:hover,
 .carousel__nav:focus-visible {
-    background: rgba(163, 230, 53, 0.12);
-    border-color: #A3E635;
-    color: #A3E635;
-    box-shadow: 0 0 20px rgba(163, 230, 53, 0.2);
+    background: rgba(168, 240, 0, 0.12);
+    border-color: var(--green);
+    color: var(--green);
+    box-shadow: 0 0 20px var(--glow-green);
 }
 
 .carousel__nav:focus-visible {
-    outline: 2px solid #A3E635;
+    outline: 2px solid var(--green);
     outline-offset: 2px;
 }
 
@@ -274,17 +257,17 @@
 .carousel__indicators {
     display: flex;
     gap: 0.35rem;
-    margin-left: 0.6rem;
+    margin-left: 0.4rem;
 }
 
 .carousel__indicators button {
     position: relative;
     width: 24px;
-    height: 2px;
+    height: 3px;
     padding: 0;
     border: 0;
     border-radius: 2px;
-    background: #3F3F46;
+    background: var(--border-strong);
     cursor: pointer;
     overflow: hidden;
     transition: width 0.3s ease, background 0.3s ease;
@@ -296,23 +279,23 @@
     inset: -12px -3px;
 }
 
-.carousel__indicators button.is-active {
-    width: 44px;
-    background: rgba(163, 230, 53, 0.15);
+.carousel__indicators button:hover {
+    background: var(--text-muted);
 }
 
-.carousel__indicators button:hover {
-    background: #52525B;
+.carousel__indicators button.is-active {
+    width: 48px;
+    background: rgba(168, 240, 0, 0.15);
 }
 
 .carousel__indicator-progress {
     position: absolute;
     inset: 0;
-    background: #A3E635;
+    background: var(--green);
     transform-origin: left center;
     transform: scaleX(0);
     animation: progress 10s linear forwards;
-    box-shadow: 0 0 10px rgba(163, 230, 53, 0.6);
+    box-shadow: 0 0 10px var(--glow-green);
 }
 
 @keyframes progress {
@@ -325,25 +308,27 @@
     }
 }
 
+/* Contador */
 .carousel__counter {
     margin-left: auto;
-    font-family: 'SF Mono', 'Fira Code', monospace;
-    font-size: 0.7rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
     font-weight: 600;
-    letter-spacing: 0.15em;
-    color: #71717A;
+    letter-spacing: 0.12em;
+    color: var(--text-secondary);
+    font-variant-numeric: tabular-nums;
 }
 
-/* ================================
-   RESPONSIVIDADE
-   ================================ */
+/* ============================================
+   RESPONSIVO — Tablet
+   ============================================ */
 @media (max-width: 768px) {
     .destaques {
-        padding: 2.5rem 0 3rem;
+        padding: 3rem 0 4rem;
     }
 
     .destaques .container {
-        padding: 0 1.2rem;
+        padding: 0 1.25rem;
     }
 
     .destaques__cabecalho {
@@ -355,8 +340,8 @@
     }
 
     .carousel {
-        min-height: 420px;
-        border-radius: 16px;
+        min-height: 460px;
+        border-radius: var(--radius-lg);
     }
 
     .slide {
@@ -382,12 +367,6 @@
         margin-bottom: 1rem;
     }
 
-    .slide__source-label {
-        font-size: 0.62rem;
-        letter-spacing: 0.1em;
-        color: #A1A1AA;
-    }
-
     .carousel__controls {
         padding: 0.85rem 1rem;
         gap: 0.6rem;
@@ -403,7 +382,7 @@
     }
 
     .carousel__indicators button.is-active {
-        width: 34px;
+        width: 36px;
     }
 
     .carousel__counter {
@@ -411,9 +390,12 @@
     }
 }
 
+/* ============================================
+   RESPONSIVO — Mobile
+   ============================================ */
 @media (max-width: 480px) {
     .destaques {
-        padding: 2rem 0 2.5rem;
+        padding: 2.5rem 0 3rem;
     }
 
     .destaques .container {
@@ -439,30 +421,28 @@
     }
 
     .carousel {
-        min-height: 460px;
-        border-radius: 14px;
+        min-height: 520px;
+        border-radius: var(--radius-md);
     }
 
     .slide {
-        inset: 0 0 58px 0;
+        inset: 0 0 60px 0;
         align-items: flex-end;
     }
 
+    /* Overlay mais forte no mobile (mais área de texto) */
     .slide__overlay {
         background:
-            linear-gradient(90deg,
-                rgba(0, 0, 0, 0.98) 0%,
-                rgba(0, 0, 0, 0.92) 60%,
-                rgba(0, 0, 0, 0.7) 100%),
-            linear-gradient(0deg,
-                rgba(0, 0, 0, 0.98) 0%,
-                rgba(0, 0, 0, 0.7) 12%,
-                transparent 35%),
             linear-gradient(180deg,
-                rgba(0, 0, 0, 0.6) 0%,
+                rgba(11, 13, 15, 0.5) 0%,
                 transparent 25%),
+            linear-gradient(0deg,
+                rgba(11, 13, 15, 0.98) 0%,
+                rgba(11, 13, 15, 0.85) 40%,
+                rgba(11, 13, 15, 0.4) 70%,
+                transparent 100%),
             linear-gradient(135deg,
-                rgba(163, 230, 53, 0.08) 0%,
+                rgba(168, 240, 0, 0.06) 0%,
                 transparent 60%);
     }
 
@@ -497,12 +477,11 @@
     .slide__source-label {
         font-size: 0.58rem;
         letter-spacing: 0.08em;
-        color: #A1A1AA;
     }
 
     .slide__source-link {
-        width: 24px;
-        height: 24px;
+        width: 26px;
+        height: 26px;
     }
 
     .slide__source-link .material-symbols-rounded {
@@ -515,8 +494,8 @@
     }
 
     .carousel__nav {
-        width: 28px;
-        height: 28px;
+        width: 30px;
+        height: 30px;
     }
 
     .carousel__nav .material-symbols-rounded {
@@ -525,7 +504,7 @@
 
     .carousel__indicators {
         gap: 0.22rem;
-        margin-left: 0.4rem;
+        margin-left: 0.3rem;
     }
 
     .carousel__indicators button {
@@ -534,15 +513,18 @@
     }
 
     .carousel__indicators button.is-active {
-        width: 24px;
+        width: 26px;
     }
 
     .carousel__counter {
-        font-size: 0.6rem;
-        letter-spacing: 0.08em;
+        font-size: 0.62rem;
+        letter-spacing: 0.06em;
     }
 }
 
+/* ============================================
+   ACESSIBILIDADE — Movimento reduzido
+   ============================================ */
 @media (prefers-reduced-motion: reduce) {
     .slide {
         transition: none;

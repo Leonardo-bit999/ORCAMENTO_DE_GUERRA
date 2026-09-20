@@ -68,7 +68,7 @@ export class Problema implements OnInit, OnDestroy {
     },
   ];
 
-  private readonly AUTOPLAY_INTERVAL = 6000; // 6 segundos (era 10s, deixei mais ágil)
+  private readonly AUTOPLAY_INTERVAL = 10000; // 6 segundos (era 10s, deixei mais ágil)
   private autoplayId: ReturnType<typeof setInterval> | undefined;
   private isPaused = false;
   private readonly reducedMotion = typeof window !== 'undefined'
