@@ -1,0 +1,150 @@
+:host {
+    --bg-color: #050505;
+    --text-primary: #ffffff;
+    --text-secondary: #a1a1aa;
+
+    --color-green: #22c55e;
+    --color-green-neon: #4ade80;
+    /* Um verde mais claro para o botão */
+
+    --font-main: 'Inter', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+.cta-final-section {
+    /* Fundo escuro com gradiente radial sutil para dar profundidade */
+    background: radial-gradient(circle at 50% 100%, rgba(34, 197, 94, 0.08) 0%, var(--bg-color) 60%);
+    color: var(--text-primary);
+    padding: 8rem 1.5rem;
+    font-family: var(--font-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 60vh;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.container {
+    max-width: 800px;
+    width: 100%;
+}
+
+.cta-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* --- Tag Superior --- */
+.eyebrow {
+    font-family: var(--font-mono);
+    color: var(--color-green);
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+/* --- Headline --- */
+.headline {
+    font-size: 2.5rem;
+    line-height: 1.1;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin: 0;
+}
+
+.highlight-green {
+    color: var(--color-green);
+    /* Um leve brilho no texto verde para destacar */
+    text-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
+}
+
+/* --- Subtexto --- */
+.subtext {
+    color: var(--text-secondary);
+    font-size: 1.125rem;
+    line-height: 1.6;
+    max-width: 500px;
+    margin: 0;
+}
+
+/* --- Ações (Botões) --- */
+.cta-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+/* Botão Principal */
+.btn-primary {
+    background-color: var(--color-green-neon);
+    color: #050505;
+    /* Texto escuro para contraste */
+    font-family: var(--font-main);
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 50px;
+    /* Estilo pílula, igual ao exemplo 1 */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.4);
+    /* Preparando para o hover */
+}
+
+.btn-primary svg {
+    transition: transform 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #86efac;
+    /* Verde mais claro no hover */
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(74, 222, 128, 0.4);
+}
+
+.btn-primary:hover svg {
+    transform: translateX(4px);
+}
+
+/* Link Secundário */
+.link-secondary {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    display: inline-block;
+}
+
+.link-secondary:hover {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+/* --- Responsividade --- */
+@media (min-width: 768px) {
+    .headline {
+        font-size: 3.5rem;
+    }
+
+    .cta-actions {
+        flex-direction: column;
+        /* Mantém empilhado, mas com espaçamento maior */
+        gap: 2rem;
+    }
+}

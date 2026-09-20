@@ -1,1 +1,69 @@
-<p>como-funciona works!</p>
+<section class="como-funciona-section">
+  <div class="container">
+    
+    <!-- Cabeçalho -->
+    <header class="section-header">
+      <span class="eyebrow">A JORNADA</span>
+      <h2 class="headline">Cinco fases para aprender <span class="highlight-green">fazendo.</span></h2>
+      <p class="subtext">
+        Cada missão apresenta um conceito, uma situação fictícia e diferentes caminhos possíveis. 
+        O objetivo não é apenas economizar, mas tomar decisões conscientes.
+      </p>
+    </header>
+
+    <!-- Grid de Passos -->
+    <div class="steps-grid">
+      @for (passo of passos(); track passo.numero; let index = $index) {
+        <article class="step-card" [attr.data-theme]="passo.cor">
+          
+          <!-- Linha conectora (oculta no último item) -->
+          @if (index < passos().length - 1) {
+            <div class="connector-line"></div>
+          }
+
+          <div class="step-header">
+            <div class="icon-box">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path [attr.d]="passo.icone"></path>
+              </svg>
+            </div>
+            <span class="step-number">FASE {{ passo.numero }}</span>
+          </div>
+
+          <h3 class="step-title">{{ passo.titulo }}</h3>
+          <p class="step-description">{{ passo.descricao }}</p>
+
+        </article>
+      }
+    </div>
+
+    <!-- Mockup do Painel do Jogo (Opcional, mas ilustra bem) -->
+    <div class="game-panel-mockup">
+      <div class="panel-header">
+        <span class="panel-tag">PAINEL DO JOGO</span>
+        <h3>Acompanhe as escolhas do personagem.</h3>
+      </div>
+
+      <div class="panel-grid">
+        <div class="panel-card balance">
+          <span class="label">SALDO DO PERSONAGEM</span>
+          <div class="value">R$ 1.240</div>
+          <div class="progress-bar-bg"><div class="progress-fill green"></div></div>
+        </div>
+
+        <div class="panel-card balance-equilibrium">
+          <span class="label">EQUILÍBRIO DO PERSONAGEM</span>
+          <div class="value">72<span class="total">/100</span></div>
+          <div class="progress-bar-bg"><div class="progress-fill blue" style="width: 72%"></div></div>
+        </div>
+
+        <div class="panel-card progress">
+          <span class="label">PROGRESSO DE APRENDIZADO</span>
+          <div class="value">60<span class="total">%</span></div>
+          <div class="progress-bar-bg"><div class="progress-fill purple" style="width: 60%"></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
