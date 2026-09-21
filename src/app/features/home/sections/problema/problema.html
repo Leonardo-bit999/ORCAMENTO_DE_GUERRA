@@ -39,30 +39,47 @@
                 rel="noopener noreferrer"
                 [attr.aria-label]="'Abrir fonte: ' + slide.source"
               >
-                <span class="material-symbols-rounded" aria-hidden="true">open_in_new</span>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
               </a>
             </div>
           </div>
         </article>
       }
 
-      <div class="carousel__controls">
+      <div class="carousel__footer">
         <button
           class="carousel__nav carousel__nav--prev"
           type="button"
           aria-label="Destaque anterior"
           (click)="anterior()"
         >
-          <span class="material-symbols-rounded" aria-hidden="true">chevron_left</span>
-        </button>
-
-        <button
-          class="carousel__nav carousel__nav--next"
-          type="button"
-          aria-label="Próximo destaque"
-          (click)="proximo()"
-        >
-          <span class="material-symbols-rounded" aria-hidden="true">chevron_right</span>
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
         </button>
 
         <div class="carousel__indicators" aria-label="Selecionar destaque">
@@ -81,10 +98,26 @@
           }
         </div>
 
-        <span class="carousel__counter" aria-hidden="true">
-          {{ (activeIndex() + 1).toString().padStart(2, '0') }} /
-          {{ slides.length.toString().padStart(2, '0') }}
-        </span>
+        <button
+          class="carousel__nav carousel__nav--next"
+          type="button"
+          aria-label="Próximo destaque"
+          (click)="proximo()"
+        >
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
       </div>
     </div>
   </div>

@@ -1,7 +1,6 @@
 <section class="proposta-section">
   <div class="container">
     
-    <!-- Cabeçalho da Seção -->
     <header class="section-header">
       <span class="eyebrow">A PROPOSTA</span>
       <h1 class="headline">
@@ -12,7 +11,6 @@
       </p>
     </header>
 
-    <!-- Grid de Cards -->
     <div class="cards-grid">
       @for (card of cards(); track card.id) {
         <article class="card" [attr.data-theme]="card.colorTheme">

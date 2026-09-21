@@ -1,537 +1,478 @@
-/* ============================================
-   SEÇÃO DESTAQUES
-   ============================================ */
 .destaques {
-    position: relative;
-    padding: 5rem 0 6rem;
-    background: var(--bg-base);
-    overflow: hidden;
+  position: relative;
+  padding: 5rem 0 6rem;
+  background: var(--bg-base);
+  overflow: hidden;
 }
 
 .destaques .container {
-    position: relative;
-    z-index: 1;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 2rem;
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
-/* ============================================
-   CABEÇALHO DA SEÇÃO
-   ============================================ */
 .destaques__cabecalho {
-    max-width: 720px;
-    margin-bottom: 2.5rem;
+  max-width: 720px;
+  margin-bottom: 2.5rem;
 }
 
 .eyebrow {
-    display: inline-block;
-    margin-bottom: 0.9rem;
-    color: var(--green);
-    font-size: 0.7rem;
-    font-weight: 900;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
+  display: inline-block;
+  margin-bottom: 0.9rem;
+  color: var(--green);
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
 }
 
 .destaques h2 {
-    margin: 0 0 0.9rem;
-    color: var(--text-primary);
-    font-size: clamp(1.6rem, 3.2vw, 2.4rem);
-    font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    text-transform: uppercase;
+  margin: 0 0 0.9rem;
+  color: var(--text-primary);
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
 }
 
 .destaques__cabecalho p {
-    margin: 0;
-    color: var(--text-secondary);
-    font-size: 1rem;
-    line-height: 1.5;
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
-/* ============================================
-   CARROSSEL
-   ============================================ */
 .carousel {
-    position: relative;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-xl);
-    background: var(--bg-surface);
-    box-shadow:
-        0 0 0 1px rgba(244, 245, 242, 0.02) inset,
-        0 20px 60px -20px rgba(0, 0, 0, 0.8),
-        0 0 80px -20px rgba(168, 240, 0, 0.06);
-    overflow: hidden;
-    min-height: 420px;
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--bg-surface);
+  box-shadow:
+    0 0 0 1px rgba(244, 245, 242, 0.02) inset,
+    0 20px 60px -20px rgba(0, 0, 0, 0.8),
+    0 0 80px -20px rgba(168, 240, 0, 0.06);
+  overflow: hidden;
+  min-height: 440px;
 }
 
 .slide {
-    position: absolute;
-    inset: 0 0 64px 0;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.6s ease, visibility 0.6s ease;
-    display: flex;
-    align-items: center;
+  position: absolute;
+  inset: 0 0 64px 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+  display: flex;
+  align-items: center;
 }
 
 .slide.is-active {
-    visibility: visible;
-    opacity: 1;
+  visibility: visible;
+  opacity: 1;
 }
 
 .slide__image {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    filter: saturate(0.7) contrast(1.05) brightness(0.65);
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(0.7) contrast(1.05) brightness(0.65);
 }
 
-/* Overlay mais leve — deixa a imagem respirar */
 .slide__overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background:
-        /* Escurece só a esquerda pro texto */
-        linear-gradient(90deg,
-            rgba(11, 13, 15, 0.96) 0%,
-            rgba(11, 13, 15, 0.88) 35%,
-            rgba(11, 13, 15, 0.5) 60%,
-            rgba(11, 13, 15, 0.1) 90%,
-            transparent 100%),
-        /* Escurece a base pro rodapé */
-        linear-gradient(0deg,
-            rgba(11, 13, 15, 0.9) 0%,
-            rgba(11, 13, 15, 0.4) 12%,
-            transparent 35%),
-        /* Tom verde bem sutil */
-        linear-gradient(135deg,
-            rgba(168, 240, 0, 0.04) 0%,
-            transparent 55%);
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(90deg,
+      rgba(11, 13, 15, 0.96) 0%,
+      rgba(11, 13, 15, 0.88) 35%,
+      rgba(11, 13, 15, 0.5) 60%,
+      rgba(11, 13, 15, 0.1) 90%,
+      transparent 100%),
+    linear-gradient(0deg,
+      rgba(11, 13, 15, 0.9) 0%,
+      rgba(11, 13, 15, 0.4) 12%,
+      transparent 35%),
+    linear-gradient(135deg,
+      rgba(168, 240, 0, 0.04) 0%,
+      transparent 55%);
 }
 
 .slide__content {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    max-width: 620px;
-    padding: 3rem 3.5rem 2.5rem 4rem;
-    color: var(--text-primary);
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  max-width: 620px;
+  padding: 3rem 3.5rem 2.5rem 4rem;
+  color: var(--text-primary);
 }
 
 .slide h3 {
-    margin: 0;
-    font-family: var(--font-mono);
-    color: var(--green);
-    font-size: clamp(2.6rem, 5.5vw, 3.8rem);
-    font-weight: 800;
-    line-height: 1;
-    letter-spacing: -0.03em;
-    text-shadow: 0 0 40px rgba(168, 240, 0, 0.35);
-    font-variant-numeric: tabular-nums;
+  margin: 0;
+  font-family: var(--font-mono);
+  color: var(--green);
+  font-size: clamp(2.6rem, 5.5vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-shadow: 0 0 40px rgba(168, 240, 0, 0.35);
+  font-variant-numeric: tabular-nums;
 }
 
 .slide__description {
-    margin: 0.75rem 0 0;
-    color: var(--text-primary);
-    font-size: clamp(1rem, 1.5vw, 1.15rem);
-    font-weight: 600;
-    line-height: 1.35;
+  margin: 0.75rem 0 0;
+  color: var(--text-primary);
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  font-weight: 600;
+  line-height: 1.35;
 }
 
 .slide__text {
-    margin: 0.85rem 0 1.5rem;
-    color: var(--text-secondary);
-    font-size: 0.85rem;
-    line-height: 1.65;
+  margin: 0.85rem 0 1.5rem;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.65;
 }
 
-/* ============================================
-   RODAPÉ DO SLIDE (fonte + link)
-   ============================================ */
 .slide__source {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
 }
 
 .slide__source-label {
-    color: var(--text-muted);
-    font-size: 0.62rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    line-height: 1.4;
+  color: var(--text-muted);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.4;
 }
 
 .slide__source-link {
-    display: inline-grid;
-    place-items: center;
-    width: 28px;
-    height: 28px;
-    flex-shrink: 0;
-    border: 1px solid var(--border-green);
-    border-radius: 50%;
-    background: var(--glow-green-soft);
-    color: var(--green);
-    transition: all 0.25s ease;
-    text-decoration: none;
-}
-
-.slide__source-link .material-symbols-rounded {
-    font-size: 15px;
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border: 1px solid var(--border-green);
+  border-radius: 50%;
+  background: var(--glow-green-soft);
+  color: var(--green);
+  transition: all 0.25s ease;
+  text-decoration: none;
 }
 
 .slide__source-link:hover,
 .slide__source-link:focus-visible {
-    background: rgba(168, 240, 0, 0.18);
-    border-color: var(--green);
-    color: var(--green-hover);
-    transform: scale(1.08);
-    box-shadow: 0 0 16px var(--glow-green);
+  background: rgba(168, 240, 0, 0.18);
+  border-color: var(--green);
+  color: var(--green-hover);
+  transform: scale(1.08);
+  box-shadow: 0 0 16px var(--glow-green);
 }
 
-/* ============================================
-   RODAPÉ DO CARROSSEL (controles)
-   ============================================ */
-.carousel__controls {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 3;
-    display: flex;
-    align-items: center;
-    gap: 0.9rem;
-    padding: 1rem 1.5rem;
-    background: linear-gradient(0deg, rgba(11, 13, 15, 0.98) 0%, rgba(11, 13, 15, 0.85) 100%);
-    border-top: 1px solid var(--border);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+.carousel__footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+
+  background: linear-gradient(0deg, rgba(11, 13, 15, 0.98) 0%, rgba(11, 13, 15, 0.75) 100%);
+  border-top: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
-/* Botões de navegação */
 .carousel__nav {
-    display: grid;
-    place-items: center;
-    width: 36px;
-    height: 36px;
-    padding: 0;
-    border: 1px solid var(--border-strong);
-    border-radius: 50%;
-    background: rgba(244, 245, 242, 0.03);
-    color: var(--text-secondary);
-    cursor: pointer;
-    transition: all 0.25s ease;
-}
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  flex-shrink: 0;
 
-.carousel__nav .material-symbols-rounded {
-    font-size: 18px;
+  border: 1px solid var(--border-strong);
+  border-radius: 50%;
+  background: rgba(244, 245, 242, 0.03);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
 
 .carousel__nav:hover,
 .carousel__nav:focus-visible {
-    background: rgba(168, 240, 0, 0.12);
-    border-color: var(--green);
-    color: var(--green);
-    box-shadow: 0 0 20px var(--glow-green);
+  background: rgba(168, 240, 0, 0.12);
+  border-color: var(--green);
+  color: var(--green);
+  box-shadow: 0 0 20px var(--glow-green);
 }
 
 .carousel__nav:focus-visible {
-    outline: 2px solid var(--green);
-    outline-offset: 2px;
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
 }
 
-/* Indicadores em barra */
 .carousel__indicators {
-    display: flex;
-    gap: 0.35rem;
-    margin-left: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
 .carousel__indicators button {
-    position: relative;
-    width: 24px;
-    height: 3px;
-    padding: 0;
-    border: 0;
-    border-radius: 2px;
-    background: var(--border-strong);
-    cursor: pointer;
-    overflow: hidden;
-    transition: width 0.3s ease, background 0.3s ease;
+  position: relative;
+  width: 24px;
+  height: 3px;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: var(--border-strong);
+  cursor: pointer;
+  overflow: hidden;
+  transition: width 0.3s ease, background 0.3s ease;
 }
 
 .carousel__indicators button::before {
-    content: '';
-    position: absolute;
-    inset: -12px -3px;
+  content: '';
+  position: absolute;
+  inset: -12px -3px;
 }
 
 .carousel__indicators button:hover {
-    background: var(--text-muted);
+  background: var(--text-muted);
 }
 
 .carousel__indicators button.is-active {
-    width: 48px;
-    background: rgba(168, 240, 0, 0.15);
+  width: 48px;
+  background: rgba(168, 240, 0, 0.15);
 }
 
 .carousel__indicator-progress {
-    position: absolute;
-    inset: 0;
-    background: var(--green);
-    transform-origin: left center;
-    transform: scaleX(0);
-    animation: progress 10s linear forwards;
-    box-shadow: 0 0 10px var(--glow-green);
+  position: absolute;
+  inset: 0;
+  background: var(--green);
+  transform-origin: left center;
+  transform: scaleX(0);
+  animation: progress 10s linear forwards;
+  box-shadow: 0 0 10px var(--glow-green);
 }
 
 @keyframes progress {
-    from {
-        transform: scaleX(0);
-    }
-
-    to {
-        transform: scaleX(1);
-    }
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
 }
 
-/* Contador */
-.carousel__counter {
-    margin-left: auto;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    color: var(--text-secondary);
-    font-variant-numeric: tabular-nums;
-}
-
-/* ============================================
-   RESPONSIVO — Tablet
-   ============================================ */
 @media (max-width: 768px) {
-    .destaques {
-        padding: 3rem 0 4rem;
-    }
+  .destaques {
+    padding: 3rem 0 4rem;
+  }
 
-    .destaques .container {
-        padding: 0 1.25rem;
-    }
+  .destaques .container {
+    padding: 0 1.25rem;
+  }
 
-    .destaques__cabecalho {
-        margin-bottom: 1.8rem;
-    }
+  .destaques__cabecalho {
+    margin-bottom: 1.8rem;
+  }
 
-    .destaques h2 {
-        font-size: clamp(1.5rem, 6vw, 2rem);
-    }
+  .destaques h2 {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
 
-    .carousel {
-        min-height: 460px;
-        border-radius: var(--radius-lg);
-    }
+  .carousel {
+    min-height: 460px;
+    border-radius: var(--radius-lg);
+  }
 
-    .slide {
-        inset: 0 0 64px 0;
-        align-items: flex-end;
-    }
+  .slide {
+    inset: 0 0 60px 0;
+    align-items: flex-end;
+  }
 
-    .slide__content {
-        max-width: 100%;
-        padding: 2rem 1.75rem 2rem;
-    }
+  .slide__content {
+    max-width: 100%;
+    padding: 2rem 1.75rem 2rem;
+  }
 
-    .slide h3 {
-        font-size: clamp(2rem, 8vw, 2.6rem);
-    }
+  .slide h3 {
+    font-size: clamp(2rem, 8vw, 2.6rem);
+  }
 
-    .slide__description {
-        font-size: 0.95rem;
-    }
+  .slide__description {
+    font-size: 0.95rem;
+  }
 
-    .slide__text {
-        font-size: 0.82rem;
-        margin-bottom: 1rem;
-    }
+  .slide__text {
+    font-size: 0.82rem;
+    margin-bottom: 1rem;
+  }
 
-    .carousel__controls {
-        padding: 0.85rem 1rem;
-        gap: 0.6rem;
-    }
+  .carousel__footer {
+    padding: 0.85rem 1rem;
+    gap: 0.6rem;
+  }
 
-    .carousel__nav {
-        width: 32px;
-        height: 32px;
-    }
+  .carousel__nav {
+    width: 32px;
+    height: 32px;
+  }
 
-    .carousel__indicators button {
-        width: 20px;
-    }
+  .carousel__indicators button {
+    width: 20px;
+  }
 
-    .carousel__indicators button.is-active {
-        width: 36px;
-    }
-
-    .carousel__counter {
-        font-size: 0.68rem;
-    }
+  .carousel__indicators button.is-active {
+    width: 36px;
+  }
 }
 
-/* ============================================
-   RESPONSIVO — Mobile
-   ============================================ */
 @media (max-width: 480px) {
-    .destaques {
-        padding: 2.5rem 0 3rem;
-    }
+  .destaques {
+    padding: 2.5rem 0 3rem;
+  }
 
-    .destaques .container {
-        padding: 0 1rem;
-    }
+  .destaques .container {
+    padding: 0 1rem;
+  }
 
-    .destaques__cabecalho {
-        margin-bottom: 1.5rem;
-    }
+  .destaques__cabecalho {
+    margin-bottom: 1.5rem;
+  }
 
-    .eyebrow {
-        font-size: 0.62rem;
-        letter-spacing: 0.16em;
-    }
+  .eyebrow {
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+  }
 
-    .destaques h2 {
-        font-size: clamp(1.35rem, 6.5vw, 1.7rem);
-        line-height: 1.15;
-    }
+  .destaques h2 {
+    font-size: clamp(1.35rem, 6.5vw, 1.7rem);
+    line-height: 1.15;
+  }
 
-    .destaques__cabecalho p {
-        font-size: 0.9rem;
-    }
+  .destaques__cabecalho p {
+    font-size: 0.9rem;
+  }
 
-    .carousel {
-        min-height: 520px;
-        border-radius: var(--radius-md);
-    }
+  .carousel {
+    min-height: 440px;
+    border-radius: var(--radius-md);
+  }
 
-    .slide {
-        inset: 0 0 60px 0;
-        align-items: flex-end;
-    }
+  .slide {
+    inset: 0 0 56px 0;
+    align-items: flex-end;
+  }
 
-    /* Overlay mais forte no mobile (mais área de texto) */
-    .slide__overlay {
-        background:
-            linear-gradient(180deg,
-                rgba(11, 13, 15, 0.5) 0%,
-                transparent 25%),
-            linear-gradient(0deg,
-                rgba(11, 13, 15, 0.98) 0%,
-                rgba(11, 13, 15, 0.85) 40%,
-                rgba(11, 13, 15, 0.4) 70%,
-                transparent 100%),
-            linear-gradient(135deg,
-                rgba(168, 240, 0, 0.06) 0%,
-                transparent 60%);
-    }
+  .slide__overlay {
+    background:
+      linear-gradient(180deg,
+        rgba(11, 13, 15, 0.5) 0%,
+        transparent 25%),
+      linear-gradient(0deg,
+        rgba(11, 13, 15, 0.98) 0%,
+        rgba(11, 13, 15, 0.85) 40%,
+        rgba(11, 13, 15, 0.4) 70%,
+        transparent 100%),
+      linear-gradient(135deg,
+        rgba(168, 240, 0, 0.06) 0%,
+        transparent 60%);
+  }
 
-    .slide__content {
-        max-width: 100%;
-        padding: 1.5rem 1.25rem 1.25rem;
-        justify-content: flex-end;
-    }
+  .slide__image {
+    filter: saturate(0.8) contrast(1.05) brightness(0.75);
+  }
 
-    .slide h3 {
-        font-size: clamp(1.9rem, 9.5vw, 2.4rem);
-        line-height: 1;
-    }
+  .slide__content {
+    max-width: 100%;
+    padding: 1.5rem 1.25rem 1.25rem;
+    justify-content: flex-end;
+  }
 
-    .slide__description {
-        margin-top: 0.5rem;
-        font-size: 0.9rem;
-        line-height: 1.3;
-    }
+  .slide h3 {
+    font-size: clamp(1.75rem, 8.5vw, 2.2rem);
+    line-height: 1;
+  }
 
-    .slide__text {
-        margin: 0.6rem 0 0.9rem;
-        font-size: 0.78rem;
-        line-height: 1.55;
-    }
+  .slide__description {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    line-height: 1.3;
+  }
 
-    .slide__source {
-        padding-top: 0.7rem;
-        gap: 0.5rem;
-    }
+  .slide__text {
+    margin: 0.6rem 0 0.9rem;
+    font-size: 0.78rem;
+    line-height: 1.55;
+  }
 
-    .slide__source-label {
-        font-size: 0.58rem;
-        letter-spacing: 0.08em;
-    }
+  .slide__source {
+    padding-top: 0.7rem;
+    gap: 0.5rem;
+  }
 
-    .slide__source-link {
-        width: 26px;
-        height: 26px;
-    }
+  .slide__source-label {
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+  }
 
-    .slide__source-link .material-symbols-rounded {
-        font-size: 13px;
-    }
+  .slide__source-link {
+    width: 26px;
+    height: 26px;
+  }
 
-    .carousel__controls {
-        padding: 0.7rem 0.9rem;
-        gap: 0.45rem;
-    }
+  .carousel__footer {
+    padding: 0.6rem 0.9rem;
+    gap: 0.4rem;
+  }
 
-    .carousel__nav {
-        width: 30px;
-        height: 30px;
-    }
+  .carousel__nav {
+    width: 28px;
+    height: 28px;
+  }
 
-    .carousel__nav .material-symbols-rounded {
-        font-size: 15px;
-    }
+  .carousel__nav svg {
+    width: 14px;
+    height: 14px;
+  }
 
-    .carousel__indicators {
-        gap: 0.22rem;
-        margin-left: 0.3rem;
-    }
+  .carousel__indicators {
+    gap: 0.25rem;
+  }
 
-    .carousel__indicators button {
-        width: 14px;
-        height: 2px;
-    }
+  .carousel__indicators button {
+    width: 14px;
+    height: 3px;
+  }
 
-    .carousel__indicators button.is-active {
-        width: 26px;
-    }
-
-    .carousel__counter {
-        font-size: 0.62rem;
-        letter-spacing: 0.06em;
-    }
+  .carousel__indicators button.is-active {
+    width: 26px;
+  }
 }
 
-/* ============================================
-   ACESSIBILIDADE — Movimento reduzido
-   ============================================ */
 @media (prefers-reduced-motion: reduce) {
-    .slide {
-        transition: none;
-    }
+  .slide {
+    transition: none;
+  }
 
-    .carousel__indicator-progress {
-        animation: none;
-        transform: scaleX(1);
-    }
+  .carousel__indicator-progress {
+    animation: none;
+    transform: scaleX(1);
+  }
 }

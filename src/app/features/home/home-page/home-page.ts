@@ -5,11 +5,11 @@ import { Navbar } from '../sections/navbar/navbar';
 import { Proposta } from '../sections/proposta/proposta';
 import { ComoFunciona } from '../sections/como-funciona/como-funciona';
 import { CtaFinal } from '../sections/cta-final/cta-final';
-import { Footer } from '../sections/footer/footer';
+import { Footer } from '../../../core/layout/footer/footer';
 
 @Component({
   selector: 'app-home-page',
-  imports: [Navbar, Hero, Problema, Proposta, ComoFunciona, CtaFinal, Footer],
+  imports: [Navbar, Hero, Problema, Proposta, ComoFunciona, CtaFinal, Footer ],
   templateUrl: './home-page.html',
   styleUrl: './home-page.css',
 })

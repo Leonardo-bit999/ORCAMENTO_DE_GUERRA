@@ -1,9 +1,6 @@
 <section class="hero-container">
-  <!-- Lado Esquerdo: Textos e Ações -->
   <div class="hero-content">
-    <div class="badge">
-      <span class="dot" aria-hidden="true"></span> SIMULADOR DE VIDA FINANCEIRA
-    </div>
+    <span class="eyebrow"> SIMULADOR • EDUCAÇÃO FINANCEIRA • VIDA REAL </span>
 
     <h1 class="main-title">
       ORÇAMENTO<br />
@@ -13,83 +10,160 @@
     <p class="subtitle">Sua vida. Seu dinheiro. Suas escolhas.</p>
 
     <p class="description">
-      Enfrente imprevistos, tome decisões e descubra até onde suas escolhas conseguem levar você.
+      Um simulador de vida financeira onde cada decisão pode mudar o seu caminho.
     </p>
 
-    <div class="tags" aria-label="Características da Simulação">
-      <span>12 MESES</span>
-      <span class="separator" aria-hidden="true">/</span>
+    <div class="tags" aria-label="Características da simulação">
       <span>DECISÕES REAIS</span>
       <span class="separator" aria-hidden="true">/</span>
-      <span>IMPREVISTOS REAIS</span>
+      <span>IMPREVISTOS</span>
       <span class="separator" aria-hidden="true">/</span>
-      <span class="danger">CONSEQUÊNCIAS REAIS</span>
-    </div>
-
-    <div class="actions">
-      <button class="btn-primary">COMEÇAR SIMULAÇÃO</button>
-      <button class="btn-secondary">COMO FUNCIONA</button>
+      <span>CONSEQUÊNCIAS</span>
+      <span class="separator" aria-hidden="true">/</span>
+      <span class="danger">APRENDIZADO</span>
     </div>
   </div>
 
-  <!-- Lado Direito: Dashboard/Card -->
   <div class="dashboard-preview">
     <div class="dashboard-card">
-      <!-- Header do Card -->
       <div class="card-header">
-        <div class="month-status">
-          <span class="status-dot"></span> MÊS {{ mesAtual < 10 ? '0' + mesAtual : mesAtual }} DE 12
+        <div class="situation-status">
+          <span class="status-dot"></span>
+          SITUAÇÃO ATUAL
         </div>
-        <div class="day-badge">Dia {{ diaAtual }}</div>
+
+        <div class="decision-badge">Decisão #07</div>
       </div>
 
-      <!-- Saldo -->
       <div class="balance-section">
         <div class="label">SALDO DISPONÍVEL</div>
-        <div class="value">{{ formatarMoeda(saldoDisponivel) }}</div>
-        <div class="expenses">↘ {{ formatarMoeda(despesasMes) }} em despesas neste mês</div>
 
-        <div class="progress-container">
-          <div class="progress-bar">
-            <div class="progress-fill" [style.width.%]="progressoJornada"></div>
-          </div>
-          <div class="progress-labels">
-            <span>Progresso da jornada</span>
-            <span>{{ progressoJornada }}%</span>
-          </div>
+        <div class="value">
+          {{ formatarMoeda(saldoDisponivel) }}
+        </div>
+
+        <div class="impact">
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <line x1="7" y1="7" x2="17" y2="17"></line>
+            <polyline points="17 7 17 17 7 17"></polyline>
+          </svg>
+          Impacto recente: {{ formatarMoeda(impactoRecente) }}
         </div>
       </div>
 
-      <!-- Status (Bem-estar e Estresse) -->
       <div class="status-grid">
+        
         <div class="status-box">
-          <div class="status-label">❤ BEM-ESTAR</div>
-          <div class="status-value">{{ bemEstar }}<span class="small">/100</span></div>
+          <div class="status-label">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path
+                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+              ></path>
+            </svg>
+            BEM-ESTAR
+          </div>
+          <div class="status-value cyan">{{ bemEstar }}<span class="small">/100</span></div>
           <div class="bar cyan">
             <div class="fill" [style.width.%]="bemEstar"></div>
           </div>
         </div>
+
         <div class="status-box">
-          <div class="status-label">⚡ ESTRESSE</div>
-          <div class="status-value red">{{ estresse }}<span class="small">/100</span></div>
-          <div class="bar red">
+          <div class="status-label">
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+            ESTRESSE
+          </div>
+          <div class="status-value yellow">{{ estresse }}<span class="small">/100</span></div>
+          <div class="bar yellow">
             <div class="fill" [style.width.%]="estresse"></div>
+          </div>
+        </div>
+
+        <div class="status-box">
+          <div class="status-label">
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <line x1="12" y1="1" x2="12" y2="23"></line>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+            FINANCEIRO
+          </div>
+          <div class="status-value green">{{ financeiro }}<span class="small">/100</span></div>
+          <div class="bar green">
+            <div class="fill" [style.width.%]="financeiro"></div>
           </div>
         </div>
       </div>
 
-      <!-- Lista de Gastos -->
-      <div class="expenses-list">
-        <div class="expense-item" *ngFor="let item of gastos">
-          <span>{{ item.categoria }}</span>
-          <span class="amount">{{ formatarMoeda(item.valor) }}</span>
+      <div class="expenses-section">
+        <div class="section-label">COMPROMISSOS</div>
+
+        <div class="expenses-list">
+          @for (item of compromissos; track item.categoria) {
+            <div class="expense-item">
+              <span>{{ item.categoria }}</span>
+              <span class="amount">{{ formatarMoeda(item.valor) }}</span>
+            </div>
+          }
         </div>
       </div>
 
-      <!-- Alerta de Imprevisto -->
       <div class="alert-box">
-        <div class="alert-title">⚠ Imprevisto: pneu furado</div>
-        <div class="alert-desc">Custo inesperado de R$ 480. O que você faz?</div>
+        <div class="alert-title">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path
+              d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
+            ></path>
+            <line x1="12" y1="9" x2="12" y2="13"></line>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+          NOVO IMPREVISTO
+        </div>
+
+        <div class="alert-event">Pneu furado</div>
+
+        <div class="alert-desc">Custo inesperado de R$ 480. Qual será sua decisão?</div>
       </div>
     </div>
   </div>

@@ -1,34 +1,39 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Necessário para *ngFor e *ngIf
+import { CommonModule } from '@angular/common';
+
+interface Compromisso {
+  categoria: string;
+  valor: number;
+}
 
 @Component({
   selector: 'app-hero',
-  standalone: true, // Assumindo que seu projeto é standalone (Angular 15+)
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './hero.html',
   styleUrls: ['./hero.css']
 })
 export class Hero {
 
-  // Dados do Card (Mock)
-  saldoDisponivel: number = 1240;
-  despesasMes: number = 1560;
-  progressoJornada: number = 33; // Porcentagem
-  mesAtual: number = 4;
-  diaAtual: number = 18;
+  protected readonly saldoDisponivel = 1240;
 
-  bemEstar: number = 72;
-  estresse: number = 34;
+  protected readonly impactoRecente = -480;
 
-  // Lista de Gastos
-  gastos = [
+  protected readonly bemEstar = 72;
+  protected readonly estresse = 34;
+  protected readonly financeiro = 55;
+
+  protected readonly compromissos: Compromisso[] = [
     { categoria: 'Moradia', valor: 900 },
     { categoria: 'Alimentação', valor: 600 },
     { categoria: 'Transporte', valor: 350 }
   ];
 
-  // Função para formatar moeda (BRL)
-  formatarMoeda(valor: number): string {
-    return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 0 });
+  protected formatarMoeda(valor: number): string {
+    return valor.toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+      minimumFractionDigits: 0
+    });
   }
 }
