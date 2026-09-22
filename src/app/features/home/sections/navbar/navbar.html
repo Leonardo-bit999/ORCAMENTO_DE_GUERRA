@@ -3,7 +3,7 @@
     <a class="brand" routerLink="/" aria-label="Orçamento de Guerra, início">
       <img
         class="brand-logo"
-        src="/images/Logo_Orcamento_de_Guerra_NavBAr1.png"
+        src="/imagesLogo/logo_Nav.png"
         alt="Logo Orçamento de Guerra"
       />
     </a>
@@ -22,11 +22,7 @@
     </button>
 
     <div id="main-menu" class="nav-links" [class.is-open]="menuOpen()">
-      <a routerLink="/" fragment="problema" (click)="closeMenu()">O Problema</a>
-
-      <a routerLink="/" fragment="como-funciona" (click)="closeMenu()">Como Funciona</a>
-
-      <a class="button button-small" routerLink="/configuracao" (click)="closeMenu()">
+      <a class="button button-small" routerLink="/entrar">
         Entrar
       </a>
     </div>

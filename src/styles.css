@@ -91,9 +91,7 @@ app-root {
   min-height: 100vh;
 }
 
-
 /*UTILITÁRIOS*/
-
 .sr-only {
   position: absolute;
   width: 1px;

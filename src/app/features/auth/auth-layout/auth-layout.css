@@ -1,0 +1,132 @@
+:host {
+    display: block;
+    min-height: 100vh;
+}
+
+.auth-page {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-base);
+    overflow: hidden;
+}
+
+.auth-bg-glow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+        radial-gradient(circle at 25% 25%, var(--glow-green-soft), transparent 55%),
+        radial-gradient(circle at 75% 75%, rgba(168, 240, 0, 0.05), transparent 60%);
+}
+
+.auth-bg-glow::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 700px;
+    height: 700px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, var(--glow-green-soft) 0%, transparent 70%);
+    filter: blur(60px);
+    opacity: 0.9;
+}
+
+.auth-navbar {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-4) var(--space-8);
+    border-bottom: 1px solid var(--border);
+    background: rgba(11, 13, 15, 0.75);
+    backdrop-filter: blur(12px);
+    flex-shrink: 0;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.brand-logo {
+    height: 64px;
+    width: auto;
+    display: block;
+    transition: height 0.2s ease;
+}
+
+.btn-voltar {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 10px 16px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border-strong);
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: color 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+
+.btn-voltar svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.18s ease;
+}
+
+.btn-voltar:hover {
+    color: var(--green);
+    border-color: var(--border-green-strong);
+    background: var(--glow-green-soft);
+}
+
+.btn-voltar:hover svg {
+    transform: translateX(-3px);
+}
+
+.auth-main {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-8);
+    min-height: 0;
+}
+
+@media (max-width: 900px) {
+    .auth-navbar {
+        padding: var(--space-3) var(--space-4);
+    }
+
+    .brand-logo {
+        height: 52px;
+    }
+
+    .btn-voltar span {
+        display: none;
+    }
+
+    .btn-voltar {
+        padding: 10px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .brand-logo {
+        height: 44px;
+    }
+
+    .auth-main {
+        padding: var(--space-6) var(--space-4);
+    }
+}

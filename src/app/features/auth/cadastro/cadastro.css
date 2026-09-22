@@ -1,0 +1,91 @@
+/* CSS exclusivo do cadastro: checkbox LGPD */
+
+.termos {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    cursor: pointer;
+    user-select: none;
+    padding: var(--space-3) var(--space-4);
+    background: var(--bg-base);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    transition: border-color 0.2s ease;
+    margin-top: var(--space-1);
+}
+
+.termos:hover {
+    border-color: var(--border-strong);
+}
+
+.termos input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.check-visual {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid var(--border-strong);
+    background: var(--bg-surface);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bg-base);
+    transition: all 0.18s ease;
+    margin-top: 1px;
+}
+
+.check-visual svg {
+    width: 14px;
+    height: 14px;
+    opacity: 0;
+    transform: scale(0.6);
+    transition: opacity 0.16s ease, transform 0.16s ease;
+}
+
+.termos input:checked~.check-visual {
+    background: var(--green);
+    border-color: var(--green);
+    box-shadow: 0 0 0 4px var(--glow-green-soft);
+}
+
+.termos input:checked~.check-visual svg {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.termos input:focus-visible~.check-visual {
+    outline: 2px solid var(--green);
+    outline-offset: 2px;
+}
+
+.termos.invalido {
+    border-color: rgba(240, 82, 58, 0.55);
+}
+
+.termos.invalido .check-visual {
+    border-color: rgba(240, 82, 58, 0.6);
+}
+
+.termos-texto {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    line-height: 1.55;
+    color: var(--text-secondary);
+}
+
+.termos-texto a {
+    color: var(--green);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border-green);
+    transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.termos-texto a:hover {
+    color: var(--green-hover);
+    border-bottom-color: var(--green-hover);
+}

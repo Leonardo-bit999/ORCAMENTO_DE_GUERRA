@@ -1,0 +1,258 @@
+/* =========================================================
+   CSS compartilhado entre cadastro e login
+   ========================================================= */
+
+:host {
+    display: block;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.form-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-bottom: var(--space-3);
+}
+
+.form-titulo {
+    font-family: var(--font-mono);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+}
+
+.form-sub {
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    line-height: 1.5;
+}
+
+/* ---------- Campos ---------- */
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.campo label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: var(--bg-base);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.input-wrap:hover {
+    border-color: rgba(244, 245, 242, 0.2);
+}
+
+.input-wrap:focus-within {
+    border-color: var(--border-green-strong);
+    background: var(--bg-elevated);
+    box-shadow: 0 0 0 4px var(--glow-green-soft);
+}
+
+.input-icone {
+    width: 18px;
+    height: 18px;
+    color: var(--text-muted);
+    margin-left: var(--space-4);
+    flex-shrink: 0;
+    transition: color 0.2s ease;
+}
+
+.input-wrap:focus-within .input-icone {
+    color: var(--green);
+}
+
+.input-wrap input {
+    flex: 1;
+    min-width: 0;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 0.92rem;
+    padding: 13px var(--space-4);
+}
+
+.input-wrap input::placeholder {
+    color: var(--text-muted);
+    opacity: 0.7;
+}
+
+.input-wrap input:-webkit-autofill,
+.input-wrap input:-webkit-autofill:hover,
+.input-wrap input:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--text-primary);
+    -webkit-box-shadow: 0 0 0 1000px var(--bg-elevated) inset;
+    transition: background-color 9999s ease-in-out 0s;
+}
+
+.campo.invalido .input-wrap {
+    border-color: rgba(240, 82, 58, 0.55);
+}
+
+.campo.invalido .input-wrap:focus-within {
+    box-shadow: 0 0 0 4px rgba(240, 82, 58, 0.12);
+}
+
+.campo.invalido .input-icone {
+    color: var(--danger);
+}
+
+/* ---------- Botão olho (ver/ocultar senha) ---------- */
+.btn-olho {
+    position: relative;
+    width: 44px;
+    height: 100%;
+    min-height: 44px;
+    flex-shrink: 0;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    color: var(--text-muted);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    transition: color 0.2s ease;
+}
+
+.btn-olho:hover,
+.btn-olho:focus-visible {
+    color: var(--green);
+    outline: none;
+}
+
+.btn-olho .olho {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    margin-left: -10px;
+    margin-top: -10px;
+    opacity: 0;
+    transform: scale(0.7) rotate(-12deg);
+    transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+.btn-olho .olho.ativo {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+}
+
+/* ---------- Erros ---------- */
+.erro {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--danger);
+    padding-left: 2px;
+}
+
+.erro-servidor {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    background: rgba(240, 82, 58, 0.08);
+    border: 1px solid rgba(240, 82, 58, 0.35);
+    color: var(--danger);
+    font-size: 0.82rem;
+    padding: 10px var(--space-4);
+    border-radius: var(--radius-md);
+}
+
+.erro-servidor svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+/* ---------- Botão primário ---------- */
+.btn-primario {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    width: 100%;
+    padding: 14px var(--space-6);
+    margin-top: var(--space-2);
+    background: var(--green);
+    color: var(--bg-base);
+    border: 0;
+    border-radius: var(--radius-md);
+    font-family: var(--font-mono);
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: background 0.18s ease, transform 0.12s ease, box-shadow 0.2s ease;
+}
+
+.btn-primario:hover:not(:disabled) {
+    background: var(--green-hover);
+    box-shadow: 0 0 0 6px var(--glow-green-soft), 0 8px 30px -10px var(--glow-green);
+}
+
+.btn-primario:active:not(:disabled) {
+    background: var(--green-dim);
+    transform: translateY(1px);
+}
+
+.btn-primario:disabled {
+    background: var(--bg-elevated);
+    color: var(--text-muted);
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.btn-seta {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.2s ease;
+}
+
+.btn-primario:hover:not(:disabled) .btn-seta {
+    transform: translateX(3px);
+}
+
+.carregando {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.spinner {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid rgba(11, 13, 15, 0.35);
+    border-top-color: var(--bg-base);
+    animation: girar 0.7s linear infinite;
+}
+
+@keyframes girar {
+    to {
+        transform: rotate(360deg);
+    }
+}

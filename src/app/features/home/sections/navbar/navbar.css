@@ -2,9 +2,6 @@
     display: block;
 }
 
-/* ============================================
-   HEADER
-   ============================================ */
 .site-header {
     position: sticky;
     top: 0;
@@ -54,51 +51,6 @@
     filter: drop-shadow(0 0 14px rgba(168, 240, 0, 0.8));
 }
 
-/* ============================================
-   NAV LINKS
-   ============================================ */
-.nav-links {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    color: var(--text-secondary);
-    font-size: 1rem;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-}
-
-.nav-links a:not(.button) {
-    position: relative;
-    color: inherit;
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-.nav-links a:not(.button):hover {
-    color: var(--green);
-}
-
-.nav-links a:not(.button)::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -6px;
-    height: 1px;
-    background: var(--green);
-    transform: scaleX(0);
-    transform-origin: left center;
-    transition: transform 0.25s ease;
-    box-shadow: 0 0 8px var(--glow-green);
-}
-
-.nav-links a:not(.button):hover::after {
-    transform: scaleX(1);
-}
-
-/* ============================================
-   BOTÃO
-   ============================================ */
 .button-small {
     display: inline-flex;
     align-items: center;
@@ -134,9 +86,6 @@
     outline-offset: 3px;
 }
 
-/* ============================================
-   MENU TOGGLE (mobile)
-   ============================================ */
 .menu-toggle {
     display: none;
     width: 40px;
@@ -166,9 +115,6 @@
     border-radius: 1px;
 }
 
-/* ============================================
-   MOBILE
-   ============================================ */
 @media (max-width: 700px) {
     .site-nav {
         min-height: 60px;

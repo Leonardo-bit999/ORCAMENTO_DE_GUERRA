@@ -1,0 +1,70 @@
+/* entrar.css — só o essencial */
+:host {
+    display: block;
+}
+
+.entrar-card {
+    width: 100%;
+    max-width: 440px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8) var(--space-6) var(--space-6);
+    box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.6);
+}
+/* Tabs */
+.tabs {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--bg-base);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    padding: 4px;
+    margin-bottom: var(--space-6);
+}
+
+.tab {
+    position: relative;
+    z-index: 1;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    padding: 10px 12px;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+    transition: color 0.2s ease;
+}
+
+.tab.ativa {
+    color: var(--bg-base);
+}
+
+.tab:hover:not(.ativa) {
+    color: var(--text-secondary);
+}
+
+.tab-indicador {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: calc(50% - 4px);
+    height: calc(100% - 8px);
+    background: var(--green);
+    border-radius: var(--radius-pill);
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 20px -4px var(--glow-green);
+    pointer-events: none;
+}
+
+.tab-indicador.direita {
+    transform: translateX(100%);
+}
+
+.tab-painel.oculto {
+    display: none;
+}
