@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CharacterCreation } from './character-creation';
+import { FaseObjetivo } from './fase-objetivo';
 
-describe('CharacterCreation', () => {
-  let component: CharacterCreation;
-  let fixture: ComponentFixture<CharacterCreation>;
+describe('FaseObjetivo', () => {
+  let component: FaseObjetivo;
+  let fixture: ComponentFixture<FaseObjetivo>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CharacterCreation]
+      imports: [FaseObjetivo]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CharacterCreation);
+    fixture = TestBed.createComponent(FaseObjetivo);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
