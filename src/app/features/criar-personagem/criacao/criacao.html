@@ -13,31 +13,33 @@
     <p class="aviso-ficticio">
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6" />
-        <path d="M12 7v6M12 16.5v.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+        <path
+          d="M12 7v6M12 16.5v.5"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+        />
       </svg>
       <span>
-        Este personagem é fictício. As informações abaixo servem para definir o
-        cenário do jogo e não precisam representar sua vida real.
+        Este personagem é fictício. As informações abaixo servem para definir o cenário do jogo e
+        não precisam representar sua vida real.
       </span>
     </p>
 
     <!-- Conteúdo da etapa (placeholder até Bloco 3) -->
     <section class="etapa-conteudo">
   <app-etapa-perfil *ngIf="etapaAtual() === 1"></app-etapa-perfil>
+  <app-etapa-cenario *ngIf="etapaAtual() === 2"></app-etapa-cenario>
+  <app-etapa-objetivo *ngIf="etapaAtual() === 3"></app-etapa-objetivo>
 
-  <p class="placeholder" *ngIf="etapaAtual() !== 1">
+  <p class="placeholder" *ngIf="etapaAtual() > 3">
     Etapa {{ etapaAtual() }} — conteúdo em construção.
   </p>
 </section>
 
     <!-- Navegação -->
     <footer class="criacao-nav">
-      <button
-        type="button"
-        class="btn-ghost"
-        [disabled]="etapaAtual() === 1"
-        (click)="voltar()"
-      >
+      <button type="button" class="btn-ghost" [disabled]="etapaAtual() === 1" (click)="voltar()">
         <svg viewBox="0 0 24 24" class="btn-seta" style="transform: scaleX(-1)">
           <path
             d="M5 12h14M13 6l6 6-6 6"

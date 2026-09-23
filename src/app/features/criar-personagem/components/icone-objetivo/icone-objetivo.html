@@ -1,0 +1,59 @@
+<svg
+  viewBox="0 0 24 24"
+  class="icone"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.6"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+>
+  <ng-container [ngSwitch]="id">
+    <!-- SAIR DA CASA DOS PAIS -->
+    <g *ngSwitchCase="'sair-casa'">
+      <path d="M3 11 12 4l9 7" />
+      <path d="M5 10v10h14V10" />
+      <path d="M10 20v-5h4v5" />
+    </g>
+
+    <!-- CONSTRUIR UMA RESERVA -->
+    <g *ngSwitchCase="'reserva'">
+      <ellipse cx="12" cy="7" rx="7" ry="3" />
+      <path d="M5 7v5c0 1.66 3.13 3 7 3s7-1.34 7-3V7" />
+      <path d="M5 12v5c0 1.66 3.13 3 7 3s7-1.34 7-3v-5" />
+    </g>
+
+    <!-- COMPRAR ALGO IMPORTANTE -->
+    <g *ngSwitchCase="'comprar'">
+      <path d="M6 7h12l-1.2 12.2A2 2 0 0 1 14.81 21H9.19a2 2 0 0 1-1.99-1.8L6 7Z" />
+      <path d="M9 7a3 3 0 0 1 6 0" />
+    </g>
+
+    <!-- EVITAR DÍVIDAS -->
+    <g *ngSwitchCase="'evitar-dividas'">
+      <path d="M3 17 9 11l4 4 8-8" />
+      <path d="M15 7h6v6" />
+    </g>
+
+    <!-- AJUDAR A FAMÍLIA -->
+    <g *ngSwitchCase="'ajudar-familia'">
+      <circle cx="8" cy="9" r="3" />
+      <circle cx="17" cy="9" r="2.5" />
+      <path d="M2.5 20c0-3 2.5-5 5.5-5s5.5 2 5.5 5" />
+      <path d="M14.5 20c0-2.3 1.6-4 3.5-4s3.5 1.7 3.5 4" />
+    </g>
+
+    <!-- COMEÇAR UM PROJETO -->
+    <g *ngSwitchCase="'projeto'">
+      <path d="M14 3h7v7" />
+      <path d="M21 3 11 13" />
+      <path d="M20 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5" />
+    </g>
+
+    <!-- OUTRO -->
+    <g *ngSwitchCase="'outro'">
+      <path d="M4 20h4l10.5-10.5a2.12 2.12 0 0 0-3-3L5 17v3Z" />
+      <path d="m13.5 6.5 3 3" />
+    </g>
+  </ng-container>
+</svg>

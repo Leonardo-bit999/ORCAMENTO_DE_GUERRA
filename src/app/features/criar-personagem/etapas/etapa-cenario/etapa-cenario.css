@@ -1,0 +1,119 @@
+:host {
+    display: block;
+}
+
+.etapa {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+}
+
+/* Grids de tiles */
+.grid-tiles {
+    display: grid;
+    gap: var(--space-3);
+}
+
+.grid-tiles-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.grid-tiles-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 900px) {
+
+    .grid-tiles-4,
+    .grid-tiles-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 520px) {
+
+    .grid-tiles-4,
+    .grid-tiles-3 {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ---------- Painel de renda ---------- */
+.renda-painel {
+    margin-top: var(--space-4);
+    padding: var(--space-4) var(--space-5);
+    border: 1px solid var(--border-green);
+    border-radius: var(--radius-md);
+    background: linear-gradient(180deg,
+            rgba(168, 240, 0, 0.04) 0%,
+            transparent 100%);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    animation: surgir 0.22s ease;
+}
+
+@keyframes surgir {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.renda-info {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-3);
+}
+
+.renda-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #F4F5F2;
+    opacity: 0.75;
+}
+
+.renda-valor {
+    font-family: var(--font-mono);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--green);
+    letter-spacing: 0.02em;
+}
+
+.renda-opcoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+.renda-custom {
+    margin-top: var(--space-2);
+}
+
+/* ---------- Aviso para perfil personalizado ---------- */
+.aviso-personalizado-texto {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: #F4F5F2;
+    opacity: 0.85;
+    background: var(--bg-surface);
+    border: 1px dashed var(--border-strong);
+    border-radius: var(--radius-md);
+    padding: var(--space-3) var(--space-4);
+}
+
+.aviso-personalizado-texto strong {
+    color: var(--green);
+    font-weight: 700;
+}

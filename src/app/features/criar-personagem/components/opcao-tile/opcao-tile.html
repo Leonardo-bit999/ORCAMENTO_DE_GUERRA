@@ -1,0 +1,17 @@
+<button
+  type="button"
+  class="tile"
+  [class.selecionada]="selecionado"
+  [attr.aria-pressed]="selecionado"
+  (click)="selecionar.emit()"
+>
+  <span class="tile-conteudo">
+    <span class="tile-icone">
+      <ng-content select="[slotIcone]"></ng-content>
+    </span>
+    <span class="tile-texto">
+      <span class="tile-titulo">{{ titulo }}</span>
+      <span *ngIf="sub" class="tile-sub">{{ sub }}</span>
+    </span>
+  </span>
+</button>

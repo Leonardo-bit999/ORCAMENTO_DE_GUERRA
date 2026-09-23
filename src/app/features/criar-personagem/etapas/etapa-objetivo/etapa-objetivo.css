@@ -1,0 +1,21 @@
+:host {
+    display: block;
+}
+
+.etapa {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+}
+
+.grid-objetivos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: var(--space-3);
+}
+
+@media (max-width: 520px) {
+    .grid-objetivos {
+        grid-template-columns: 1fr;
+    }
+}

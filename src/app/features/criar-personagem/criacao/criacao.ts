@@ -5,6 +5,10 @@ import { Navbar } from '../../../core/layout/navbar/navbar';
 import { BarraProgresso, EtapaProgresso } from '../components/barra-progresso/barra-progresso';
 import { CharacterService, EtapaId, TOTAL_ETAPAS } from '../../../core/services/character';
 import { EtapaPerfil } from '../etapas/etapa-perfil/etapa-perfil';
+import { EtapaCenario } from '../etapas/etapa-cenario/etapa-cenario';
+import { EtapaObjetivo } from '../etapas/etapa-objetivo/etapa-objetivo';
+import { EtapaEstilo } from '../etapas/etapa-estilo/etapa-estilo';
+import { EtapaResumo } from '../etapas/etapa-resumo/etapa-resumo';
 
 @Component({
   selector: 'app-criacao',
@@ -13,7 +17,11 @@ import { EtapaPerfil } from '../etapas/etapa-perfil/etapa-perfil';
     CommonModule,
     Navbar,
     BarraProgresso,
-    EtapaPerfil
+    EtapaPerfil,
+    EtapaCenario,
+    EtapaObjetivo,
+    EtapaEstilo,
+    EtapaResumo
 ],
   templateUrl: './criacao.html',
   styleUrls: ['./criacao.css', '../shared/criacao.shared.css'],

@@ -1,1 +1,45 @@
-<p>etapa-objetivo works!</p>
+<section class="etapa">
+  <header class="etapa-header">
+    <h1 class="etapa-titulo">Qual é a principal missão deste personagem?</h1>
+    <p class="etapa-sub">
+      Escolha o foco da campanha. Você poderá desbloquear outros objetivos
+      durante o jogo.
+    </p>
+  </header>
+
+  <div class="grupo">
+    <span class="grupo-label">Objetivo principal</span>
+
+    <div class="grid-objetivos">
+      <app-opcao-tile
+        *ngFor="let o of objetivos"
+        [titulo]="o.label"
+        [selecionado]="draft().objetivo === o.id"
+        (selecionar)="selecionarObjetivo(o.id)"
+      >
+        <app-icone-objetivo slotIcone [id]="o.id"></app-icone-objetivo>
+      </app-opcao-tile>
+    </div>
+  </div>
+
+  <!-- CAMPO OUTRO -->
+  <div class="grupo" *ngIf="ehOutro()">
+    <div class="campo" [class.invalido]="outroInvalido">
+      <label for="objetivo-outro">Qual é o objetivo?</label>
+      <div class="input-wrap">
+        <input
+          id="objetivo-outro"
+          type="text"
+          [value]="draft().objetivoOutroTexto"
+          (input)="setOutroTexto($any($event.target).value)"
+          placeholder="Ex: Juntar dinheiro para uma viagem"
+          autocomplete="off"
+          maxlength="80"
+        />
+      </div>
+      <small class="erro" *ngIf="outroInvalido">
+        O objetivo precisa ter ao menos 2 caracteres.
+      </small>
+    </div>
+  </div>
+</section>
