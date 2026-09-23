@@ -4,29 +4,28 @@
     background: var(--bg-base);
 }
 
-.criacao-main {
-    padding: var(--space-8) var(--space-4) 4rem;
-}
-
-.criacao-container {
-    max-width: 880px;
-    margin-inline: auto;
+/* =========================================================
+   AVISO COMPACTO (centrado, entre navbar e corpo)
+   ========================================================= */
+.criacao-aviso-wrap {
     display: flex;
-    flex-direction: column;
-    gap: var(--space-6);
+    justify-content: center;
+    padding: 32px 24px 20px;
 }
 
 .aviso-ficticio {
     display: flex;
-    align-items: flex-start;
-    gap: var(--space-3);
-    padding: var(--space-4) var(--space-5);
+    align-items: center;
+    gap: 12px;
+    max-width: 720px;
+    margin: 0;
+    padding: 14px 18px;
     background: rgba(94, 184, 255, 0.08);
-    border: 1px solid rgba(94, 184, 255, 0.35);
+    border: 1px solid rgba(94, 184, 255, 0.3);
     border-radius: var(--radius-md);
     color: #CFE6FF;
     font-family: var(--font-mono);
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     line-height: 1.55;
 }
 
@@ -35,38 +34,150 @@
     height: 18px;
     flex-shrink: 0;
     color: var(--info);
-    margin-top: 2px;
 }
 
-.etapa-conteudo {
-    min-height: 380px;
+/* =========================================================
+   CORPO: split de 2 colunas com fundo
+   ========================================================= */
+.criacao-corpo {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    align-items: start;
+    gap: 0;
+
+    max-width: 1600px;
+    margin: 0 auto 48px;
+    width: calc(100% - 48px);
+
+    background: var(--bg-surface);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+/* ---------- Coluna esquerda ---------- */
+.criacao-esquerda {
+    min-width: 0;
+    padding: 40px 40px 32px;
+    border-right: 1px solid var(--border);
+}
+
+.criacao-esquerda-inner {
     display: flex;
     flex-direction: column;
+    gap: 32px;
+    max-width: 900px;
+    margin-inline: auto;
+    width: 100%;
 }
 
-.placeholder {
-    color: var(--text-muted);
-    font-family: var(--font-mono);
-    font-size: 0.9rem;
-    text-align: center;
-    padding: var(--space-12) 0;
-    border: 1px dashed var(--border-strong);
-    border-radius: var(--radius-lg);
-    background: var(--bg-surface);
+app-barra-progresso {
+    display: block;
+    margin: -40px -40px 0;
 }
 
+/* ---------- Coluna direita (sticky) ---------- */
+.criacao-direita {
+    min-width: 0;
+    padding: 40px 32px 32px;
+}
+
+.criacao-direita-inner {
+    position: sticky;
+    top: 88px;
+}
+
+/* =========================================================
+   ANIMAÇÃO DA ETAPA (fade + leve escala — opção C)
+   ========================================================= */
+.etapa-wrapper {
+    animation: fadeEtapa 0.22s ease;
+}
+
+@keyframes fadeEtapa {
+    from {
+        opacity: 0;
+        transform: scale(0.995) translateY(2px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* =========================================================
+   NAVEGAÇÃO (Voltar / Continuar)
+   ========================================================= */
 .criacao-nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-4);
-    padding-top: var(--space-4);
+    gap: 16px;
+    padding-top: 32px;
     border-top: 1px solid var(--border);
 }
 
+.criacao-nav-spacer {
+    flex: 1;
+}
+
+/* =========================================================
+   RESPONSIVO
+   ========================================================= */
+@media (max-width: 1200px) {
+    .criacao-corpo {
+        grid-template-columns: 1fr 340px;
+    }
+
+    .criacao-esquerda {
+        padding: 32px 32px 28px;
+    }
+
+    app-barra-progresso {
+        margin: -32px -32px 0;
+    }
+
+    .criacao-direita {
+        padding: 32px 24px 28px;
+    }
+}
+
+@media (max-width: 960px) {
+    .criacao-corpo {
+        grid-template-columns: 1fr;
+        width: calc(100% - 32px);
+        margin-bottom: 32px;
+    }
+
+    .criacao-esquerda {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+        padding: 28px 24px 24px;
+    }
+
+    app-barra-progresso {
+        margin: -28px -24px 0;
+    }
+
+    .criacao-direita {
+        display: none;
+    }
+
+    .criacao-esquerda-inner {
+        max-width: none;
+        gap: 24px;
+    }
+}
+
 @media (max-width: 640px) {
-    .criacao-main {
-        padding: var(--space-6) var(--space-4) var(--space-8);
+    .criacao-aviso-wrap {
+        padding: 20px 16px 12px;
+    }
+
+    .aviso-ficticio {
+        font-size: 0.76rem;
+        padding: 12px 14px;
+        gap: 10px;
     }
 
     .criacao-nav {
@@ -75,5 +186,9 @@
 
     .criacao-nav>button {
         width: 100%;
+    }
+
+    .criacao-nav-spacer {
+        display: none;
     }
 }

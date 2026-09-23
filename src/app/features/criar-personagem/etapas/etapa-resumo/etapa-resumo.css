@@ -1,0 +1,224 @@
+:host {
+    display: block;
+}
+
+.resumo {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+/* ---------- Header ---------- */
+.resumo-header {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.resumo-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--green);
+}
+
+.resumo-nome {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    margin: 0;
+    word-break: break-word;
+}
+
+.resumo-nome.vazio {
+    color: var(--text-primary);
+    opacity: 0.35;
+    font-style: italic;
+    font-size: 1.15rem;
+}
+
+/* ---------- Perfil ---------- */
+.resumo-perfil {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--bg-base);
+    border: 1px solid var(--border-green);
+    border-radius: var(--radius-md);
+}
+
+.resumo-perfil-icone {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--green);
+    background: var(--glow-green-soft);
+    border-radius: var(--radius-md);
+}
+
+.resumo-perfil-icone svg {
+    width: 22px;
+    height: 22px;
+}
+
+.resumo-perfil-texto {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+
+.resumo-perfil-titulo {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--green);
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+}
+
+.resumo-perfil-titulo.vazio {
+    color: var(--text-primary);
+    opacity: 0.35;
+    font-style: italic;
+    font-weight: 400;
+}
+
+.resumo-perfil-hint {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-primary);
+    opacity: 0.55;
+}
+
+.resumo-perfil-vazio {
+    padding: 16px;
+    background: var(--bg-base);
+    border: 1px dashed var(--border-strong);
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+
+/* ---------- Blocos destacados ---------- */
+.resumo-bloco {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.resumo-bloco-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--green);
+}
+
+.resumo-bloco-valor {
+    font-family: var(--font-mono);
+    font-size: 0.92rem;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.resumo-bloco-valor.vazio {
+    opacity: 0.4;
+    font-style: italic;
+}
+
+/* ---------- Lista compacta ---------- */
+.resumo-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.resumo-linha {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+}
+
+.resumo-chave {
+    color: var(--text-primary);
+    opacity: 0.65;
+    flex-shrink: 0;
+}
+
+.resumo-valor {
+    color: var(--text-primary);
+    font-weight: 600;
+    text-align: right;
+}
+
+.resumo-valor.vazio {
+    opacity: 0.4;
+    font-style: italic;
+    font-weight: 400;
+}
+
+/* ---------- Situação inicial ---------- */
+.resumo-situacao {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.resumo-situacao-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--green);
+}
+
+.resumo-situacao-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.resumo-situacao-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px 14px;
+    background: var(--bg-base);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+}
+
+.resumo-situacao-chave {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--text-primary);
+    opacity: 0.6;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.resumo-situacao-valor {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--green);
+    letter-spacing: 0.01em;
+}

@@ -4,8 +4,6 @@
 
 export type PerfilId = 'iniciante' | 'planejador' | 'personalizado';
 
-export type AvatarId = 'avatar-1' | 'avatar-2' | 'avatar-3';
-
 export type Moradia = 'familia' | 'sozinho' | 'divide' | 'republica';
 
 export type FonteRenda = 'jovem-aprendiz' | 'estagiario' | 'formal' | 'variavel' | 'personalizado';
@@ -42,9 +40,9 @@ export type Vibe = 'social' | 'caseiro' | 'fitness' | 'geek' | 'criativo';
 
 export const RENDA_MENSAL_POR_FONTE: Record<FonteRenda, number> = {
   'jovem-aprendiz': 800,
-  estagiario: 1200,
-  formal: 2200,
-  variavel: 1500,
+  estagiario: 1290,
+  formal: 2299,
+  variavel: 1599,
   personalizado: 0,
 };
 
@@ -120,12 +118,8 @@ export const PERFIS: PerfilPreset[] = [
 ];
 
 /* =========================================================
-   Listas de opções
+   Listas de opções (labels amigáveis)
    ========================================================= */
-
-export const AVATARES: AvatarId[] = ['avatar-1', 'avatar-2', 'avatar-3'];
-
-export const AVATAR_PADRAO: AvatarId = 'avatar-1';
 
 export const MORADIAS: { id: Moradia; label: string }[] = [
   { id: 'familia', label: 'Mora com a família' },
@@ -164,14 +158,14 @@ export const RESPONSABILIDADES: { id: Responsabilidade; label: string }[] = [
   { id: 'veiculo', label: 'Veículo' },
 ];
 
-export const OBJETIVOS: { id: Objetivo; label: string; emoji: string }[] = [
-  { id: 'sair-casa', label: 'Sair da casa dos pais', emoji: '🎯' },
-  { id: 'reserva', label: 'Construir uma reserva', emoji: '💰' },
-  { id: 'comprar', label: 'Comprar algo importante', emoji: '🛒' },
-  { id: 'evitar-dividas', label: 'Evitar dívidas', emoji: '📉' },
-  { id: 'ajudar-familia', label: 'Ajudar a família', emoji: '👨‍👩‍👦' },
-  { id: 'projeto', label: 'Começar um projeto', emoji: '🚀' },
-  { id: 'outro', label: 'Outro', emoji: '✏️' },
+export const OBJETIVOS: { id: Objetivo; label: string }[] = [
+  { id: 'sair-casa', label: 'Sair da casa dos pais' },
+  { id: 'reserva', label: 'Construir uma reserva' },
+  { id: 'comprar', label: 'Comprar algo importante' },
+  { id: 'evitar-dividas', label: 'Evitar dívidas' },
+  { id: 'ajudar-familia', label: 'Ajudar a família' },
+  { id: 'projeto', label: 'Começar um projeto' },
+  { id: 'outro', label: 'Outro' },
 ];
 
 export const ESTILOS_VIDA: { id: EstiloVida; label: string; descricao: string }[] = [
@@ -211,7 +205,6 @@ export const VIBES: { id: Vibe; label: string; descricao: string }[] = [
 export interface CharacterDraft {
   // Etapa 1
   nome: string;
-  avatar: AvatarId;
   perfilId: PerfilId | null;
 
   // Etapa 2
@@ -222,7 +215,7 @@ export interface CharacterDraft {
   custoVida: CustoVida | null;
   responsabilidades: Responsabilidade[];
 
-  // Personalizado
+  // Personalizado (só quando perfilId === 'personalizado')
   personalizado: {
     rendaMensal: number | null;
     saldoInicial: number | null;
@@ -251,7 +244,6 @@ export interface Character extends Omit<CharacterDraft, 'personalizado'> {
 
 export const DRAFT_INICIAL: CharacterDraft = {
   nome: '',
-  avatar: AVATAR_PADRAO,
   perfilId: null,
 
   moradia: null,

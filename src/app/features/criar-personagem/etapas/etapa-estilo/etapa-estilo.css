@@ -1,0 +1,30 @@
+:host {
+    display: block;
+}
+
+.etapa {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+}
+
+.grid-tiles {
+    display: grid;
+    gap: var(--space-3);
+}
+
+.grid-tiles-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 900px) {
+    .grid-tiles-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 520px) {
+    .grid-tiles-3 {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,1 +1,49 @@
-<p>etapa-estilo works!</p>
+<section class="etapa">
+  <header class="etapa-header">
+    <h1 class="etapa-titulo">Como este personagem vive?</h1>
+    <p class="etapa-sub">
+      O estilo de vida e a vibe influenciam decisões de consumo, eventos e
+      missões durante a campanha.
+    </p>
+  </header>
+
+  <!-- ESTILO DE VIDA -->
+  <div class="grupo">
+    <span class="grupo-label">Estilo de vida</span>
+    <span class="grupo-ajuda">
+      Como o personagem lida com dinheiro no dia a dia.
+    </span>
+
+    <div class="grid-tiles grid-tiles-3">
+      <app-opcao-tile
+        *ngFor="let e of estilos"
+        [titulo]="e.label"
+        [sub]="e.descricao"
+        [selecionado]="draft().estiloVida === e.id"
+        (selecionar)="selecionarEstilo(e.id)"
+      >
+        <app-icone-estilo slotIcone [id]="e.id"></app-icone-estilo>
+      </app-opcao-tile>
+    </div>
+  </div>
+
+  <!-- VIBE -->
+  <div class="grupo">
+    <span class="grupo-label">Vibe do personagem</span>
+    <span class="grupo-ajuda">
+      O contexto estético do personagem. Pode influenciar eventos no futuro.
+    </span>
+
+    <div class="grid-tiles grid-tiles-3">
+      <app-opcao-tile
+        *ngFor="let v of vibes"
+        [titulo]="v.label"
+        [sub]="v.descricao"
+        [selecionado]="draft().vibe === v.id"
+        (selecionar)="selecionarVibe(v.id)"
+      >
+        <app-icone-vibe slotIcone [id]="v.id"></app-icone-vibe>
+      </app-opcao-tile>
+    </div>
+  </div>
+</section>

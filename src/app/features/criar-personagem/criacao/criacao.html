@@ -1,97 +1,121 @@
-<app-navbar></app-navbar>
+<app-navbar />
 
-<app-barra-progresso
-  [etapas]="etapas"
-  [atual]="etapaAtual()"
-  [clicavel]="true"
-  (irPara)="irPara($event)"
-></app-barra-progresso>
-
-<main class="criacao-main">
-  <div class="criacao-container">
-    <!-- Aviso fictício -->
-    <p class="aviso-ficticio">
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6" />
-        <path
-          d="M12 7v6M12 16.5v.5"
-          stroke="currentColor"
-          stroke-width="1.8"
-          stroke-linecap="round"
-        />
-      </svg>
-      <span>
-        Este personagem é fictício. As informações abaixo servem para definir o cenário do jogo e
-        não precisam representar sua vida real.
-      </span>
-    </p>
-
-    <!-- Conteúdo da etapa (placeholder até Bloco 3) -->
-    <section class="etapa-conteudo">
-  <app-etapa-perfil *ngIf="etapaAtual() === 1"></app-etapa-perfil>
-  <app-etapa-cenario *ngIf="etapaAtual() === 2"></app-etapa-cenario>
-  <app-etapa-objetivo *ngIf="etapaAtual() === 3"></app-etapa-objetivo>
-
-  <p class="placeholder" *ngIf="etapaAtual() > 3">
-    Etapa {{ etapaAtual() }} — conteúdo em construção.
+<!-- Aviso compacto, centralizado, entre navbar e corpo -->
+<aside class="criacao-aviso-wrap" aria-label="Aviso sobre o personagem">
+  <p class="aviso-ficticio">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6" />
+      <path d="M12 7v6M12 16.5v.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+    </svg>
+    <span>
+      Este personagem é fictício. As informações abaixo servem para definir o
+      cenário do jogo e não precisam representar sua vida real.
+    </span>
   </p>
-</section>
+</aside>
 
-    <!-- Navegação -->
-    <footer class="criacao-nav">
-      <button type="button" class="btn-ghost" [disabled]="etapaAtual() === 1" (click)="voltar()">
-        <svg viewBox="0 0 24 24" class="btn-seta" style="transform: scaleX(-1)">
-          <path
-            d="M5 12h14M13 6l6 6-6 6"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-        Voltar
-      </button>
+<!-- Corpo: split de 2 colunas -->
+<div class="criacao-corpo">
+  <!-- Coluna esquerda: barra + etapa + navegação -->
+  <main class="criacao-esquerda">
+    <div class="criacao-esquerda-inner">
+      <app-barra-progresso
+        [etapas]="etapas"
+        [atual]="etapaAtual()"
+        [clicavel]="true"
+        (irPara)="irPara($event)"
+      />
 
-      <button
-        *ngIf="!ehUltima()"
-        type="button"
-        class="btn-primario"
-        [disabled]="!podeAvancar()"
-        (click)="avancar()"
-      >
-        Continuar
-        <svg viewBox="0 0 24 24" class="btn-seta">
-          <path
-            d="M5 12h14M13 6l6 6-6 6"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      </button>
+      <!-- Etapa atual (com animação de fade) -->
+      @for (etapa of [etapaAtual()]; track etapa) {
+        <section class="etapa-wrapper">
+          @if (etapa === 1) { <app-etapa-perfil /> }
+          @if (etapa === 2) { <app-etapa-cenario /> }
+          @if (etapa === 3) { <app-etapa-objetivo /> }
+          @if (etapa === 4) { <app-etapa-estilo /> }
+        </section>
+      }
 
-      <button
-        *ngIf="ehUltima()"
-        type="button"
-        class="btn-primario"
-        [disabled]="!podeAvancar()"
-        (click)="confirmar()"
-      >
-        Começar jornada
-        <svg viewBox="0 0 24 24" class="btn-seta">
-          <path
-            d="M5 12h14M13 6l6 6-6 6"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      </button>
-    </footer>
-  </div>
-</main>
+      <!-- Navegação -->
+      <footer class="criacao-nav">
+        @if (!ehPrimeira()) {
+          <button type="button" class="btn-ghost" (click)="voltar()">
+            <svg viewBox="0 0 24 24" class="btn-seta btn-seta-voltar" aria-hidden="true">
+              <path
+                d="M19 12H5M11 18l-6-6 6-6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            Voltar
+          </button>
+        } @else {
+          <span class="criacao-nav-spacer"></span>
+        }
+
+        @if (!ehUltima()) {
+          <button
+            type="button"
+            class="btn-primario"
+            [disabled]="!podeAvancar()"
+            (click)="avancar()"
+          >
+            Continuar
+            <svg viewBox="0 0 24 24" class="btn-seta" aria-hidden="true">
+              <path
+                d="M5 12h14M13 6l6 6-6 6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        } @else {
+          <button
+            type="button"
+            class="btn-primario"
+            [disabled]="!podeAvancar()"
+            (click)="abrirModal()"
+          >
+            Começar jornada
+            <svg viewBox="0 0 24 24" class="btn-seta" aria-hidden="true">
+              <path
+                d="M5 12h14M13 6l6 6-6 6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        }
+      </footer>
+    </div>
+  </main>
+
+  <!-- Coluna direita: resumo -->
+  <aside class="criacao-direita" aria-label="Resumo do personagem">
+    <div class="criacao-direita-inner">
+      <app-etapa-resumo />
+    </div>
+  </aside>
+</div>
+
+<!-- Modal -->
+@if (modalAberto()) {
+  <app-modal-confirmar
+    [nome]="nome()"
+    [perfil]="perfilTitulo()"
+    [saldo]="saldo()"
+    [reserva]="reserva()"
+    [carregando]="carregando()"
+    (confirmar)="confirmarFinalizacao()"
+    (cancelar)="fecharModal()"
+  />
+}

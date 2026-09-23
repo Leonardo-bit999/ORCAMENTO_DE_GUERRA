@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AvatarId, AVATARES } from '../../../../core/models/character.model';
+//import { AvatarId, AVATARES } from '../../../../core/models/character.model';
 
 @Component({
   selector: 'app-avatar-picker',
@@ -10,17 +10,18 @@ import { AvatarId, AVATARES } from '../../../../core/models/character.model';
   styleUrl: './avatar-picker.css',
 })
 export class AvatarPicker {
-  @Input() selecionado: AvatarId | null = null;
-  @Output() selecionar = new EventEmitter<AvatarId>();
+  //@Input() selecionado: AvatarId | null = null;
+  @Input() somenteLeitura = false;
+  //@Output() selecionar = new EventEmitter<AvatarId>();
 
-  avatares = AVATARES;
+  //avatares = AVATARES;
 
-  corDe(id: AvatarId): string {
-    const map: Record<AvatarId, string> = {
-      'avatar-1': '#A8F000',
-      'avatar-2': '#5EB8FF',
-      'avatar-3': '#FFC928',
-    };
-    return map[id];
-  }
+  //corDe(id: AvatarId): string {
+   // const map: Record<AvatarId, string> = {
+      //'avatar-1': '#A8F000',
+     // 'avatar-2': '#5EB8FF',
+     // 'avatar-3': '#FFC928',
+   // };
+    //return map[id];
+ // }
 }

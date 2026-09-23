@@ -2,7 +2,7 @@ import { Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CharacterService } from '../../../../core/services/character';
-import { PERFIS, AvatarId, PerfilId } from '../../../../core/models/character.model';
+import { PERFIS, PerfilId } from '../../../../core/models/character.model';
 import { OpcaoCard } from '../../components/opcao-card/opcao-card';
 import { AvatarPicker } from '../../components/avatar-picker/avatar-picker';
 
@@ -27,10 +27,6 @@ export class EtapaPerfil {
 
   setNome(valor: string) {
     this.svc.atualizar({ nome: valor });
-  }
-
-  selecionarAvatar(id: AvatarId) {
-    this.svc.atualizar({ avatar: id });
   }
 
   selecionarPerfil(id: PerfilId) {

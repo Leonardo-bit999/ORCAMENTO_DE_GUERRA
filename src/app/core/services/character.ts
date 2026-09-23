@@ -1,4 +1,5 @@
 import { Injectable, inject, signal } from '@angular/core';
+import { Auth } from './auth';
 import {
   Character,
   CharacterDraft,
@@ -11,15 +12,13 @@ import {
   FonteRenda,
   PerfilId,
   Responsabilidade,
-  AVATAR_PADRAO,
 } from '../models/character.model';
-import { Auth } from './auth';
 
 const KEY_DRAFT = (uid: string) => `og:character-draft:${uid}`;
 const KEY_CHAR = (uid: string) => `og:character:${uid}`;
 
-export type EtapaId = 1 | 2 | 3 | 4 | 5;
-export const TOTAL_ETAPAS: EtapaId = 5;
+export type EtapaId = 1 | 2 | 3 | 4;
+export const TOTAL_ETAPAS: EtapaId = 4;
 
 @Injectable({ providedIn: 'root' })
 export class CharacterService {
@@ -68,17 +67,13 @@ export class CharacterService {
   selecionarPerfil(perfilId: PerfilId) {
     const partial: Partial<CharacterDraft> = { perfilId };
 
-    // Ao escolher um perfil preset, sugerimos renda mas só aplicamos
-    // quando o usuário escolher a fonte de renda.
     if (perfilId !== 'personalizado') {
-      // Limpa config personalizada ao trocar para preset
       partial.personalizado = {
         rendaMensal: null,
         saldoInicial: null,
         reservaInicial: null,
       };
     } else {
-      // Limpa renda sugerida ao trocar para personalizado
       partial.fonteRenda = null;
       partial.rendaMensal = null;
       partial.usarRendaSugerida = false;
@@ -109,23 +104,13 @@ export class CharacterService {
     this.atualizar({ responsabilidades: novas });
   }
 
-  definirAvatarPadraoSeVazio() {
-    const d = this._draft();
-    if (!d.avatar) {
-      this.atualizar({ avatar: AVATAR_PADRAO });
-    }
-  }
-
   // ---------- Validação por etapa ----------
   etapaValida(etapa: EtapaId): boolean {
     const d = this._draft();
     switch (etapa) {
       case 1:
-        return (
-          d.nome.trim().length >= 2 &&
-          d.avatar !== null &&
-          d.perfilId !== null
-        );
+        return d.nome.trim().length >= 2 && d.perfilId !== null;
+
       case 2: {
         const baseOk = d.moradia !== null && d.custoVida !== null;
         if (!baseOk) return false;
@@ -140,27 +125,28 @@ export class CharacterService {
           );
         }
 
-        // Perfil preset: precisa fonte de renda
         if (d.fonteRenda === null) return false;
-        // Se optou por personalizar a renda, precisa preencher
         if (!d.usarRendaSugerida) {
           return d.rendaMensal !== null && d.rendaMensal > 0;
         }
         return true;
       }
+
       case 3:
         return (
           d.objetivo !== null && (d.objetivo !== 'outro' || d.objetivoOutroTexto.trim().length >= 2)
         );
+
       case 4:
         return d.estiloVida !== null && d.vibe !== null;
-      case 5:
-        return (
-          this.etapaValida(1) && this.etapaValida(2) && this.etapaValida(3) && this.etapaValida(4)
-        );
+
       default:
         return false;
     }
+  }
+
+  etapaTudoValido(): boolean {
+    return this.etapaValida(1) && this.etapaValida(2) && this.etapaValida(3) && this.etapaValida(4);
   }
 
   // ---------- Cálculos ----------
@@ -190,12 +176,6 @@ export class CharacterService {
     return d.rendaMensal ?? 0;
   }
 
-  /**
-   * Calcula despesas previstas:
-   *   soma dos valores-base das responsabilidades
-   *   × modificador de custo de vida
-   *   × modificador de moradia
-   */
   despesasPrevistas(): number {
     const d = this._draft();
     if (!d.custoVida || !d.moradia) return 0;
@@ -216,7 +196,7 @@ export class CharacterService {
     const d = this._draft();
     const uid = this.userId();
     if (!uid) throw new Error('Usuário não autenticado.');
-    if (!this.etapaValida(5)) throw new Error('Dados incompletos.');
+    if (!this.etapaTudoValido()) throw new Error('Dados incompletos.');
 
     const preset = PERFIS.find((p) => p.id === d.perfilId);
 
@@ -226,7 +206,6 @@ export class CharacterService {
       criadoEm: new Date().toISOString(),
 
       nome: d.nome.trim(),
-      avatar: d.avatar,
       perfilId: d.perfilId,
       perfilTitulo: preset?.titulo ?? 'Personalizado',
       perfilFrase: preset?.frase ?? '',

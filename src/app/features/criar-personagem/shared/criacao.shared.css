@@ -1,34 +1,40 @@
 :host {
   display: block;
 }
+
+/* ---------- Cabeçalho da etapa ---------- */
 .etapa-header {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: 10px;
+  margin-bottom: 36px;
 }
 
 .etapa-titulo {
   font-family: var(--font-mono);
   font-size: clamp(1.6rem, 2.4vw, 2.1rem);
   font-weight: 700;
-  color: #F4F5F2;             /* branco gelo direto, sem token */
+  color: var(--text-primary);
   letter-spacing: -0.02em;
   line-height: 1.15;
+  margin: 0;
 }
 
 .etapa-sub {
-  color: #F4F5F2;
-  opacity: 0.85;
+  color: var(--text-primary);
+  opacity: 0.75;
   font-size: 0.95rem;
   line-height: 1.6;
   max-width: 60ch;
+  margin: 0;
 }
 
-/* ---------- Grupos de campo ---------- */
+/* ---------- Grupos ---------- */
 .grupo {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: 14px;
+  margin-bottom: 36px;
 }
 
 .grupo-label {
@@ -37,31 +43,32 @@
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #A8F000;             /* verde-limão direto */
+  color: var(--green);
 }
 
 .grupo-ajuda {
   font-family: var(--font-mono);
   font-size: 0.82rem;
-  color: #F4F5F2;
-  opacity: 0.75;
+  color: var(--text-primary);
+  opacity: 0.7;
+  margin: -4px 0 4px;
 }
 
 /* ---------- Input ---------- */
 .campo {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: 8px;
 }
 
 .campo label {
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #F4F5F2;
-  opacity: 0.9;
+  color: var(--text-primary);
+  opacity: 0.85;
 }
 
 .input-wrap {
@@ -90,38 +97,32 @@
   background: transparent;
   border: 0;
   outline: 0;
-  color: #F4F5F2;
+  color: var(--text-primary);
   font-family: var(--font-mono);
   font-size: 0.95rem;
-  padding: 14px var(--space-4);
+  padding: 14px 16px;
 }
 
 .input-wrap input::placeholder {
-  color: #F4F5F2;
-  opacity: 0.45;
-}
-
-.input-wrap input:-webkit-autofill {
-  -webkit-text-fill-color: #F4F5F2;
-  -webkit-box-shadow: 0 0 0 1000px var(--bg-elevated) inset;
+  color: var(--text-primary);
+  opacity: 0.4;
 }
 
 .campo.invalido .input-wrap {
   border-color: rgba(240, 82, 58, 0.55);
 }
 
-/* ---------- Grids utilitários ---------- */
+/* ---------- Grids ---------- */
 .grid-cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: var(--space-4);
-  align-items: start;    /* 👈 não estica os cards */
+  gap: 16px;
 }
 
 .grid-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2);
+  gap: 10px;
 }
 
 @media (max-width: 640px) {
@@ -144,8 +145,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-2);
-  padding: 12px 22px;
+  gap: 8px;
+  padding: 13px 24px;
   border-radius: var(--radius-pill);
   font-family: var(--font-mono);
   font-size: 0.85rem;
@@ -158,14 +159,15 @@
 
 .btn-primario {
   background: var(--green);
-  color: #0B0D0F;
+  color: var(--bg-base);
   border: 1px solid var(--green);
 }
 
 .btn-primario:hover:not(:disabled) {
   background: var(--green-hover);
   border-color: var(--green-hover);
-  box-shadow: 0 0 0 6px var(--glow-green-soft), 0 8px 30px -10px var(--glow-green);
+  box-shadow: 0 0 0 6px var(--glow-green-soft),
+    0 8px 30px -10px var(--glow-green);
 }
 
 .btn-primario:active:not(:disabled) {
@@ -177,15 +179,15 @@
 .btn-primario:disabled {
   background: var(--bg-elevated);
   border-color: var(--border-strong);
-  color: #F4F5F2;
-  opacity: 0.45;
+  color: var(--text-primary);
+  opacity: 0.4;
   cursor: not-allowed;
   box-shadow: none;
 }
 
 .btn-ghost {
   background: transparent;
-  color: #F4F5F2;
+  color: var(--text-primary);
   border: 1px solid var(--border-strong);
 }
 
@@ -196,7 +198,7 @@
 }
 
 .btn-ghost:disabled {
-  opacity: 0.35;
+  opacity: 0.3;
   cursor: not-allowed;
 }
 

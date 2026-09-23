@@ -78,3 +78,11 @@
         grid-template-columns: repeat(3, 1fr);
     }
 }
+.avatares.somente-leitura {
+    grid-template-columns: 96px;
+}
+
+.avatares.somente-leitura .avatar {
+    cursor: default;
+    pointer-events: none;
+}
