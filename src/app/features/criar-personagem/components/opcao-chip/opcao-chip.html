@@ -1,0 +1,11 @@
+<button
+  type="button"
+  class="chip"
+  [class.selecionado]="selecionado"
+  [disabled]="disabled"
+  [attr.aria-pressed]="selecionado"
+  (click)="selecionar.emit()"
+>
+  <span class="chip-label">{{ label }}</span>
+  <span *ngIf="sub" class="chip-sub">{{ sub }}</span>
+</button>

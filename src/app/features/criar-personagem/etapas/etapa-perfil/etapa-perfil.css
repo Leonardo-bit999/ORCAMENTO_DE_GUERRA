@@ -1,0 +1,73 @@
+:host {
+    display: block;
+}
+
+.etapa {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+}
+
+/* Bloco personalizado */
+.personalizado {
+    padding: var(--space-5);
+    border: 1px solid var(--border-green);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(180deg,
+            rgba(168, 240, 0, 0.05) 0%,
+            transparent 100%);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    animation: surgir 0.25s ease;
+}
+
+@keyframes surgir {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.personalizado-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.personalizado-tag {
+    align-self: flex-start;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green);
+    background: var(--glow-green-soft);
+    border: 1px solid var(--border-green);
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+}
+
+.personalizado-sub {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    line-height: 1.5;
+}
+
+.personalizado-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+}
+
+@media (max-width: 640px) {
+    .personalizado-grid {
+        grid-template-columns: 1fr;
+    }
+}

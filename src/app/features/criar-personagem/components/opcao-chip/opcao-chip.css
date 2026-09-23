@@ -1,0 +1,59 @@
+:host {
+    display: inline-block;
+}
+
+.chip {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px 16px;
+    border-radius: var(--radius-pill);
+    background: var(--bg-base);
+    border: 1px solid var(--border-strong);
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.18s ease;
+}
+
+.chip:hover:not(:disabled) {
+    color: var(--text-primary);
+    border-color: var(--border-green-strong);
+    background: var(--glow-green-soft);
+}
+
+.chip:focus-visible {
+    outline: 2px solid var(--green);
+    outline-offset: 2px;
+}
+
+.chip.selecionado {
+    background: var(--green);
+    border-color: var(--green);
+    color: var(--bg-base);
+    font-weight: 700;
+    box-shadow: 0 0 0 4px var(--glow-green-soft);
+}
+
+.chip:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.chip-label {
+    font-weight: inherit;
+}
+
+.chip-sub {
+    font-size: 0.7rem;
+    opacity: 0.75;
+}
+
+/* chip quadrado (usado em faixa etária) */
+.chip:not(:has(.chip-sub)) {
+    border-radius: var(--radius-md);
+    min-width: 72px;
+    justify-content: center;
+    align-items: center;
+}

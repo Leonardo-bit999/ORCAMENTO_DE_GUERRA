@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth-guard';
+import { hasCharacterGuard } from './core/guards/has-character-guard';
 
 
 export const routes: Routes = [
@@ -23,15 +24,16 @@ export const routes: Routes = [
   { path: 'login', redirectTo: '/entrar', pathMatch: 'full' },
 
   {
-    path: 'character/criar',
-    canActivate: [authGuard],
-    loadComponent: () => import('./features/criar-personagem/criar/criar').then((m) => m.Criar),
-  },
-  {
-    path: 'character/summary',
+    path: 'criar-personagem',
     canActivate: [authGuard],
     loadComponent: () =>
-      import('./features/criar-personagem/resumo/resumo').then((m) => m.Resumo),
+      import('./features/criar-personagem/criacao/criacao').then((m) => m.Criacao),
+  },
+
+  {
+    path: 'game',
+    canActivate: [authGuard, hasCharacterGuard],
+    loadComponent: () => import('./features/criar-personagem/game/game').then((m) => m.Game),
   },
 
   { path: '**', redirectTo: '' },

@@ -1,0 +1,59 @@
+<nav class="barra" aria-label="Progresso da criação">
+  <ol class="barra-lista">
+    <li
+      *ngFor="let etapa of etapas; let i = index"
+      class="barra-item"
+      [class.concluida]="estadoDe(etapa.numero) === 'concluida'"
+      [class.atual]="estadoDe(etapa.numero) === 'atual'"
+      [class.futura]="estadoDe(etapa.numero) === 'futura'"
+      [class.clicavel]="clicavel && etapa.numero < atual"
+    >
+      <button
+        type="button"
+        class="barra-btn"
+        [disabled]="!clicavel || etapa.numero >= atual"
+        (click)="clicar(etapa.numero)"
+      >
+        <span class="barra-marcador" aria-hidden="true">
+          <svg *ngIf="estadoDe(etapa.numero) === 'concluida'" viewBox="0 0 24 24">
+            <path
+              d="m5 12 5 5 9-11"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </span>
+        <span class="barra-texto">
+          <span class="barra-numero">{{ (etapa.numero < 10 ? '0' : '') + etapa.numero }}</span>
+          <span class="barra-label">{{ etapa.label }}</span>
+        </span>
+      </button>
+
+      <span
+        *ngIf="i < etapas.length - 1"
+        class="barra-linha"
+        [class.ativa]="etapa.numero < atual"
+        aria-hidden="true"
+      ></span>
+    </li>
+  </ol>
+
+  <!-- Versão mobile -->
+  <div class="barra-mobile">
+    <span class="barra-mobile-label">
+      ETAPA {{ atual }} DE {{ etapas.length }}
+    </span>
+    <span class="barra-mobile-nome">
+      {{ etapas[atual - 1]?.label }}
+    </span>
+    <div class="barra-mobile-trilha">
+      <span
+        class="barra-mobile-progresso"
+        [style.width.%]="(atual / etapas.length) * 100"
+      ></span>
+    </div>
+  </div>
+</nav>

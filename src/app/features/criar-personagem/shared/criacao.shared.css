@@ -1,0 +1,211 @@
+:host {
+  display: block;
+}
+.etapa-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.etapa-titulo {
+  font-family: var(--font-mono);
+  font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+  font-weight: 700;
+  color: #F4F5F2;             /* branco gelo direto, sem token */
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.etapa-sub {
+  color: #F4F5F2;
+  opacity: 0.85;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: 60ch;
+}
+
+/* ---------- Grupos de campo ---------- */
+.grupo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.grupo-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #A8F000;             /* verde-limão direto */
+}
+
+.grupo-ajuda {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: #F4F5F2;
+  opacity: 0.75;
+}
+
+/* ---------- Input ---------- */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.campo label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #F4F5F2;
+  opacity: 0.9;
+}
+
+.input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: var(--bg-base);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.input-wrap:hover {
+  border-color: rgba(244, 245, 242, 0.25);
+}
+
+.input-wrap:focus-within {
+  border-color: var(--border-green-strong);
+  background: var(--bg-elevated);
+  box-shadow: 0 0 0 4px var(--glow-green-soft);
+}
+
+.input-wrap input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: #F4F5F2;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  padding: 14px var(--space-4);
+}
+
+.input-wrap input::placeholder {
+  color: #F4F5F2;
+  opacity: 0.45;
+}
+
+.input-wrap input:-webkit-autofill {
+  -webkit-text-fill-color: #F4F5F2;
+  -webkit-box-shadow: 0 0 0 1000px var(--bg-elevated) inset;
+}
+
+.campo.invalido .input-wrap {
+  border-color: rgba(240, 82, 58, 0.55);
+}
+
+/* ---------- Grids utilitários ---------- */
+.grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-4);
+  align-items: start;    /* 👈 não estica os cards */
+}
+
+.grid-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+@media (max-width: 640px) {
+  .grid-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Erros ---------- */
+.erro {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--danger);
+  padding-left: 2px;
+}
+
+/* ---------- Botões ---------- */
+.btn-primario,
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 12px 22px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: color 0.18s ease, border-color 0.18s ease,
+    background 0.18s ease, box-shadow 0.2s ease, transform 0.12s ease;
+}
+
+.btn-primario {
+  background: var(--green);
+  color: #0B0D0F;
+  border: 1px solid var(--green);
+}
+
+.btn-primario:hover:not(:disabled) {
+  background: var(--green-hover);
+  border-color: var(--green-hover);
+  box-shadow: 0 0 0 6px var(--glow-green-soft), 0 8px 30px -10px var(--glow-green);
+}
+
+.btn-primario:active:not(:disabled) {
+  background: var(--green-dim);
+  border-color: var(--green-dim);
+  transform: translateY(1px);
+}
+
+.btn-primario:disabled {
+  background: var(--bg-elevated);
+  border-color: var(--border-strong);
+  color: #F4F5F2;
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: #F4F5F2;
+  border: 1px solid var(--border-strong);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  color: var(--green);
+  border-color: var(--border-green-strong);
+  background: var(--glow-green-soft);
+}
+
+.btn-ghost:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.btn-seta {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s ease;
+}
+
+.btn-primario:hover:not(:disabled) .btn-seta {
+  transform: translateX(3px);
+}

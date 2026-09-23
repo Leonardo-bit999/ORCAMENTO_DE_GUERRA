@@ -1,0 +1,33 @@
+<button
+  type="button"
+  class="opcao"
+  [class.selecionada]="selecionado"
+  [attr.aria-pressed]="selecionado"
+  (click)="selecionar.emit()"
+>
+  <header class="opcao-topo">
+    <h3 class="opcao-titulo">{{ titulo }}</h3>
+  </header>
+
+  <!-- Container intermediário sempre presente -->
+  <div class="opcao-corpo">
+    <p class="opcao-frase">{{ frase || '' }}</p>
+
+    <ul class="opcao-bullets">
+      <li *ngFor="let b of bullets">
+        <span class="bullet-dot" aria-hidden="true"></span>
+        <span>{{ b }}</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Rodapé sempre presente -->
+  <footer class="opcao-rodape-wrap">
+    <div class="opcao-valores">
+      <span *ngIf="destaque" class="opcao-valor">{{ destaque }}</span>
+      <span *ngIf="destaque2" class="opcao-valor">{{ destaque2 }}</span>
+    </div>
+
+    <p class="opcao-rodape">{{ rodape || '' }}</p>
+  </footer>
+</button>

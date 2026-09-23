@@ -45,7 +45,7 @@ export class Login {
     const { email, senha } = this.form.getRawValue();
     try {
       await this.auth.entrar({ email: email!, senha: senha! });
-      this.router.navigate(['/character/create']);
+      this.router.navigate(['/criar-personagem']);
     } catch (e: any) {
       this.erroServidor.set(e?.message ?? 'Erro ao entrar. Tente novamente.');
     } finally {

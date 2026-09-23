@@ -66,7 +66,7 @@ export class Cadastro {
     const { nome, email, senha } = this.form.getRawValue();
     try {
       await this.auth.cadastrar({ nome: nome!, email: email!, senha: senha! });
-      this.router.navigate(['/character/create']);
+      this.router.navigate(['/criar-personagem']);
     } catch (e: any) {
       this.erroServidor.set(e?.message ?? 'Erro ao criar conta. Tente novamente.');
     } finally {
