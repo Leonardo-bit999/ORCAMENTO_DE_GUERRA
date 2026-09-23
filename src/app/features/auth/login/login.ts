@@ -10,7 +10,7 @@ import { Auth } from '../../../core/services/auth';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './login.html',
-  styleUrls: ['../shared/auth-form.css'],
+  styleUrls: ['../../shared/auth-form.css'],
 })
 export class Login {
   private fb = inject(FormBuilder);

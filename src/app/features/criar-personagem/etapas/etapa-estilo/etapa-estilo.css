@@ -5,16 +5,25 @@
 .etapa {
     display: flex;
     flex-direction: column;
-    gap: var(--space-8);
 }
 
+/* =========================================================
+   Grids de estilo e vibe
+   ========================================================= */
 .grid-tiles {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: grid;
-    gap: var(--space-3);
+    gap: 14px;
 }
 
 .grid-tiles-3 {
     grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-tiles li {
+    min-width: 0;
 }
 
 @media (max-width: 900px) {

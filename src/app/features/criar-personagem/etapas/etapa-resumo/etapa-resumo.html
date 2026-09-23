@@ -8,22 +8,18 @@
 
   @if (perfilTitulo(); as titulo) {
     <article class="resumo-perfil">
-      <span class="resumo-perfil-icone" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-             stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="9" />
-          <path d="M12 7v5l3 2" />
-        </svg>
-      </span>
-      <div class="resumo-perfil-texto">
-        <span class="resumo-perfil-titulo">{{ titulo }}</span>
-        <span class="resumo-perfil-hint">Ponto de partida</span>
-      </div>
-    </article>
+    <span class="resumo-perfil-icone" aria-hidden="true">
+      <app-icone-perfil [id]="perfilId()!" />
+    </span>
+    <div class="resumo-perfil-texto">
+      <span class="resumo-perfil-titulo">{{ titulo }}</span>
+      <span class="resumo-perfil-hint">Ponto de partida</span>
+    </div>
+  </article>
   } @else {
     <article class="resumo-perfil-vazio">
-      <span class="resumo-perfil-titulo vazio">Perfil não definido</span>
-    </article>
+    <span class="resumo-perfil-titulo vazio">Perfil não definido</span>
+  </article>
   }
 
   <section class="resumo-bloco">

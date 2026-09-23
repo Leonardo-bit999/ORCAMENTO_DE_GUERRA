@@ -5,13 +5,22 @@
 .etapa {
     display: flex;
     flex-direction: column;
-    gap: var(--space-8);
 }
 
+/* =========================================================
+   Grid de objetivos
+   ========================================================= */
 .grid-objetivos {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: var(--space-3);
+    gap: 14px;
+}
+
+.grid-objetivos li {
+    min-width: 0;
 }
 
 @media (max-width: 520px) {

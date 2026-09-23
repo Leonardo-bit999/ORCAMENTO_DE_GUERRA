@@ -65,9 +65,10 @@
     border-radius: var(--radius-md);
 }
 
-.resumo-perfil-icone svg {
+.resumo-perfil-icone app-icone-perfil {
     width: 22px;
     height: 22px;
+    display: inline-block;
 }
 
 .resumo-perfil-texto {

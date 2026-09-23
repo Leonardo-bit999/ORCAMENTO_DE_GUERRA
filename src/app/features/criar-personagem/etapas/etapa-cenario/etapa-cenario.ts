@@ -20,7 +20,7 @@ import { OpcaoChip } from '../../components/opcao-chip/opcao-chip';
   standalone: true,
   imports: [CommonModule, FormsModule, OpcaoTile, OpcaoChip],
   templateUrl: './etapa-cenario.html',
-  styleUrls: ['./etapa-cenario.css', '../../shared/criacao.shared.css'],
+  styleUrls: ['./etapa-cenario.css', '../../../shared/criacao.shared.css'],
 })
 export class EtapaCenario {
   private svc = inject(CharacterService);
@@ -32,13 +32,10 @@ export class EtapaCenario {
 
   draft = this.svc.draft;
 
-  ehPersonalizado = computed(() => this.draft().perfilId === 'personalizado');
-
-  /**
-   * Só faz sentido mostrar opções de renda sugerida quando o perfil NÃO é
-   * personalizado (no personalizado a renda veio da etapa 1).
-   */
-  mostrarFontesRenda = computed(() => !this.ehPersonalizado());
+  fonteAtual = computed(() => {
+    const d = this.draft();
+    return this.fontesRenda.find((f) => f.id === d.fonteRenda) ?? null;
+  });
 
   selecionarMoradia(id: Moradia) {
     this.svc.atualizar({ moradia: id });
@@ -57,8 +54,7 @@ export class EtapaCenario {
   }
 
   setRendaCustom(valor: string) {
-    const n = this.paraNumero(valor);
-    this.svc.atualizar({ rendaMensal: n });
+    this.svc.atualizar({ rendaMensal: this.paraNumero(valor) });
   }
 
   usarValorSugerido() {
@@ -72,14 +68,13 @@ export class EtapaCenario {
     this.svc.atualizar({ usarRendaSugerida: false });
   }
 
+  formatarMoeda(valor: number): string {
+    return `R$ ${valor.toLocaleString('pt-BR')}`;
+  }
+
   private paraNumero(valor: string): number | null {
     if (valor === '' || valor === null || valor === undefined) return null;
     const n = Number(valor);
     return Number.isFinite(n) && n >= 0 ? n : null;
-  }
-
-  get fonteAtual() {
-    const d = this.draft();
-    return this.fontesRenda.find((f) => f.id === d.fonteRenda) ?? null;
   }
 }

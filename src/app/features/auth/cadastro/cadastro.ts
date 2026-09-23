@@ -21,7 +21,7 @@ function senhasIguais(group: AbstractControl): ValidationErrors | null {
   selector: 'app-cadastro',
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './cadastro.html',
-  styleUrls: ['./cadastro.css', '../shared/auth-form.css'],
+  styleUrls: ['./cadastro.css', '../../shared/auth-form.css'],
 })
 export class Cadastro {
   private fb = inject(FormBuilder);

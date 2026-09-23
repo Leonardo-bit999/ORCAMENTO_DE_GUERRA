@@ -7,138 +7,138 @@
   </header>
 
   <!-- MORADIA -->
-  <div class="grupo">
-    <span class="grupo-label">Moradia</span>
-    <div class="grid-tiles grid-tiles-4">
-      <app-opcao-tile
-        *ngFor="let m of moradias"
-        [titulo]="m.label"
-        [selecionado]="draft().moradia === m.id"
-        (selecionar)="selecionarMoradia(m.id)"
-      ></app-opcao-tile>
-    </div>
-  </div>
+  <section class="grupo" aria-labelledby="moradia-label">
+    <span id="moradia-label" class="grupo-label">Moradia</span>
 
-  <!-- FONTE DE RENDA (só para perfis preset) -->
-  <div class="grupo" *ngIf="mostrarFontesRenda()">
-    <span class="grupo-label">Fonte de renda</span>
-
-    <div class="grid-tiles grid-tiles-3">
-      <app-opcao-tile
-        *ngFor="let f of fontesRenda"
-        [titulo]="f.label"
-        [sub]="f.valor > 0 ? ('Sugerido: R$ ' + f.valor + '/mês') : 'Você define o valor'"
-        [selecionado]="draft().fonteRenda === f.id"
-        (selecionar)="selecionarFonte(f.id)"
-      ></app-opcao-tile>
-    </div>
-
-    <!-- Painel de renda: só quando uma fonte NÃO personalizada foi escolhida -->
-    <div
-      class="renda-painel"
-      *ngIf="fonteAtual && fonteAtual.id !== 'personalizado'"
-    >
-      <div class="renda-info">
-        <span class="renda-label">Renda mensal</span>
-        <span class="renda-valor">
-          R$ {{ draft().rendaMensal ?? fonteAtual.valor }}
-        </span>
-      </div>
-
-      <div class="renda-opcoes">
-        <app-opcao-chip
-          label="Usar valor sugerido"
-          [selecionado]="draft().usarRendaSugerida"
-          (selecionar)="usarValorSugerido()"
-        ></app-opcao-chip>
-
-        <app-opcao-chip
-          label="Personalizar"
-          [selecionado]="!draft().usarRendaSugerida"
-          (selecionar)="personalizarRenda()"
-        ></app-opcao-chip>
-      </div>
-
-      <div
-        class="renda-custom"
-        *ngIf="!draft().usarRendaSugerida"
-      >
-        <div class="campo">
-          <label for="renda-custom">Valor personalizado (R$/mês)</label>
-          <div class="input-wrap">
-            <input
-              id="renda-custom"
-              type="number"
-              min="0"
-              step="50"
-              [value]="draft().rendaMensal ?? ''"
-              (input)="setRendaCustom($any($event.target).value)"
-              placeholder="1200"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Painel quando escolheu "Personalizado" como fonte -->
-    <div
-      class="renda-painel"
-      *ngIf="fonteAtual && fonteAtual.id === 'personalizado'"
-    >
-      <div class="campo">
-        <label for="renda-custom-2">Renda mensal personalizada (R$/mês)</label>
-        <div class="input-wrap">
-          <input
-            id="renda-custom-2"
-            type="number"
-            min="0"
-            step="50"
-            [value]="draft().rendaMensal ?? ''"
-            (input)="setRendaCustom($any($event.target).value)"
-            placeholder="1200"
+    <ul class="grid-tiles grid-tiles-4">
+      @for (m of moradias; track m.id) {
+        <li>
+          <app-opcao-tile
+            [titulo]="m.label"
+            [selecionado]="draft().moradia === m.id"
+            (selecionar)="selecionarMoradia(m.id)"
           />
-        </div>
-      </div>
-    </div>
-  </div>
+        </li>
+      }
+    </ul>
+  </section>
 
-  <!-- AVISO PARA PERFIL PERSONALIZADO -->
-  <div class="grupo aviso-personalizado" *ngIf="ehPersonalizado()">
-    <span class="grupo-label">Renda</span>
-    <p class="aviso-personalizado-texto">
-      A renda do seu personagem foi definida na etapa de perfil
-      (<strong>R$ {{ draft().personalizado.rendaMensal ?? 0 }}/mês</strong>).
-    </p>
-  </div>
+  <!-- FONTE DE RENDA -->
+    <section class="grupo" aria-labelledby="renda-label">
+      <span id="renda-label" class="grupo-label">Fonte de renda</span>
+
+      <ul class="grid-tiles grid-tiles-3">
+        @for (f of fontesRenda; track f.id) {
+          <li>
+            <app-opcao-tile
+              [titulo]="f.label"
+              [sub]="
+                f.valor > 0 ? 'Sugerido: ' + formatarMoeda(f.valor) + '/mês' : 'Você define o valor'
+              "
+              [selecionado]="draft().fonteRenda === f.id"
+              (selecionar)="selecionarFonte(f.id)"
+            />
+          </li>
+        }
+      </ul>
+
+      <!-- Painel de renda (aparece só quando escolheu uma fonte não-personalizada) -->
+      @if (fonteAtual(); as fonte) {
+        @if (fonte.id !== 'personalizado') {
+          <article class="renda-painel">
+            <header class="renda-info">
+              <span class="renda-label">Renda mensal</span>
+              <span class="renda-valor">
+                {{ formatarMoeda(draft().rendaMensal ?? fonte.valor) }}
+              </span>
+            </header>
+
+            <div class="renda-opcoes">
+              <app-opcao-chip
+                label="Usar valor sugerido"
+                [selecionado]="draft().usarRendaSugerida"
+                (selecionar)="usarValorSugerido()"
+              />
+              <app-opcao-chip
+                label="Personalizar"
+                [selecionado]="!draft().usarRendaSugerida"
+                (selecionar)="personalizarRenda()"
+              />
+            </div>
+
+            @if (!draft().usarRendaSugerida) {
+              <div class="campo renda-custom">
+                <label for="renda-custom">Valor personalizado (R$/mês)</label>
+                <div class="input-wrap">
+                  <input
+                    id="renda-custom"
+                    type="number"
+                    min="0"
+                    step="50"
+                    [value]="draft().rendaMensal ?? ''"
+                    (input)="setRendaCustom($any($event.target).value)"
+                    placeholder="1200"
+                  />
+                </div>
+              </div>
+            }
+          </article>
+        } @else {
+          <article class="renda-painel">
+            <div class="campo">
+              <label for="renda-personalizada">Renda mensal personalizada (R$/mês)</label>
+              <div class="input-wrap">
+                <input
+                  id="renda-personalizada"
+                  type="number"
+                  min="0"
+                  step="50"
+                  [value]="draft().rendaMensal ?? ''"
+                  (input)="setRendaCustom($any($event.target).value)"
+                  placeholder="1200"
+                />
+              </div>
+            </div>
+          </article>
+        }
+      }
+    </section>
 
   <!-- CUSTO DE VIDA -->
-  <div class="grupo">
-    <span class="grupo-label">Custo de vida</span>
-    <div class="grid-tiles grid-tiles-3">
-      <app-opcao-tile
-        *ngFor="let c of custosVida"
-        [titulo]="c.label"
-        [sub]="c.descricao"
-        [selecionado]="draft().custoVida === c.id"
-        (selecionar)="selecionarCusto(c.id)"
-      ></app-opcao-tile>
-    </div>
-  </div>
+  <section class="grupo" aria-labelledby="custo-label">
+    <span id="custo-label" class="grupo-label">Custo de vida</span>
+
+    <ul class="grid-tiles grid-tiles-3">
+      @for (c of custosVida; track c.id) {
+        <li>
+          <app-opcao-tile
+            [titulo]="c.label"
+            [sub]="c.descricao"
+            [selecionado]="draft().custoVida === c.id"
+            (selecionar)="selecionarCusto(c.id)"
+          />
+        </li>
+      }
+    </ul>
+  </section>
 
   <!-- RESPONSABILIDADES -->
-  <div class="grupo">
-    <span class="grupo-label">Responsabilidades</span>
-    <span class="grupo-ajuda">
+  <section class="grupo" aria-labelledby="resp-label">
+    <span id="resp-label" class="grupo-label">Responsabilidades</span>
+    <p class="grupo-ajuda">
       Selecione os gastos recorrentes do personagem. Pode escolher mais de um.
-    </span>
+    </p>
 
-    <div class="grid-chips">
-      <app-opcao-chip
-        *ngFor="let r of responsabilidades"
-        [label]="r.label"
-        [selecionado]="draft().responsabilidades.includes(r.id)"
-        (selecionar)="toggleResponsabilidade(r.id)"
-      ></app-opcao-chip>
-    </div>
-  </div>
+    <ul class="grid-chips">
+      @for (r of responsabilidades; track r.id) {
+        <li>
+          <app-opcao-chip
+            [label]="r.label"
+            [selecionado]="draft().responsabilidades.includes(r.id)"
+            (selecionar)="toggleResponsabilidade(r.id)"
+          />
+        </li>
+      }
+    </ul>
+  </section>
 </section>

@@ -1,5 +1,10 @@
 <div class="modal-overlay" (click)="clicarFora($event)">
-  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+  <div
+    class="modal-card"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-titulo"
+  >
     <header class="modal-header">
       <span class="modal-eyebrow">Tudo pronto?</span>
       <h2 id="modal-titulo" class="modal-titulo">
@@ -11,7 +16,7 @@
       </p>
     </header>
 
-    <div class="modal-resumo">
+    <section class="modal-resumo" aria-label="Resumo do personagem">
       <div class="modal-linha">
         <span class="modal-chave">Personagem</span>
         <span class="modal-valor">{{ nome }}</span>
@@ -22,13 +27,13 @@
       </div>
       <div class="modal-linha">
         <span class="modal-chave">Saldo inicial</span>
-        <span class="modal-valor verde">R$ {{ saldo }}</span>
+        <span class="modal-valor verde">{{ formatarMoeda(saldo) }}</span>
       </div>
       <div class="modal-linha">
         <span class="modal-chave">Reserva inicial</span>
-        <span class="modal-valor verde">R$ {{ reserva }}</span>
+        <span class="modal-valor verde">{{ formatarMoeda(reserva) }}</span>
       </div>
-    </div>
+    </section>
 
     <footer class="modal-acoes">
       <button
@@ -46,23 +51,26 @@
         [disabled]="carregando"
         (click)="confirmar.emit()"
       >
-        <span *ngIf="!carregando">
-          Começar campanha
-          <svg viewBox="0 0 24 24" class="btn-seta">
-            <path
-              d="M5 12h14M13 6l6 6-6 6"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </span>
-        <span *ngIf="carregando" class="modal-carregando">
-          <span class="modal-spinner" aria-hidden="true"></span>
-          Criando campanha...
-        </span>
+        @if (!carregando) {
+          <span class="btn-conteudo">
+            Começar campanha
+            <svg viewBox="0 0 24 24" class="btn-seta" aria-hidden="true">
+              <path
+                d="M5 12h14M13 6l6 6-6 6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+        } @else {
+          <span class="btn-conteudo">
+            <span class="modal-spinner" aria-hidden="true"></span>
+            Criando campanha...
+          </span>
+        }
       </button>
     </footer>
   </div>

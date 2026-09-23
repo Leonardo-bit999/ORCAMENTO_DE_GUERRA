@@ -8,42 +8,48 @@
   </header>
 
   <!-- ESTILO DE VIDA -->
-  <div class="grupo">
-    <span class="grupo-label">Estilo de vida</span>
-    <span class="grupo-ajuda">
+  <section class="grupo" aria-labelledby="estilo-label">
+    <span id="estilo-label" class="grupo-label">Estilo de vida</span>
+    <p class="grupo-ajuda">
       Como o personagem lida com dinheiro no dia a dia.
-    </span>
+    </p>
 
-    <div class="grid-tiles grid-tiles-3">
-      <app-opcao-tile
-        *ngFor="let e of estilos"
-        [titulo]="e.label"
-        [sub]="e.descricao"
-        [selecionado]="draft().estiloVida === e.id"
-        (selecionar)="selecionarEstilo(e.id)"
-      >
-        <app-icone-estilo slotIcone [id]="e.id"></app-icone-estilo>
-      </app-opcao-tile>
-    </div>
-  </div>
+    <ul class="grid-tiles grid-tiles-3">
+      @for (e of estilos; track e.id) {
+        <li>
+          <app-opcao-tile
+            [titulo]="e.label"
+            [sub]="e.descricao"
+            [selecionado]="draft().estiloVida === e.id"
+            (selecionar)="selecionarEstilo(e.id)"
+          >
+            <app-icone-estilo slotIcone [id]="e.id" />
+          </app-opcao-tile>
+        </li>
+      }
+    </ul>
+  </section>
 
   <!-- VIBE -->
-  <div class="grupo">
-    <span class="grupo-label">Vibe do personagem</span>
-    <span class="grupo-ajuda">
+  <section class="grupo" aria-labelledby="vibe-label">
+    <span id="vibe-label" class="grupo-label">Vibe do personagem</span>
+    <p class="grupo-ajuda">
       O contexto estético do personagem. Pode influenciar eventos no futuro.
-    </span>
+    </p>
 
-    <div class="grid-tiles grid-tiles-3">
-      <app-opcao-tile
-        *ngFor="let v of vibes"
-        [titulo]="v.label"
-        [sub]="v.descricao"
-        [selecionado]="draft().vibe === v.id"
-        (selecionar)="selecionarVibe(v.id)"
-      >
-        <app-icone-vibe slotIcone [id]="v.id"></app-icone-vibe>
-      </app-opcao-tile>
-    </div>
-  </div>
+    <ul class="grid-tiles grid-tiles-3">
+      @for (v of vibes; track v.id) {
+        <li>
+          <app-opcao-tile
+            [titulo]="v.label"
+            [sub]="v.descricao"
+            [selecionado]="draft().vibe === v.id"
+            (selecionar)="selecionarVibe(v.id)"
+          >
+            <app-icone-vibe slotIcone [id]="v.id" />
+          </app-opcao-tile>
+        </li>
+      }
+    </ul>
+  </section>
 </section>

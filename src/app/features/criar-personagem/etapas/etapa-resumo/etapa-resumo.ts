@@ -8,17 +8,13 @@ import {
   OBJETIVOS,
   ESTILOS_VIDA,
   VIBES,
-  Moradia,
-  CustoVida,
-  Objetivo,
-  EstiloVida,
-  Vibe,
 } from '../../../../core/models/character.model';
+import { IconePerfil } from '../../components/icone-perfil/icone-perfil';
 
 @Component({
   selector: 'app-etapa-resumo',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, IconePerfil],
   templateUrl: './etapa-resumo.html',
   styleUrl: './etapa-resumo.css',
 })
@@ -26,6 +22,8 @@ export class EtapaResumo {
   private svc = inject(CharacterService);
 
   draft = this.svc.draft;
+
+  perfilId = computed(() => this.draft().perfilId);
 
   perfilTitulo = computed(() => {
     const d = this.draft();
@@ -51,12 +49,7 @@ export class EtapaResumo {
 
   renda = computed(() => this.svc.rendaMensalEfetiva());
 
-  temRenda = computed(() => {
-    const d = this.draft();
-    return d.perfilId === 'personalizado'
-      ? d.personalizado.rendaMensal !== null
-      : d.fonteRenda !== null;
-  });
+  temRenda = computed(() => this.draft().fonteRenda !== null);
 
   saldo = computed(() => this.svc.saldoInicial());
   reserva = computed(() => this.svc.reservaInicial());

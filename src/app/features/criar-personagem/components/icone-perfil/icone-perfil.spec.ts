@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AvatarPicker } from './avatar-picker';
+import { IconePerfil } from './icone-perfil';
 
-describe('AvatarPicker', () => {
-  let component: AvatarPicker;
-  let fixture: ComponentFixture<AvatarPicker>;
+describe('IconePerfil', () => {
+  let component: IconePerfil;
+  let fixture: ComponentFixture<IconePerfil>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AvatarPicker]
+      imports: [IconePerfil]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AvatarPicker);
+    fixture = TestBed.createComponent(IconePerfil);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

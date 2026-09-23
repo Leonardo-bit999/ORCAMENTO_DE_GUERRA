@@ -7,39 +7,45 @@
     </p>
   </header>
 
-  <div class="grupo">
-    <span class="grupo-label">Objetivo principal</span>
+  <section class="grupo" aria-labelledby="objetivo-label">
+    <span id="objetivo-label" class="grupo-label">Objetivo principal</span>
 
-    <div class="grid-objetivos">
-      <app-opcao-tile
-        *ngFor="let o of objetivos"
-        [titulo]="o.label"
-        [selecionado]="draft().objetivo === o.id"
-        (selecionar)="selecionarObjetivo(o.id)"
-      >
-        <app-icone-objetivo slotIcone [id]="o.id"></app-icone-objetivo>
-      </app-opcao-tile>
-    </div>
-  </div>
+    <ul class="grid-objetivos">
+      @for (o of objetivos; track o.id) {
+        <li>
+          <app-opcao-tile
+            [titulo]="o.label"
+            [selecionado]="draft().objetivo === o.id"
+            (selecionar)="selecionarObjetivo(o.id)"
+          >
+            <app-icone-objetivo slotIcone [id]="o.id" />
+          </app-opcao-tile>
+        </li>
+      }
+    </ul>
+  </section>
 
-  <!-- CAMPO OUTRO -->
-  <div class="grupo" *ngIf="ehOutro()">
-    <div class="campo" [class.invalido]="outroInvalido">
-      <label for="objetivo-outro">Qual é o objetivo?</label>
-      <div class="input-wrap">
-        <input
-          id="objetivo-outro"
-          type="text"
-          [value]="draft().objetivoOutroTexto"
-          (input)="setOutroTexto($any($event.target).value)"
-          placeholder="Ex: Juntar dinheiro para uma viagem"
-          autocomplete="off"
-          maxlength="80"
-        />
+  @if (ehOutro()) {
+    <section class="grupo" aria-labelledby="objetivo-outro-label">
+      <div class="campo" [class.invalido]="outroInvalido">
+        <label id="objetivo-outro-label" for="objetivo-outro">
+          Qual é o objetivo?
+        </label>
+        <div class="input-wrap">
+          <input
+            id="objetivo-outro"
+            type="text"
+            [value]="draft().objetivoOutroTexto"
+            (input)="setOutroTexto($any($event.target).value)"
+            placeholder="Ex: Juntar dinheiro para uma viagem"
+            autocomplete="off"
+            maxlength="80"
+          />
+        </div>
+        @if (outroInvalido) {
+          <small class="erro">O objetivo precisa ter ao menos 2 caracteres.</small>
+        }
       </div>
-      <small class="erro" *ngIf="outroInvalido">
-        O objetivo precisa ter ao menos 2 caracteres.
-      </small>
-    </div>
-  </div>
+    </section>
+  }
 </section>

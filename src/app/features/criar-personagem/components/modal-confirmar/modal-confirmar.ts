@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, HostListener } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -27,5 +27,9 @@ export class ModalConfirmar {
     if (evento.target === evento.currentTarget && !this.carregando) {
       this.cancelar.emit();
     }
+  }
+
+  formatarMoeda(valor: number): string {
+    return `R$ ${valor.toLocaleString('pt-BR')}`;
   }
 }

@@ -1,112 +1,86 @@
 <section class="etapa">
   <header class="etapa-header">
     <h1 class="etapa-titulo">Crie seu personagem</h1>
-    <p class="etapa-sub">Monte o personagem que vai enfrentar esta campanha.</p>
+    <p class="etapa-sub">
+      Monte o personagem que vai enfrentar esta campanha.
+    </p>
   </header>
 
-  <div class="dados-personagem">
-    <!-- NOME -->
-    <div class="grupo nome-bloco">
-      <div class="campo" [class.invalido]="nomeInvalido">
-        <label for="perfil-nome">Nome do personagem</label>
-        <div class="input-wrap">
-          <input
-            id="perfil-nome"
-            type="text"
-            [value]="draft().nome"
-            (input)="setNome($any($event.target).value)"
-            placeholder="Como devemos chamar?"
-            autocomplete="off"
-            maxlength="32"
-          />
-        </div>
-        <small class="erro" *ngIf="nomeInvalido">
-          O nome precisa ter ao menos 2 caracteres.
-        </small>
+  <!-- NOME -->
+  <section class="grupo" aria-labelledby="perfil-nome-label">
+    <div class="campo" [class.invalido]="nomeInvalido">
+      <label id="perfil-nome-label" for="perfil-nome">Nome do personagem</label>
+      <div class="input-wrap">
+        <input
+          id="perfil-nome"
+          type="text"
+          [value]="draft().nome"
+          (input)="setNome($any($event.target).value)"
+          placeholder="Como devemos chamar?"
+          autocomplete="off"
+          maxlength="32"
+        />
       </div>
+      @if (nomeInvalido) {
+        <small class="erro">O nome precisa ter ao menos 2 caracteres.</small>
+      }
     </div>
+  </section>
 
-    <!-- AVATAR -->
-    <div class="grupo avatar-bloco">
-      <span class="grupo-label">Escolha um avatar</span>
-      
-    </div>
-  </div>
+  <!-- PONTO DE PARTIDA -->
+  <section class="grupo" aria-labelledby="perfil-partida-label">
+    <span id="perfil-partida-label" class="grupo-label">
+      Escolha seu ponto de partida
+    </span>
 
-  <!-- PERFIL -->
-  <div class="grupo">
-    <span class="grupo-label">Escolha seu ponto de partida</span>
+    <ul class="lista-perfis">
+      @for (p of perfis; track p.id) {
+        <li>
+          <button
+            type="button"
+            class="perfil-card"
+            [class.selecionado]="draft().perfilId === p.id"
+            [attr.aria-pressed]="draft().perfilId === p.id"
+            (click)="selecionarPerfil(p.id)"
+          >
+            <span class="perfil-icone" aria-hidden="true">
+              <app-icone-perfil [id]="p.id" />
+            </span>
 
-    <div class="grid-cards">
-      <app-opcao-card
-        *ngFor="let p of perfis"
-        [titulo]="p.titulo"
-        [frase]="p.frase"
-        [bullets]="p.bullets"
-        [destaque]="p.id !== 'personalizado' ? ('Saldo: R$ ' + p.saldoInicial) : ''"
-        [destaque2]="p.id !== 'personalizado' ? ('Reserva: R$ ' + p.reservaInicial) : ''"
-        [rodape]="p.objetivoSugerido"
-        [selecionado]="draft().perfilId === p.id"
-        (selecionar)="selecionarPerfil(p.id)"
-      ></app-opcao-card>
-    </div>
-  </div>
+            <span class="perfil-conteudo">
+              <span class="perfil-titulo">{{ p.titulo }}</span>
+              <span class="perfil-frase">{{ p.frase }}</span>
 
-  <!-- BLOCO PERSONALIZADO -->
-  <div class="personalizado" *ngIf="ehPersonalizado()">
-    <header class="personalizado-header">
-      <span class="personalizado-tag">Configuração personalizada</span>
-      <p class="personalizado-sub">
-        Defina o núcleo financeiro do seu personagem. Todos os campos são
-        obrigatórios.
-      </p>
-    </header>
+              <span class="perfil-valores">
+                <span class="perfil-valor">
+                  Saldo: {{ formatarMoeda(p.saldoInicial) }}
+                </span>
+                <span class="perfil-valor">
+                  Reserva: {{ formatarMoeda(p.reservaInicial) }}
+                </span>
+              </span>
 
-    <div class="personalizado-grid">
-      <div class="campo">
-        <label for="p-renda">Renda mensal (R$)</label>
-        <div class="input-wrap">
-          <input
-            id="p-renda"
-            type="number"
-            min="0"
-            step="50"
-            [value]="draft().personalizado.rendaMensal ?? ''"
-            (input)="setPersonalizadoRenda($any($event.target).value)"
-            placeholder="1200"
-          />
-        </div>
-      </div>
+              <span class="perfil-objetivo">
+                <span class="perfil-objetivo-label">Objetivo sugerido</span>
+                {{ p.objetivoSugerido }}
+              </span>
+            </span>
 
-      <div class="campo">
-        <label for="p-saldo">Saldo inicial (R$)</label>
-        <div class="input-wrap">
-          <input
-            id="p-saldo"
-            type="number"
-            min="0"
-            step="50"
-            [value]="draft().personalizado.saldoInicial ?? ''"
-            (input)="setPersonalizadoSaldo($any($event.target).value)"
-            placeholder="500"
-          />
-        </div>
-      </div>
-
-      <div class="campo">
-        <label for="p-reserva">Reserva inicial (R$)</label>
-        <div class="input-wrap">
-          <input
-            id="p-reserva"
-            type="number"
-            min="0"
-            step="50"
-            [value]="draft().personalizado.reservaInicial ?? ''"
-            (input)="setPersonalizadoReserva($any($event.target).value)"
-            placeholder="200"
-          />
-        </div>
-      </div>
-    </div>
-  </div>
+            <span class="perfil-check" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="m5 12 5 5 9-11"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+          </button>
+        </li>
+      }
+    </ul>
+  </section>
 </section>

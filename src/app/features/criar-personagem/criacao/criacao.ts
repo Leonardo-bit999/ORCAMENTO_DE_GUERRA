@@ -11,6 +11,7 @@ import { EtapaObjetivo } from '../etapas/etapa-objetivo/etapa-objetivo';
 import { EtapaEstilo } from '../etapas/etapa-estilo/etapa-estilo';
 import { ModalConfirmar } from '../components/modal-confirmar/modal-confirmar';
 import { EtapaResumo } from '../etapas/etapa-resumo/etapa-resumo';
+import { DrawerResumo } from '../components/drawer-resumo/drawer-resumo';
 
 
 @Component({
@@ -26,9 +27,10 @@ import { EtapaResumo } from '../etapas/etapa-resumo/etapa-resumo';
     EtapaEstilo,
     ModalConfirmar,
     EtapaResumo,
+    DrawerResumo,
   ],
   templateUrl: './criacao.html',
-  styleUrls: ['./criacao.css', '../shared/criacao.shared.css'],
+  styleUrls: ['./criacao.css', '../../shared/criacao.shared.css'],
 })
 export class Criacao {
   private svc = inject(CharacterService);
@@ -120,5 +122,14 @@ export class Criacao {
 
   private scrollParaTopo() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  drawerAberto = signal(false);
+
+  abrirDrawer() {
+    this.drawerAberto.set(true);
+  }
+  fecharDrawer() {
+    this.drawerAberto.set(false);
   }
 }

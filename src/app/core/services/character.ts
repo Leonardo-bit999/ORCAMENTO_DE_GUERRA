@@ -65,21 +65,7 @@ export class CharacterService {
 
   // ---------- Ações específicas ----------
   selecionarPerfil(perfilId: PerfilId) {
-    const partial: Partial<CharacterDraft> = { perfilId };
-
-    if (perfilId !== 'personalizado') {
-      partial.personalizado = {
-        rendaMensal: null,
-        saldoInicial: null,
-        reservaInicial: null,
-      };
-    } else {
-      partial.fonteRenda = null;
-      partial.rendaMensal = null;
-      partial.usarRendaSugerida = false;
-    }
-
-    this.atualizar(partial);
+    this.atualizar({ perfilId });
   }
 
   selecionarFonteRenda(fonte: FonteRenda) {
@@ -112,19 +98,7 @@ export class CharacterService {
         return d.nome.trim().length >= 2 && d.perfilId !== null;
 
       case 2: {
-        const baseOk = d.moradia !== null && d.custoVida !== null;
-        if (!baseOk) return false;
-
-        if (d.perfilId === 'personalizado') {
-          const p = d.personalizado;
-          return (
-            p.rendaMensal !== null &&
-            p.rendaMensal > 0 &&
-            p.saldoInicial !== null &&
-            p.reservaInicial !== null
-          );
-        }
-
+        if (d.moradia === null || d.custoVida === null) return false;
         if (d.fonteRenda === null) return false;
         if (!d.usarRendaSugerida) {
           return d.rendaMensal !== null && d.rendaMensal > 0;
@@ -152,27 +126,18 @@ export class CharacterService {
   // ---------- Cálculos ----------
   saldoInicial(): number {
     const d = this._draft();
-    if (d.perfilId === 'personalizado') {
-      return d.personalizado.saldoInicial ?? 0;
-    }
     const preset = PERFIS.find((p) => p.id === d.perfilId);
     return preset?.saldoInicial ?? 0;
   }
 
   reservaInicial(): number {
     const d = this._draft();
-    if (d.perfilId === 'personalizado') {
-      return d.personalizado.reservaInicial ?? 0;
-    }
     const preset = PERFIS.find((p) => p.id === d.perfilId);
     return preset?.reservaInicial ?? 0;
   }
 
   rendaMensalEfetiva(): number {
     const d = this._draft();
-    if (d.perfilId === 'personalizado') {
-      return d.personalizado.rendaMensal ?? 0;
-    }
     return d.rendaMensal ?? 0;
   }
 
@@ -206,8 +171,8 @@ export class CharacterService {
       criadoEm: new Date().toISOString(),
 
       nome: d.nome.trim(),
-      perfilId: d.perfilId,
-      perfilTitulo: preset?.titulo ?? 'Personalizado',
+      perfilId: d.perfilId!,
+      perfilTitulo: preset?.titulo ?? 'Personagem',
       perfilFrase: preset?.frase ?? '',
 
       moradia: d.moradia,

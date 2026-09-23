@@ -73,6 +73,10 @@
 app-barra-progresso {
     display: block;
     margin: -40px -40px 0;
+    padding-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    
 }
 
 /* ---------- Coluna direita (sticky) ---------- */
@@ -190,5 +194,53 @@ app-barra-progresso {
 
     .criacao-nav-spacer {
         display: none;
+    }
+}
+
+/* =========================================================
+   FAB do resumo (mobile)
+   ========================================================= */
+.resumo-fab {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 40;
+    padding: 12px 18px;
+    background: var(--green);
+    color: var(--bg-base);
+    border: 0;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    align-items: center;
+    gap: 8px;
+    box-shadow:
+        0 8px 24px -8px rgba(0, 0, 0, 0.6),
+        0 0 0 4px var(--glow-green-soft);
+    transition: background 0.18s ease, transform 0.12s ease;
+}
+
+.resumo-fab:hover {
+    background: var(--green-hover);
+    transform: translateY(-1px);
+}
+
+.resumo-fab:active {
+    transform: translateY(0);
+}
+
+.resumo-fab svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* Mostra o FAB só quando a coluna direita está oculta (< 960px) */
+@media (max-width: 960px) {
+    .resumo-fab {
+        display: inline-flex;
     }
 }

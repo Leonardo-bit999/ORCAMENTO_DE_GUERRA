@@ -2,7 +2,7 @@
    Tipos base
    ========================================================= */
 
-export type PerfilId = 'iniciante' | 'planejador' | 'personalizado';
+export type PerfilId = 'planejador' | 'reorganizador' | 'independente' | 'iniciante';
 
 export type Moradia = 'familia' | 'sozinho' | 'divide' | 'republica';
 
@@ -72,7 +72,7 @@ export const MODIFICADOR_MORADIA: Record<Moradia, number> = {
 };
 
 /* =========================================================
-   Presets de perfil
+   Presets de perfil (4 perfis fixos)
    ========================================================= */
 
 export interface PerfilPreset {
@@ -87,16 +87,6 @@ export interface PerfilPreset {
 
 export const PERFIS: PerfilPreset[] = [
   {
-    id: 'iniciante',
-    titulo: 'O Iniciante',
-    frase: 'Todo mundo começa de algum lugar.',
-    bullets: ['Primeiro planejamento', 'Sem dívidas iniciais', 'Sem reserva'],
-    saldoInicial: 650,
-    reservaInicial: 0,
-    objetivoSugerido:
-      'Aprender os fundamentos da organização financeira e construir os primeiros hábitos.',
-  },
-  {
     id: 'planejador',
     titulo: 'O Planejador',
     frase: 'Você prefere se preparar antes que o imprevisto aconteça.',
@@ -107,18 +97,37 @@ export const PERFIS: PerfilPreset[] = [
       'Manter o equilíbrio financeiro enquanto constrói segurança para imprevistos.',
   },
   {
-    id: 'personalizado',
-    titulo: 'Personalizado',
-    frase: 'Você define as condições da sua própria campanha.',
-    bullets: ['Você escolhe saldo', 'Você escolhe reserva', 'Você define a renda'],
-    saldoInicial: 0,
+    id: 'reorganizador',
+    titulo: 'O Reorganizador',
+    frase: 'Nem tudo saiu como planejado. Agora é hora de colocar a casa em ordem.',
+    bullets: ['Renda variável', 'Despesas comprometidas', 'Pouca reserva'],
+    saldoInicial: 720,
+    reservaInicial: 200,
+    objetivoSugerido: 'Priorizar gastos, reorganizar o orçamento e recuperar o equilíbrio.',
+  },
+  {
+    id: 'independente',
+    titulo: 'O Independente',
+    frase: 'Liberdade traz novas responsabilidades.',
+    bullets: ['Renda variável', 'Custos de trabalho', 'Transporte frequente'],
+    saldoInicial: 980,
+    reservaInicial: 350,
+    objetivoSugerido: 'Lidar com incertezas e construir segurança financeira.',
+  },
+  {
+    id: 'iniciante',
+    titulo: 'O Iniciante',
+    frase: 'Todo mundo começa de algum lugar.',
+    bullets: ['Primeiro planejamento', 'Sem dívidas iniciais', 'Sem reserva'],
+    saldoInicial: 650,
     reservaInicial: 0,
-    objetivoSugerido: 'Definir o próprio caminho.',
+    objetivoSugerido:
+      'Aprender os fundamentos da organização financeira e construir os primeiros hábitos.',
   },
 ];
 
 /* =========================================================
-   Listas de opções (labels amigáveis)
+   Listas de opções
    ========================================================= */
 
 export const MORADIAS: { id: Moradia; label: string }[] = [
@@ -215,13 +224,6 @@ export interface CharacterDraft {
   custoVida: CustoVida | null;
   responsabilidades: Responsabilidade[];
 
-  // Personalizado (só quando perfilId === 'personalizado')
-  personalizado: {
-    rendaMensal: number | null;
-    saldoInicial: number | null;
-    reservaInicial: number | null;
-  };
-
   // Etapa 3
   objetivo: Objetivo | null;
   objetivoOutroTexto: string;
@@ -231,7 +233,7 @@ export interface CharacterDraft {
   vibe: Vibe | null;
 }
 
-export interface Character extends Omit<CharacterDraft, 'personalizado'> {
+export interface Character extends CharacterDraft {
   id: string;
   userId: string;
   criadoEm: string;
@@ -252,12 +254,6 @@ export const DRAFT_INICIAL: CharacterDraft = {
   rendaMensal: null,
   custoVida: null,
   responsabilidades: [],
-
-  personalizado: {
-    rendaMensal: null,
-    saldoInicial: null,
-    reservaInicial: null,
-  },
 
   objetivo: null,
   objetivoOutroTexto: '',
