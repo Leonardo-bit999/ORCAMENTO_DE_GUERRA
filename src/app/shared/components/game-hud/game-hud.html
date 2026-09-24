@@ -1,0 +1,68 @@
+<aside class="hud" aria-label="Indicadores do jogador">
+  <!-- Financeiro -->
+  <div class="hud-grupo">
+    <div class="hud-item" title="Dinheiro disponível no período">
+      <span class="hud-icone" aria-hidden="true">💰</span>
+      <div class="hud-texto">
+        <span class="hud-label">Disponível</span>
+        <span class="hud-valor">{{ formatarMoeda(disponivel()) }}</span>
+      </div>
+    </div>
+
+    <div class="hud-item" title="Dinheiro guardado na reserva">
+      <span class="hud-icone" aria-hidden="true">🛡️</span>
+      <div class="hud-texto">
+        <span class="hud-label">Reserva</span>
+        <span class="hud-valor">{{ formatarMoeda(reserva()) }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Separador -->
+  <span class="hud-divisor" aria-hidden="true"></span>
+
+  <!-- Emocionais -->
+  <div class="hud-grupo">
+    <div class="hud-item" title="Bem-estar do personagem">
+      <span class="hud-icone" aria-hidden="true">❤️</span>
+      <div class="hud-texto">
+        <span class="hud-label">Bem-estar</span>
+        <span class="hud-valor">{{ bemEstar() }}</span>
+        <div class="hud-barra">
+          <div
+            class="hud-barra-preenchida hud-barra-bemEstar"
+            [style.width.%]="bemEstar()"
+          ></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hud-item" title="Estresse acumulado (quanto menor, melhor)">
+      <span class="hud-icone" aria-hidden="true">🧠</span>
+      <div class="hud-texto">
+        <span class="hud-label">Estresse</span>
+        <span class="hud-valor">{{ estresse() }}</span>
+        <div class="hud-barra">
+          <div
+            class="hud-barra-preenchida hud-barra-estresse"
+            [style.width.%]="estresse()"
+          ></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Separador -->
+  <span class="hud-divisor" aria-hidden="true"></span>
+
+  <!-- XP -->
+  <div class="hud-grupo">
+    <div class="hud-item" title="Experiência acumulada">
+      <span class="hud-icone" aria-hidden="true">⭐</span>
+      <div class="hud-texto">
+        <span class="hud-label">XP</span>
+        <span class="hud-valor">{{ xp() }}</span>
+      </div>
+    </div>
+  </div>
+</aside>

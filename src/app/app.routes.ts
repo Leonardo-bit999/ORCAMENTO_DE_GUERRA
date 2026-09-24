@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth-guard';
 import { hasCharacterGuard } from './core/guards/has-character-guard';
 
-
 export const routes: Routes = [
   {
     path: '',
@@ -12,15 +11,7 @@ export const routes: Routes = [
     path: 'entrar',
     loadComponent: () => import('./features/auth/entrar/entrar').then((m) => m.Entrar),
   },
-  // Redirects das rotas antigas
-  {
-    path: 'cadastro',
-    redirectTo: '/entrar',
-    pathMatch: 'full',
-    // Usamos uma rota que aceita query:
-    // na prática: /cadastro → /entrar
-    // se quiser forçar tab=cadastro, use um componente redirecionador
-  },
+  { path: 'cadastro', redirectTo: '/entrar', pathMatch: 'full' },
   { path: 'login', redirectTo: '/entrar', pathMatch: 'full' },
 
   {
@@ -30,10 +21,11 @@ export const routes: Routes = [
       import('./features/criar-personagem/criacao/criacao').then((m) => m.Criacao),
   },
 
+  // Jornada (home do jogo)
   {
-    path: 'game',
+    path: 'jornada',
     canActivate: [authGuard, hasCharacterGuard],
-    loadComponent: () => import('./features/criar-personagem/game/game').then((m) => m.Game),
+    loadComponent: () => import('./features/jogo/jornada/jornada').then((m) => m.Jornada),
   },
 
   { path: '**', redirectTo: '' },

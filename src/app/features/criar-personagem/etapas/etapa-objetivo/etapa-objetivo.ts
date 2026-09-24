@@ -11,7 +11,7 @@ import { IconeObjetivo } from '../../components/icone-objetivo/icone-objetivo';
   standalone: true,
   imports: [CommonModule, FormsModule, OpcaoTile, IconeObjetivo],
   templateUrl: './etapa-objetivo.html',
-  styleUrls: ['./etapa-objetivo.css', '../../../shared/criacao.shared.css'],
+  styleUrls: ['./etapa-objetivo.css', '../../criacao.shared.css'],
 })
 export class EtapaObjetivo {
   private svc = inject(CharacterService);

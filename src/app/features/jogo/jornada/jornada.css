@@ -1,0 +1,402 @@
+:host {
+    display: block;
+    min-height: 100vh;
+    background: var(--bg-base);
+}
+
+.jornada {
+    max-width: 900px;
+    margin-inline: auto;
+    padding: 40px 24px 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+/* =========================================================
+   Cabeçalho do capítulo
+   ========================================================= */
+.capitulo-header {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 28px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-lg);
+}
+
+.capitulo-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.capitulo-tag {
+    align-self: flex-start;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--green);
+    background: var(--glow-green-soft);
+    border: 1px solid var(--border-green);
+    padding: 5px 12px;
+    border-radius: var(--radius-pill);
+}
+
+.capitulo-titulo {
+    font-family: var(--font-mono);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #F4F5F2;
+    letter-spacing: -0.01em;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.capitulo-descricao {
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    color: #F4F5F2;
+    opacity: 0.75;
+    line-height: 1.55;
+    margin: 0;
+}
+
+.capitulo-progresso {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+}
+
+.progresso-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: #F4F5F2;
+    opacity: 0.7;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.progresso-trilha {
+    height: 6px;
+    background: var(--bg-elevated);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.progresso-preenchido {
+    height: 100%;
+    background: var(--green);
+    border-radius: 999px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 8px var(--glow-green-soft);
+}
+
+/* =========================================================
+   Trilha de missões
+   ========================================================= */
+.trilha {
+    width: 100%;
+}
+
+.trilha-lista {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.trilha-no {
+    display: block;
+}
+
+.no-botao {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.2s ease, background 0.2s ease,
+        box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+.trilha-no.disponivel .no-botao:hover {
+    border-color: var(--border-green-strong);
+    background: var(--bg-elevated);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px -10px var(--glow-green);
+}
+
+.no-botao:disabled {
+    cursor: not-allowed;
+}
+
+/* Marcador (ícone à esquerda) */
+.no-marcador {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-base);
+    border: 2px solid var(--border-strong);
+    color: #F4F5F2;
+    transition: all 0.2s ease;
+}
+
+.no-marcador svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* Concluída */
+.trilha-no.concluida .no-marcador {
+    background: var(--green);
+    border-color: var(--green);
+    color: var(--bg-base);
+}
+
+/* Disponível */
+.trilha-no.disponivel .no-marcador {
+    background: var(--green);
+    border-color: var(--green);
+    color: var(--bg-base);
+    box-shadow: 0 0 0 4px var(--glow-green-soft);
+}
+
+/* Bloqueada */
+.trilha-no.bloqueada .no-marcador {
+    opacity: 0.4;
+}
+
+/* Conteúdo */
+.no-conteudo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+}
+
+.no-numero {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: #F4F5F2;
+    opacity: 0.5;
+}
+
+.no-titulo {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #F4F5F2;
+    line-height: 1.3;
+}
+
+.trilha-no.bloqueada .no-titulo {
+    opacity: 0.5;
+}
+
+.no-estado {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #F4F5F2;
+    opacity: 0.5;
+}
+
+.no-estado.destaque {
+    color: var(--green);
+    opacity: 1;
+    font-weight: 700;
+}
+
+/* Linha entre nós */
+.trilha-linha {
+    height: 24px;
+    width: 2px;
+    margin-left: 39px;
+    background: var(--border-strong);
+    transition: background 0.3s ease;
+}
+
+.trilha-linha.ativa {
+    background: var(--green);
+    box-shadow: 0 0 6px var(--glow-green-soft);
+}
+
+/* =========================================================
+   CTA
+   ========================================================= */
+.jornada-cta {
+    display: flex;
+    justify-content: center;
+    padding-top: 8px;
+}
+
+.btn-primario {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px 28px;
+    background: var(--green);
+    color: var(--bg-base);
+    border: 1px solid var(--green);
+    border-radius: var(--radius-pill);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: background 0.18s ease, box-shadow 0.2s ease, transform 0.12s ease;
+}
+
+.btn-primario:hover {
+    background: var(--green-hover);
+    border-color: var(--green-hover);
+    box-shadow: 0 0 0 6px var(--glow-green-soft), 0 8px 30px -10px var(--glow-green);
+}
+
+.btn-primario:active {
+    background: var(--green-dim);
+    transform: translateY(1px);
+}
+
+.btn-seta {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.2s ease;
+}
+
+.btn-primario:hover .btn-seta {
+    transform: translateX(3px);
+}
+
+/* =========================================================
+   Capítulos bloqueados
+   ========================================================= */
+.capitulos-bloqueados {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+}
+
+.bloqueado-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #F4F5F2;
+    opacity: 0.5;
+}
+
+.capitulo-bloqueado {
+    padding: 24px;
+    background: var(--bg-surface);
+    border: 1px dashed var(--border-strong);
+    border-radius: var(--radius-lg);
+    opacity: 0.7;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.capitulo-bloqueado-topo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.capitulo-bloqueado-cadeado {
+    font-size: 1rem;
+}
+
+.capitulo-bloqueado-numero {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #F4F5F2;
+    opacity: 0.6;
+}
+
+.capitulo-bloqueado-titulo {
+    font-family: var(--font-mono);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #F4F5F2;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.capitulo-bloqueado-descricao {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: #F4F5F2;
+    opacity: 0.65;
+    line-height: 1.55;
+    margin: 0;
+}
+
+/* =========================================================
+   Responsivo
+   ========================================================= */
+@media (max-width: 640px) {
+    .jornada {
+        padding: 24px 16px 48px;
+        gap: 28px;
+    }
+
+    .capitulo-header {
+        padding: 20px;
+    }
+
+    .capitulo-titulo {
+        font-size: 1.3rem;
+    }
+
+    .no-botao {
+        padding: 16px;
+        gap: 12px;
+    }
+
+    .no-marcador {
+        width: 34px;
+        height: 34px;
+    }
+
+    .no-marcador svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .no-titulo {
+        font-size: 0.92rem;
+    }
+
+    .trilha-linha {
+        margin-left: 33px;
+    }
+}

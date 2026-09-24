@@ -20,7 +20,7 @@ import { OpcaoChip } from '../../components/opcao-chip/opcao-chip';
   standalone: true,
   imports: [CommonModule, FormsModule, OpcaoTile, OpcaoChip],
   templateUrl: './etapa-cenario.html',
-  styleUrls: ['./etapa-cenario.css', '../../../shared/criacao.shared.css'],
+  styleUrls: ['./etapa-cenario.css', '../../criacao.shared.css'],
 })
 export class EtapaCenario {
   private svc = inject(CharacterService);

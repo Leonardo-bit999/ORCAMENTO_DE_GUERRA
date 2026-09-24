@@ -10,7 +10,7 @@ import { IconePerfil } from '../../components/icone-perfil/icone-perfil';
   standalone: true,
   imports: [CommonModule, FormsModule, IconePerfil],
   templateUrl: './etapa-perfil.html',
-  styleUrls: ['./etapa-perfil.css', '../../../shared/criacao.shared.css'],
+  styleUrls: ['./etapa-perfil.css', '../../criacao.shared.css'],
 })
 export class EtapaPerfil {
   private svc = inject(CharacterService);

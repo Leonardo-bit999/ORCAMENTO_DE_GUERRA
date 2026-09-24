@@ -11,7 +11,7 @@ import { IconeVibe } from '../../components/icone-vibe/icone-vibe';
   standalone: true,
   imports: [CommonModule, OpcaoTile, IconeEstilo, IconeVibe],
   templateUrl: './etapa-estilo.html',
-  styleUrls: ['./etapa-estilo.css', '../../../shared/criacao.shared.css'],
+  styleUrls: ['./etapa-estilo.css', '../../criacao.shared.css'],
 })
 export class EtapaEstilo {
   private svc = inject(CharacterService);

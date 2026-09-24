@@ -12,7 +12,7 @@ import { EtapaEstilo } from '../etapas/etapa-estilo/etapa-estilo';
 import { ModalConfirmar } from '../components/modal-confirmar/modal-confirmar';
 import { EtapaResumo } from '../etapas/etapa-resumo/etapa-resumo';
 import { DrawerResumo } from '../components/drawer-resumo/drawer-resumo';
-
+import { GameStateService } from '../../../core/services/game-state';
 
 @Component({
   selector: 'app-criacao',
@@ -30,11 +30,12 @@ import { DrawerResumo } from '../components/drawer-resumo/drawer-resumo';
     DrawerResumo,
   ],
   templateUrl: './criacao.html',
-  styleUrls: ['./criacao.css', '../../shared/criacao.shared.css'],
+  styleUrls: ['./criacao.css', '../criacao.shared.css'],
 })
 export class Criacao {
   private svc = inject(CharacterService);
   private router = inject(Router);
+  private gameState = inject(GameStateService);
 
   etapas: EtapaProgresso[] = [
     { numero: 1, label: 'Perfil' },
@@ -49,7 +50,6 @@ export class Criacao {
 
   modalAberto = signal(false);
   carregando = signal(false);
-  /** Nome da etapa atual para animação key */
   private _animKey = signal(0);
   readonly animKey = this._animKey.asReadonly();
 
@@ -58,7 +58,6 @@ export class Criacao {
   ehUltima = computed(() => this.etapaAtual() === this.totalEtapas);
   tudoValido = computed(() => this.svc.etapaTudoValido());
 
-  // Dados pro modal
   readonly draft = this.svc.draft;
   nome = computed(() => this.draft().nome);
 
@@ -69,6 +68,8 @@ export class Criacao {
 
   saldo = computed(() => this.svc.saldoInicial());
   reserva = computed(() => this.svc.reservaInicial());
+
+  drawerAberto = signal(false);
 
   avancar() {
     if (!this.podeAvancar()) return;
@@ -104,6 +105,14 @@ export class Criacao {
     this.modalAberto.set(false);
   }
 
+  abrirDrawer() {
+    this.drawerAberto.set(true);
+  }
+
+  fecharDrawer() {
+    this.drawerAberto.set(false);
+  }
+
   async confirmarFinalizacao() {
     if (this.carregando()) return;
     this.carregando.set(true);
@@ -111,8 +120,14 @@ export class Criacao {
     await new Promise((r) => setTimeout(r, 900));
 
     try {
-      this.svc.finalizar();
-      this.router.navigate(['/game']);
+      // 1. Cria o Character (a partir do wizard)
+      const character = this.svc.finalizar();
+
+      // 2. Inicializa o EstadoJogo com esse Character
+      this.gameState.inicializar(character);
+
+      // 3. Navega pra Jornada
+      this.router.navigate(['/jornada']);
     } catch (e) {
       this.carregando.set(false);
       this.modalAberto.set(false);
@@ -122,14 +137,5 @@ export class Criacao {
 
   private scrollParaTopo() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  drawerAberto = signal(false);
-
-  abrirDrawer() {
-    this.drawerAberto.set(true);
-  }
-  fecharDrawer() {
-    this.drawerAberto.set(false);
   }
 }
