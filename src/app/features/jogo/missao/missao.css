@@ -1,0 +1,277 @@
+:host {
+  display: block;
+}
+
+.missao {
+  max-width: 760px;
+  margin-inline: auto;
+  padding: 48px 24px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Destaque quando é evento */
+.missao.evento {
+  position: relative;
+}
+
+.missao.evento::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 600px;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--yellow) 50%,
+    transparent 100%
+  );
+  border-radius: 999px;
+  opacity: 0.6;
+}
+
+/* =========================================================
+   Cabeçalho
+   ========================================================= */
+.missao-header {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.missao-tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green);
+  background: var(--glow-green-soft);
+  border: 1px solid var(--border-green);
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+}
+
+.missao-tag.tag-evento {
+  color: var(--yellow);
+  background: rgba(255, 201, 40, 0.1);
+  border-color: rgba(255, 201, 40, 0.3);
+}
+
+.missao-titulo {
+  font-family: var(--font-mono);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: #F4F5F2;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.missao-pensamento {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: #F4F5F2;
+  opacity: 0.65;
+  line-height: 1.6;
+  margin: 0;
+  padding-left: 16px;
+  border-left: 2px solid var(--border-strong);
+}
+
+/* =========================================================
+   Abertura
+   ========================================================= */
+.missao-abertura {
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #F4F5F2;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* =========================================================
+   Corpo
+   ========================================================= */
+.missao-corpo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px 28px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+}
+
+.missao-corpo p {
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  color: #F4F5F2;
+  opacity: 0.88;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* =========================================================
+   Erro
+   ========================================================= */
+.missao-erro {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: rgba(240, 82, 58, 0.08);
+  border: 1px solid rgba(240, 82, 58, 0.35);
+  border-radius: var(--radius-md);
+  color: var(--danger);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.missao-erro svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   Decisão
+   ========================================================= */
+.missao-decisao {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.decisao-titulo {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #F4F5F2;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+.opcoes-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.opcao-card {
+  width: 100%;
+  text-align: left;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: center;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.15s ease;
+}
+
+.opcao-card:hover {
+  border-color: var(--border-green-strong);
+  background: var(--bg-elevated);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -12px var(--glow-green);
+}
+
+.opcao-card:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+.opcao-texto {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.opcao-titulo {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #F4F5F2;
+  line-height: 1.3;
+}
+
+.opcao-descricao {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: #F4F5F2;
+  opacity: 0.7;
+  line-height: 1.5;
+}
+
+.opcao-custo {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--green);
+  letter-spacing: 0.02em;
+  margin-top: 4px;
+}
+
+.opcao-seta {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #F4F5F2;
+  opacity: 0.4;
+  transition: color 0.18s ease, opacity 0.18s ease, transform 0.2s ease;
+}
+
+.opcao-seta svg {
+  width: 100%;
+  height: 100%;
+}
+
+.opcao-card:hover .opcao-seta {
+  color: var(--green);
+  opacity: 1;
+  transform: translateX(3px);
+}
+
+/* =========================================================
+   Responsivo
+   ========================================================= */
+@media (max-width: 640px) {
+  .missao {
+    padding: 28px 16px 48px;
+    gap: 24px;
+  }
+
+  .missao-corpo {
+    padding: 20px;
+  }
+
+  .opcao-card {
+    padding: 16px 18px;
+  }
+
+  .opcao-titulo {
+    font-size: 0.94rem;
+  }
+}

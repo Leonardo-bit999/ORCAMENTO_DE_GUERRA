@@ -1,1 +1,89 @@
-<p>missao works!</p>
+<app-game-layout>
+  @if (missao()) {
+    <section class="missao" [class.evento]="missao()!.tipo === 'evento'">
+      <!-- Contexto -->
+      <header class="missao-header">
+        <span class="missao-tag" [class.tag-evento]="missao()!.tipo === 'evento'">
+          @if (missao()!.tipo === 'evento') {
+            Evento surpresa
+          } @else {
+            Missão
+          }
+        </span>
+
+        <h1 class="missao-titulo">{{ tituloComPrefixo() }}</h1>
+
+        @if (pensamento()) {
+          <p class="missao-pensamento">"{{ pensamento() }}"</p>
+        }
+      </header>
+
+      <!-- Abertura (frase de destaque) -->
+      <p class="missao-abertura">{{ abertura() }}</p>
+
+      <!-- Corpo (situação narrativa) -->
+      <article class="missao-corpo">
+        @for (linha of corpo().split('\n'); track $index) {
+          @if (linha.trim() === '') {
+            <br />
+          } @else {
+            <p>{{ linha }}</p>
+          }
+        }
+      </article>
+
+      <!-- Erro (se houver) -->
+      @if (erro()) {
+        <div class="missao-erro" role="alert">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6" />
+            <path d="M12 7v6M12 16.5v.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+          </svg>
+          <span>{{ erro() }}</span>
+        </div>
+      }
+
+      <!-- Opções -->
+      <section class="missao-decisao" aria-label="O que você faz?">
+        <h2 class="decisao-titulo">O que você faz?</h2>
+
+        <ul class="opcoes-lista">
+          @for (opcao of opcoesDisponiveis(); track opcao.id) {
+            <li>
+              <button
+                type="button"
+                class="opcao-card"
+                (click)="escolher(opcao)"
+              >
+                <span class="opcao-texto">
+                  <span class="opcao-titulo">{{ opcao.titulo }}</span>
+                  @if (opcao.descricao) {
+                    <span class="opcao-descricao">{{ opcao.descricao }}</span>
+                  }
+                  @if (mostrarCusto(opcao)) {
+                    <span class="opcao-custo">
+                      {{ formatarMoeda(opcao.custo) }}
+                    </span>
+                  }
+                </span>
+
+                <span class="opcao-seta" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path
+                      d="M5 12h14M13 6l6 6-6 6"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+              </button>
+            </li>
+          }
+        </ul>
+      </section>
+    </section>
+  }
+</app-game-layout>

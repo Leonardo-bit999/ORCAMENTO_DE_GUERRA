@@ -21,11 +21,29 @@ export const routes: Routes = [
       import('./features/criar-personagem/criacao/criacao').then((m) => m.Criacao),
   },
 
-  // Jornada (home do jogo)
   {
     path: 'jornada',
     canActivate: [authGuard, hasCharacterGuard],
     loadComponent: () => import('./features/jogo/jornada/jornada').then((m) => m.Jornada),
+  },
+
+  {
+    path: 'missao/:id',
+    canActivate: [authGuard, hasCharacterGuard],
+    loadComponent: () =>
+      import('./features/jogo/missao/missao').then((m) => m.Missao),
+  },
+  {
+    path: 'resultado/:missaoId',
+    canActivate: [authGuard, hasCharacterGuard],
+    loadComponent: () =>
+      import('./features/jogo/resultado/resultado').then((m) => m.Resultado),
+  },
+  {
+    path: 'licao/:licaoId',
+    canActivate: [authGuard, hasCharacterGuard],
+    loadComponent: () =>
+      import('./features/jogo/licao/licao').then((m) => m.Licao),
   },
 
   { path: '**', redirectTo: '' },

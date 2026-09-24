@@ -1,1 +1,196 @@
-<p>resultado works!</p>
+<app-game-layout>
+  @if (entry()) {
+    <section class="resultado">
+      <!-- Cabeçalho -->
+      <header class="resultado-header">
+        <span class="resultado-tag">Sua decisão</span>
+        <h1 class="resultado-titulo">{{ entry()!.titulo }}</h1>
+        @if (opcaoEscolhida(); as opcao) {
+          <p class="resultado-escolha">"{{ opcao.titulo }}"</p>
+        }
+      </header>
+
+      <!-- Impacto -->
+      @if (deltas(); as d) {
+        <section class="resultado-impacto" aria-label="Impacto da decisão">
+          <h2 class="impacto-titulo">Impacto</h2>
+
+          <ul class="impacto-lista">
+            @if (d.disponivel !== 0) {
+              <li class="impacto-item">
+                <span class="impacto-icone impacto-icone-dinheiro" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M12 7v10M9 9.5h5a1.5 1.5 0 0 1 0 3h-4a1.5 1.5 0 0 0 0 3h5" />
+                  </svg>
+                </span>
+                <span class="impacto-label">Disponível</span>
+                <span class="impacto-valor" [class.negativo]="d.disponivel < 0">
+                  {{ formatarMoedaDelta(d.disponivel) }}
+                </span>
+              </li>
+            }
+
+            @if (d.reserva !== 0) {
+              <li class="impacto-item">
+                <span class="impacto-icone impacto-icone-reserva" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M12 3 4 6v6c0 5 3.4 9.4 8 10 4.6-.6 8-5 8-10V6l-8-3Z" />
+                    <path d="m9 12 2 2 4-4" />
+                  </svg>
+                </span>
+                <span class="impacto-label">Reserva</span>
+                <span class="impacto-valor" [class.negativo]="d.reserva < 0">
+                  {{ formatarMoedaDelta(d.reserva) }}
+                </span>
+              </li>
+            }
+
+            @if (d.bemEstar !== 0) {
+              <li class="impacto-item">
+                <span class="impacto-icone impacto-icone-bem" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10Z" />
+                  </svg>
+                </span>
+                <span class="impacto-label">Bem-estar</span>
+                <span class="impacto-valor" [class.negativo]="d.bemEstar < 0">
+                  {{ formatarDelta(d.bemEstar) }}
+                </span>
+              </li>
+            }
+
+            @if (d.estresse !== 0) {
+              <li class="impacto-item">
+                <span class="impacto-icone impacto-icone-est" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M13 2 4.5 13.5h6L9 22l8.5-11.5h-6L13 2Z" />
+                  </svg>
+                </span>
+                <span class="impacto-label">Estresse</span>
+                <span class="impacto-valor" [class.negativo]="d.estresse > 0">
+                  {{ formatarDelta(d.estresse) }}
+                </span>
+              </li>
+            }
+
+            <li class="impacto-item">
+              <span class="impacto-icone impacto-icone-xp" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="m12 3 2.6 5.6 6.4.8-4.7 4.4 1.3 6.2L12 17l-5.6 3 1.3-6.2L3 9.4l6.4-.8L12 3Z"
+                  />
+                </svg>
+              </span>
+              <span class="impacto-label">XP</span>
+              <span class="impacto-valor">{{ formatarDelta(d.xp) }}</span>
+            </li>
+          </ul>
+        </section>
+      }
+
+      <!-- Consequência narrativa -->
+      @if (opcaoEscolhida(); as opcao) {
+        <section class="resultado-consequencia" aria-label="O que isso significa">
+          <h2 class="consequencia-titulo">O que isso significa</h2>
+          <p class="consequencia-texto">{{ opcao.resultado }}</p>
+        </section>
+      }
+
+      <!-- "E se..." (só na M1) -->
+      @if (temESe() && opcaoAlternativa(); as alternativa) {
+        <section class="resultado-ese">
+          <button
+            type="button"
+            class="ese-botao"
+            (click)="toggleESe()"
+            [attr.aria-expanded]="eSeAberto"
+          >
+            <span>E se eu tivesse escolhido outra coisa?</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="m6 9 6 6 6-6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+
+          @if (eSeAberto) {
+            <article class="ese-conteudo">
+              <h3 class="ese-titulo">E se você tivesse escolhido:</h3>
+              <p class="ese-opcao">"{{ alternativa.titulo }}"</p>
+
+              <p class="ese-texto">{{ alternativa.resultado }}</p>
+
+              <p class="ese-nota">
+                Esse caminho também é válido — só leva a uma história diferente.
+              </p>
+            </article>
+          }
+        </section>
+      }
+
+      <!-- Ações -->
+      <footer class="resultado-acoes">
+        @if (missao()) {
+          <button type="button" class="btn-primario" (click)="continuar()">
+            Ver o aprendizado
+            <svg viewBox="0 0 24 24" class="btn-seta" aria-hidden="true">
+              <path
+                d="M5 12h14M13 6l6 6-6 6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        } @else {
+          <button type="button" class="btn-primario" (click)="voltarJornada()">
+            Voltar pra jornada
+          </button>
+        }
+      </footer>
+    </section>
+  }
+</app-game-layout>
