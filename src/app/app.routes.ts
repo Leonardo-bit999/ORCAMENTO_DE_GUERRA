@@ -45,6 +45,26 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/jogo/licao/licao').then((m) => m.Licao),
   },
+  {
+    path: 'caderno',
+    canActivate: [authGuard, hasCharacterGuard],
+    loadComponent: () =>
+      import('./features/jogo/caderno/caderno').then((m) => m.Caderno),
+  },
+  {
+    path: 'jornada-financeira',
+    canActivate: [authGuard, hasCharacterGuard],
+    loadComponent: () =>
+      import('./features/jogo/jornada-financeira/jornada-financeira').then(
+        (m) => m.JornadaFinanceira
+      ),
+  },
+  {
+    path: 'perfil',
+    canActivate: [authGuard, hasCharacterGuard],
+    loadComponent: () =>
+    import('./features/jogo/perfil/perfil').then((m) => m.Perfil),
+  },
 
   { path: '**', redirectTo: '' },
 ];

@@ -1,1 +1,121 @@
-<p>jornada-financeira works!</p>
+<app-game-layout>
+  <section class="jornada-financeira">
+    <!-- Cabeçalho -->
+    <header class="jf-header">
+      <span class="jf-tag">Sua Jornada Financeira</span>
+      <h1 class="jf-titulo">{{ nome() }}</h1>
+      <p class="jf-perfil">{{ perfilTitulo() }}</p>
+    </header>
+
+    <!-- Timeline -->
+    @if (temHistorico()) {
+      <ol class="timeline">
+        @for (entry of historico(); track entry.missaoId; let i = $index) {
+          <li class="timeline-no">
+            <div class="no-marcador" aria-hidden="true">
+              <span class="no-ponto"></span>
+            </div>
+
+            <div class="no-conteudo">
+              <span class="no-numero">
+                {{ (i + 1 < 10 ? '0' : '') + (i + 1) }}
+              </span>
+              <h2 class="no-titulo">{{ entry.titulo }}</h2>
+              <p class="no-decisao">{{ entry.textoCurto }}</p>
+            </div>
+          </li>
+
+          @if (i < historico().length - 1) {
+            <li class="timeline-linha" aria-hidden="true"></li>
+          }
+        }
+
+        <!-- Fim: estado atual -->
+        <li class="timeline-linha timeline-linha-final" aria-hidden="true"></li>
+
+        <li class="timeline-fim">
+          <div class="no-marcador no-marcador-fim" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 5v14M5 12l7 7 7-7"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+
+          <div class="no-conteudo">
+            <h2 class="no-titulo destaque">Situação atual</h2>
+
+            <div class="situacao-grid">
+              <div class="situacao-item">
+                <span class="situacao-label">Reserva</span>
+                <span class="situacao-valor">{{ formatarMoeda(reserva()) }}</span>
+              </div>
+              <div class="situacao-item">
+                <span class="situacao-label">Disponível</span>
+                <span class="situacao-valor">{{ formatarMoeda(disponivel()) }}</span>
+              </div>
+              <div class="situacao-item">
+                <span class="situacao-label">Bem-estar</span>
+                <span class="situacao-valor">{{ bemEstar() }}</span>
+              </div>
+              <div class="situacao-item">
+                <span class="situacao-label">Estresse</span>
+                <span class="situacao-valor">{{ estresse() }}</span>
+              </div>
+              <div class="situacao-item situacao-item-xp">
+                <span class="situacao-label">XP</span>
+                <span class="situacao-valor">{{ xp() }}</span>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ol>
+    } @else {
+      <!-- Vazio -->
+      <div class="jf-vazio">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M3 17 9 11l4 4 8-8"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M15 7h6v6"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        <p class="jf-vazio-titulo">Sua jornada ainda não começou.</p>
+        <p class="jf-vazio-texto">Jogue a primeira missão para começar a construir sua história.</p>
+      </div>
+    }
+
+    <!-- Ações -->
+    <footer class="jf-acoes">
+      <button type="button" class="btn-primario" (click)="voltar()">
+        Voltar pra Jornada
+        <svg viewBox="0 0 24 24" class="btn-seta" aria-hidden="true">
+          <path
+            d="M5 12h14M13 6l6 6-6 6"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+    </footer>
+  </section>
+</app-game-layout>

@@ -1,1 +1,74 @@
-<p>licao works!</p>
+<app-game-layout>
+  @if (licao()) {
+    <section class="licao">
+      <!-- Cabeçalho -->
+      <header class="licao-header">
+        <span class="licao-tag">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M5 4h11a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M9 4v18"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+            />
+            <path
+              d="M13 9h3M13 13h3"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+            />
+          </svg>
+          Nova lição no Caderno
+        </span>
+
+        <h1 class="licao-titulo">{{ licao()!.titulo }}</h1>
+      </header>
+
+      <!-- Conceito -->
+      <article class="licao-conceito">
+        @for (p of paragrafos(); track $index) {
+          <p class="licao-paragrafo">{{ p }}</p>
+        }
+      </article>
+
+      <!-- Ancoragem personalizada -->
+      @if (ancoragem()) {
+        <aside class="licao-ancoragem">
+          <span class="ancoragem-label">No seu caso:</span>
+          <p class="ancoragem-texto">{{ ancoragem() }}</p>
+        </aside>
+      }
+
+      <!-- Ações -->
+      <footer class="licao-acoes">
+        <button type="button" class="btn-ghost" (click)="irParaCaderno()">
+          Ver o Caderno
+        </button>
+
+        <button type="button" class="btn-primario" (click)="voltar()">
+          Voltar pra Jornada
+          <svg viewBox="0 0 24 24" class="btn-seta" aria-hidden="true">
+            <path
+              d="M5 12h14M13 6l6 6-6 6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </footer>
+    </section>
+  }
+</app-game-layout>

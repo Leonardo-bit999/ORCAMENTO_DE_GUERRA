@@ -1,1 +1,105 @@
-<p>caderno works!</p>
+<app-game-layout>
+  <section class="caderno">
+    <!-- Cabeçalho -->
+    <header class="caderno-header">
+      <span class="caderno-tag">Caderno de Aprendizado</span>
+      <h1 class="caderno-titulo">O que você já aprendeu</h1>
+      <p class="caderno-sub">
+        Cada missão deixa uma lição. Aqui elas ficam guardadas.
+      </p>
+
+      <div class="caderno-progresso">
+        <span class="progresso-label">
+          {{ progresso().desbloqueadas }} de {{ progresso().total }} lições
+        </span>
+        <div class="progresso-trilha">
+          <div
+            class="progresso-preenchido"
+            [style.width.%]="(progresso().desbloqueadas / progresso().total) * 100"
+          ></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Lista -->
+    <ul class="licoes-lista">
+      @for (item of itens(); track item.licao.id; let i = $index) {
+        <li>
+          <button
+            type="button"
+            class="licao-card"
+            [class.desbloqueada]="item.desbloqueada"
+            [class.bloqueada]="!item.desbloqueada"
+            [disabled]="!item.desbloqueada"
+            (click)="abrir(item)"
+          >
+            <span class="licao-numero">
+              {{ (i + 1 < 10 ? '0' : '') + (i + 1) }}
+            </span>
+
+            <span class="licao-conteudo">
+              @if (item.desbloqueada) {
+                <span class="licao-titulo">{{ item.licao.titulo }}</span>
+                <span class="licao-preview">{{ preview(item.licao) }}</span>
+              } @else {
+                <span class="licao-titulo bloqueado">
+                  Lição ainda não desbloqueada
+                </span>
+                <span class="licao-preview bloqueado">
+                  Continue a jornada para revelar.
+                </span>
+              }
+            </span>
+
+            <span class="licao-icone" aria-hidden="true">
+              @if (item.desbloqueada) {
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M5 4h11a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M9 4v18"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                  />
+                  <path
+                    d="M13 9h3M13 13h3"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              } @else {
+                <svg viewBox="0 0 24 24">
+                  <rect
+                    x="5"
+                    y="11"
+                    width="14"
+                    height="9"
+                    rx="2"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                  />
+                  <path
+                    d="M8 11V8a4 4 0 0 1 8 0v3"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                  />
+                </svg>
+              }
+            </span>
+          </button>
+        </li>
+      }
+    </ul>
+  </section>
+</app-game-layout>

@@ -1,0 +1,204 @@
+:host {
+  display: block;
+}
+
+.licao {
+  max-width: 720px;
+  margin-inline: auto;
+  padding: 48px 24px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* =========================================================
+   Cabeçalho
+   ========================================================= */
+.licao-header {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.licao-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green);
+  background: var(--glow-green-soft);
+  border: 1px solid var(--border-green);
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+}
+
+.licao-tag svg {
+  width: 14px;
+  height: 14px;
+}
+
+.licao-titulo {
+  font-family: var(--font-mono);
+  font-size: clamp(1.5rem, 2.8vw, 1.9rem);
+  font-weight: 700;
+  color: #F4F5F2;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin: 0;
+}
+
+/* =========================================================
+   Conceito
+   ========================================================= */
+.licao-conceito {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 28px 32px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  border-left: 3px solid var(--green);
+  border-radius: var(--radius-lg);
+}
+
+.licao-paragrafo {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: #F4F5F2;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* =========================================================
+   Ancoragem
+   ========================================================= */
+.licao-ancoragem {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px 22px;
+  background: rgba(168, 240, 0, 0.04);
+  border: 1px dashed var(--border-green);
+  border-radius: var(--radius-md);
+}
+
+.ancoragem-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green);
+}
+
+.ancoragem-texto {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #F4F5F2;
+  opacity: 0.9;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* =========================================================
+   Ações
+   ========================================================= */
+.licao-acoes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.btn-primario,
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 24px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition:
+    color 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease,
+    box-shadow 0.2s ease,
+    transform 0.12s ease;
+}
+
+.btn-primario {
+  background: var(--green);
+  color: var(--bg-base);
+  border: 1px solid var(--green);
+}
+
+.btn-primario:hover {
+  background: var(--green-hover);
+  border-color: var(--green-hover);
+  box-shadow:
+    0 0 0 6px var(--glow-green-soft),
+    0 8px 30px -10px var(--glow-green);
+}
+
+.btn-primario:active {
+  background: var(--green-dim);
+  transform: translateY(1px);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: #F4F5F2;
+  border: 1px solid var(--border-strong);
+}
+
+.btn-ghost:hover {
+  color: var(--green);
+  border-color: var(--border-green-strong);
+  background: var(--glow-green-soft);
+}
+
+.btn-seta {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s ease;
+}
+
+.btn-primario:hover .btn-seta {
+  transform: translateX(3px);
+}
+
+/* =========================================================
+   Responsivo
+   ========================================================= */
+@media (max-width: 640px) {
+  .licao {
+    padding: 28px 16px 48px;
+    gap: 24px;
+  }
+
+  .licao-conceito {
+    padding: 22px 20px;
+  }
+
+  .licao-acoes {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .licao-acoes > button {
+    width: 100%;
+  }
+}

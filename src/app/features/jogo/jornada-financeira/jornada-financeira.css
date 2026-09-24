@@ -1,0 +1,308 @@
+:host {
+  display: block;
+}
+
+.jornada-financeira {
+  max-width: 780px;
+  margin-inline: auto;
+  padding: 48px 24px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* =========================================================
+   Cabeçalho
+   ========================================================= */
+.jf-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.jf-tag {
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green);
+  background: var(--glow-green-soft);
+  border: 1px solid var(--border-green);
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+}
+
+.jf-titulo {
+  font-family: var(--font-mono);
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  font-weight: 700;
+  color: #F4F5F2;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.jf-perfil {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin: 0;
+}
+
+/* =========================================================
+   Timeline
+   ========================================================= */
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline-no,
+.timeline-fim {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.no-marcador {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--bg-surface);
+  border: 2px solid var(--green);
+  flex-shrink: 0;
+}
+
+.no-ponto {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 10px var(--glow-green);
+}
+
+.no-marcador-fim {
+  background: var(--green);
+  border-color: var(--green);
+  color: var(--bg-base);
+}
+
+.no-marcador-fim svg {
+  width: 16px;
+  height: 16px;
+}
+
+.no-conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 4px;
+  min-width: 0;
+}
+
+.no-numero {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #F4F5F2;
+  opacity: 0.5;
+}
+
+.no-titulo {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #F4F5F2;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.no-titulo.destaque {
+  color: var(--green);
+  font-size: 1.1rem;
+}
+
+.no-decisao {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: #F4F5F2;
+  opacity: 0.75;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Linha entre nós */
+.timeline-linha {
+  height: 28px;
+  width: 2px;
+  margin-left: 15px;
+  background: var(--green);
+  opacity: 0.4;
+  list-style: none;
+}
+
+.timeline-linha-final {
+  opacity: 0.7;
+  box-shadow: 0 0 6px var(--glow-green-soft);
+}
+
+/* =========================================================
+   Situação atual (fim)
+   ========================================================= */
+.situacao-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.situacao-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 16px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+}
+
+.situacao-item-xp {
+  grid-column: 1 / -1;
+}
+
+.situacao-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #F4F5F2;
+  opacity: 0.55;
+}
+
+.situacao-valor {
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--green);
+  letter-spacing: 0.01em;
+}
+
+/* =========================================================
+   Vazio
+   ========================================================= */
+.jf-vazio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 64px 24px;
+  background: var(--bg-surface);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-lg);
+}
+
+.jf-vazio svg {
+  width: 48px;
+  height: 48px;
+  color: var(--green);
+  opacity: 0.5;
+}
+
+.jf-vazio-titulo {
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #F4F5F2;
+  margin: 0;
+}
+
+.jf-vazio-texto {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: #F4F5F2;
+  opacity: 0.7;
+  line-height: 1.55;
+  margin: 0;
+  max-width: 380px;
+}
+
+/* =========================================================
+   Ações
+   ========================================================= */
+.jf-acoes {
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+}
+
+.btn-primario {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 28px;
+  background: var(--green);
+  color: var(--bg-base);
+  border: 1px solid var(--green);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.18s ease, box-shadow 0.2s ease, transform 0.12s ease;
+}
+
+.btn-primario:hover {
+  background: var(--green-hover);
+  border-color: var(--green-hover);
+  box-shadow: 0 0 0 6px var(--glow-green-soft), 0 8px 30px -10px var(--glow-green);
+}
+
+.btn-primario:active {
+  background: var(--green-dim);
+  transform: translateY(1px);
+}
+
+.btn-seta {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s ease;
+}
+
+.btn-primario:hover .btn-seta {
+  transform: translateX(3px);
+}
+
+/* =========================================================
+   Responsivo
+   ========================================================= */
+@media (max-width: 640px) {
+  .jornada-financeira {
+    padding: 28px 16px 48px;
+    gap: 24px;
+  }
+
+  .situacao-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .situacao-item-xp {
+    grid-column: auto;
+  }
+}

@@ -1,0 +1,146 @@
+<app-game-layout>
+  @if (perfil()) {
+    <section class="perfil">
+      <!-- Identidade -->
+      <header class="perfil-header">
+        @if (perfilId(); as pid) {
+          <span class="perfil-icone" aria-hidden="true">
+            <app-icone-perfil [id]="pid" />
+          </span>
+        }
+
+        <div class="perfil-identidade">
+          <span class="perfil-tag">Personagem</span>
+          <h1 class="perfil-nome">{{ nome() }}</h1>
+          <p class="perfil-arquetipo">{{ perfilTitulo() }}</p>
+          @if (perfilFrase()) {
+            <p class="perfil-frase">{{ perfilFrase() }}</p>
+          }
+        </div>
+      </header>
+
+      <!-- Situação atual -->
+      <section class="perfil-secao" aria-label="Situação atual">
+        <h2 class="secao-titulo">Situação atual</h2>
+        <div class="cards-grid cards-grid-3">
+          <div class="card-valor">
+            <span class="card-label">Disponível</span>
+            <span class="card-numero">{{ formatarMoeda(disponivel()) }}</span>
+          </div>
+          <div class="card-valor">
+            <span class="card-label">Reserva</span>
+            <span class="card-numero">{{ formatarMoeda(reserva()) }}</span>
+          </div>
+          <div class="card-valor">
+            <span class="card-label">XP</span>
+            <span class="card-numero">{{ xp() }}</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Indicadores -->
+      <section class="perfil-secao" aria-label="Indicadores">
+        <h2 class="secao-titulo">Como você está</h2>
+
+        <div class="indicadores">
+          <div class="indicador">
+            <div class="indicador-topo">
+              <span class="indicador-label">Bem-estar</span>
+              <span class="indicador-valor">{{ bemEstar() }}</span>
+            </div>
+            <div class="indicador-trilha">
+              <div
+                class="indicador-preenchido indicador-bem"
+                [style.width.%]="bemEstar()"
+              ></div>
+            </div>
+          </div>
+
+          <div class="indicador">
+            <div class="indicador-topo">
+              <span class="indicador-label">Estresse</span>
+              <span class="indicador-valor">{{ estresse() }}</span>
+            </div>
+            <div class="indicador-trilha">
+              <div
+                class="indicador-preenchido indicador-est"
+                [style.width.%]="estresse()"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Objetivo -->
+      @if (objetivoLabel()) {
+        <section class="perfil-secao" aria-label="Objetivo">
+          <h2 class="secao-titulo">Objetivo</h2>
+          <p class="secao-destaque">{{ objetivoLabel() }}</p>
+        </section>
+      }
+
+      <!-- Cenário -->
+      <section class="perfil-secao" aria-label="Cenário">
+        <h2 class="secao-titulo">Cenário</h2>
+
+        <ul class="dados-lista">
+          @if (moradiaLabel()) {
+            <li>
+              <span class="dado-chave">Moradia</span>
+              <span class="dado-valor">{{ moradiaLabel() }}</span>
+            </li>
+          }
+          @if (fonteRendaLabel()) {
+            <li>
+              <span class="dado-chave">Fonte de renda</span>
+              <span class="dado-valor">{{ fonteRendaLabel() }}</span>
+            </li>
+          }
+          <li>
+            <span class="dado-chave">Renda mensal</span>
+            <span class="dado-valor">{{ formatarMoeda(rendaMensal()) }}</span>
+          </li>
+          @if (custoVidaLabel()) {
+            <li>
+              <span class="dado-chave">Custo de vida</span>
+              <span class="dado-valor">{{ custoVidaLabel() }}</span>
+            </li>
+          }
+        </ul>
+
+        @if (responsabilidadesLabels().length > 0) {
+          <div class="dados-chips">
+            <span class="dados-chips-label">Responsabilidades</span>
+            <div class="chips-lista">
+              @for (r of responsabilidadesLabels(); track r) {
+                <span class="chip">{{ r }}</span>
+              }
+            </div>
+          </div>
+        }
+      </section>
+
+      <!-- Comportamento -->
+      @if (estiloLabel() || vibeLabel()) {
+        <section class="perfil-secao" aria-label="Comportamento">
+          <h2 class="secao-titulo">Comportamento</h2>
+
+          <ul class="dados-lista">
+            @if (estiloLabel()) {
+              <li>
+                <span class="dado-chave">Estilo de vida</span>
+                <span class="dado-valor">{{ estiloLabel() }}</span>
+              </li>
+            }
+            @if (vibeLabel()) {
+              <li>
+                <span class="dado-chave">Vibe</span>
+                <span class="dado-valor">{{ vibeLabel() }}</span>
+              </li>
+            }
+          </ul>
+        </section>
+      }
+    </section>
+  }
+</app-game-layout>
