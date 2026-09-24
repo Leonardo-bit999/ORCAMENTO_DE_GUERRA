@@ -1,157 +1,147 @@
-<app-navbar></app-navbar>
-<app-game-hud></app-game-hud>
-
-<main class="jornada">
-  <!-- Capítulo atual -->
-  <header class="capitulo-header">
-    <div class="capitulo-info">
-      <span class="capitulo-tag">Capítulo {{ capituloAtual().ordem }}</span>
-      <h1 class="capitulo-titulo">{{ capituloAtual().titulo }}</h1>
-      <p class="capitulo-descricao">{{ capituloAtual().descricao }}</p>
-    </div>
-
-    <div class="capitulo-progresso">
-      <span class="progresso-label">
-        {{ progresso().concluidas }} de {{ progresso().total }} missões
-      </span>
-      <div class="progresso-trilha">
-        <div
-          class="progresso-preenchido"
-          [style.width.%]="progresso().percentual"
-        ></div>
+<app-game-layout>
+  <section class="jornada">
+    <!-- Cabeçalho do capítulo -->
+    <header class="capitulo-header">
+      <div class="capitulo-info">
+        <span class="capitulo-tag">Capítulo {{ capituloAtual().ordem }}</span>
+        <h1 class="capitulo-titulo">{{ capituloAtual().titulo }}</h1>
+        <p class="capitulo-descricao">{{ capituloAtual().descricao }}</p>
       </div>
-    </div>
-  </header>
 
-  <!-- Trilha de missões -->
-  <section class="trilha" aria-label="Missões do capítulo">
-    <ol class="trilha-lista">
-      @for (item of missoesDoCapitulo(); track item.missao.id; let i = $index) {
-        <li
-          class="trilha-no"
-          [class.concluida]="item.concluida"
-          [class.disponivel]="item.disponivel"
-          [class.bloqueada]="!item.concluida && !item.disponivel"
-        >
-          <button
-            type="button"
-            class="no-botao"
-            [disabled]="!item.disponivel"
-            (click)="abrirMissao(item)"
+      <div class="capitulo-progresso">
+        <span class="progresso-label">
+          {{ progresso().concluidas }} de {{ progresso().total }} missões
+        </span>
+        <div class="progresso-trilha">
+          <div
+            class="progresso-preenchido"
+            [style.width.%]="progresso().percentual"
+          ></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Trilha de missões -->
+    <section class="trilha" aria-label="Missões do capítulo">
+      <ol class="trilha-lista">
+        @for (item of missoesDoCapitulo(); track item.missao.id; let i = $index) {
+          <li
+            class="trilha-no"
+            [class.concluida]="item.concluida"
+            [class.disponivel]="item.disponivel"
+            [class.bloqueada]="!item.concluida && !item.disponivel"
           >
-            <span class="no-marcador" aria-hidden="true">
-              @if (item.concluida) {
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="m5 12 5 5 9-11"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="3"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              } @else if (item.disponivel) {
-                <svg viewBox="0 0 24 24">
-                  <path
-                    d="M8 5v14l11-7L8 5Z"
-                    fill="currentColor"
-                  />
-                </svg>
-              } @else {
-                <svg viewBox="0 0 24 24">
-                  <rect
-                    x="5"
-                    y="11"
-                    width="14"
-                    height="9"
-                    rx="2"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  />
-                  <path
-                    d="M8 11V8a4 4 0 0 1 8 0v3"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  />
-                </svg>
-              }
-            </span>
-
-            <span class="no-conteudo">
-              <span class="no-numero">
-                {{ (i + 1 < 10 ? '0' : '') + (i + 1) }}
+            <button
+              type="button"
+              class="no-botao"
+              [disabled]="!item.disponivel"
+              (click)="abrirMissao(item)"
+            >
+              <span class="no-marcador" aria-hidden="true">
+                @if (item.concluida) {
+                  <svg viewBox="0 0 24 24">
+                    <path
+                      d="m5 12 5 5 9-11"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                } @else if (item.disponivel) {
+                  <svg viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7L8 5Z" fill="currentColor" />
+                  </svg>
+                } @else {
+                  <svg viewBox="0 0 24 24">
+                    <rect x="5" y="11" width="14" height="9" rx="2"
+                          fill="none" stroke="currentColor" stroke-width="2" />
+                    <path d="M8 11V8a4 4 0 0 1 8 0v3"
+                          fill="none" stroke="currentColor" stroke-width="2" />
+                  </svg>
+                }
               </span>
-              <span class="no-titulo">{{ item.missao.titulo }}</span>
-              @if (item.concluida) {
-                <span class="no-estado">Concluída</span>
-              } @else if (item.disponivel) {
-                <span class="no-estado destaque">Disponível</span>
-              } @else {
-                <span class="no-estado">Bloqueada</span>
-              }
-            </span>
-          </button>
-        </li>
 
-        @if (i < missoesDoCapitulo().length - 1) {
-          <li class="trilha-linha" [class.ativa]="item.concluida" aria-hidden="true"></li>
+              <span class="no-conteudo">
+                <span class="no-numero">
+                  {{ (i + 1 < 10 ? '0' : '') + (i + 1) }}
+                </span>
+                <span class="no-titulo">{{ item.missao.titulo }}</span>
+                @if (item.concluida) {
+                  <span class="no-estado">Concluída</span>
+                } @else if (item.disponivel) {
+                  <span class="no-estado destaque">Disponível</span>
+                } @else {
+                  <span class="no-estado">Bloqueada</span>
+                }
+              </span>
+            </button>
+          </li>
+
+          @if (i < missoesDoCapitulo().length - 1) {
+            <li class="trilha-linha" [class.ativa]="item.concluida" aria-hidden="true"></li>
+          }
         }
-      }
-    </ol>
-  </section>
-
-  <!-- CTA -->
-  <footer class="jornada-cta">
-    @if (capitulo1Concluido()) {
-      <button type="button" class="btn-primario" (click)="verJornadaFinanceira()">
-        Ver sua Jornada Financeira
-        <svg viewBox="0 0 24 24" class="btn-seta" aria-hidden="true">
-          <path
-            d="M5 12h14M13 6l6 6-6 6"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      </button>
-    } @else if (proximaMissao()) {
-      <button type="button" class="btn-primario" (click)="continuar()">
-        Continuar a jornada
-        <svg viewBox="0 0 24 24" class="btn-seta" aria-hidden="true">
-          <path
-            d="M5 12h14M13 6l6 6-6 6"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      </button>
-    }
-  </footer>
-
-  <!-- Capítulos bloqueados -->
-  @if (capitulosBloqueados().length > 0) {
-    <section class="capitulos-bloqueados" aria-label="Próximos capítulos">
-      <span class="bloqueado-label">Em breve</span>
-      @for (cap of capitulosBloqueados(); track cap.id) {
-        <article class="capitulo-bloqueado">
-          <div class="capitulo-bloqueado-topo">
-            <span class="capitulo-bloqueado-cadeado" aria-hidden="true">🔒</span>
-            <span class="capitulo-bloqueado-numero">
-              Capítulo {{ cap.ordem }}
-            </span>
-          </div>
-          <h2 class="capitulo-bloqueado-titulo">{{ cap.titulo }}</h2>
-          <p class="capitulo-bloqueado-descricao">{{ cap.descricao }}</p>
-        </article>
-      }
+      </ol>
     </section>
-  }
-</main>
+
+    <!-- CTA -->
+    <footer class="jornada-cta">
+      @if (capitulo1Concluido()) {
+        <button type="button" class="btn-primario" (click)="verJornadaFinanceira()">
+          Ver sua Jornada Financeira
+          <svg viewBox="0 0 24 24" class="btn-seta" aria-hidden="true">
+            <path
+              d="M5 12h14M13 6l6 6-6 6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      } @else if (proximaMissao()) {
+        <button type="button" class="btn-primario" (click)="continuar()">
+          Continuar a jornada
+          <svg viewBox="0 0 24 24" class="btn-seta" aria-hidden="true">
+            <path
+              d="M5 12h14M13 6l6 6-6 6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      }
+    </footer>
+
+    <!-- Capítulos bloqueados -->
+    @if (capitulosBloqueados().length > 0) {
+      <section class="capitulos-bloqueados" aria-label="Próximos capítulos">
+        <span class="bloqueado-label">Em breve</span>
+        @for (cap of capitulosBloqueados(); track cap.id) {
+          <article class="capitulo-bloqueado">
+            <div class="capitulo-bloqueado-topo">
+              <span class="capitulo-bloqueado-cadeado" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="5" y="11" width="14" height="9" rx="2" />
+                  <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+                </svg>
+              </span>
+              <span class="capitulo-bloqueado-numero">
+                Capítulo {{ cap.ordem }}
+              </span>
+            </div>
+            <h2 class="capitulo-bloqueado-titulo">{{ cap.titulo }}</h2>
+            <p class="capitulo-bloqueado-descricao">{{ cap.descricao }}</p>
+          </article>
+        }
+      </section>
+    }
+  </section>
+</app-game-layout>
