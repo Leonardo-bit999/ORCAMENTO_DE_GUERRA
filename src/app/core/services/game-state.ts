@@ -116,23 +116,37 @@ export class GameStateService {
   }
 
   // =========================================================
-  // Progressão
+  // Conquistas
+  // =========================================================
+
+  readonly conquistas = computed(() => this._estado()?.progressao.conquista ?? []);
+
+  temConquista(conquistaId: string): boolean {
+    return this._estado()?.progressao.conquista.includes(conquistaId) ?? false;
+  }
+
+  // =========================================================
+  // Progressão — atualização
   // =========================================================
 
   /**
-   * Verifica se uma missão pode ser jogada agora.
-   * - Não pode ter sido concluída.
-   * - Todos os pré-requisitos precisam estar concluídos.
+   * Verifica se uma conquista foi desbloqueada na última decisão.
+   * Usado pra mostrar o alerta.
    */
+  ultimaConquistaDesbloqueada(): string | null {
+    const conquistas = this.conquistas();
+    return conquistas.length > 0 ? conquistas[conquistas.length - 1] : null;
+  }
+
+  // =========================================================
+  // Progressão
+  // =========================================================
+
   missaoDisponivel(missao: Missao): boolean {
     if (this.missaoConcluida(missao.id)) return false;
     return missao.preRequisitos.every((req) => this.missaoConcluida(req));
   }
 
-  /**
-   * Verifica se um capítulo está liberado.
-   * Precisa ter `liberado: true` no dado e o capítulo anterior concluído.
-   */
   capituloLiberado(capitulo: Capitulo, todosCapitulos: Capitulo[]): boolean {
     if (!capitulo.liberado) return false;
     if (capitulo.ordem === 1) return true;
@@ -143,29 +157,16 @@ export class GameStateService {
     return this.capituloConcluido(anterior);
   }
 
-  /**
-   * Verifica se um capítulo foi concluído.
-   *
-   * Regra do MVP: o capítulo é concluído quando a sua ÚLTIMA missão
-   * da lista foi concluída. Isso permite ramificações (2A/2B) sem
-   * exigir que o jogador jogue as duas.
-   */
   capituloConcluido(capitulo: Capitulo): boolean {
     if (capitulo.missoesIds.length === 0) return false;
     const ultimaId = capitulo.missoesIds[capitulo.missoesIds.length - 1];
     return this.missaoConcluida(ultimaId);
   }
 
-  /**
-   * Devolve a primeira missão disponível (não concluída e com prereqs ok).
-   */
   proximaMissao(todas: Missao[]): Missao | null {
     return todas.find((m) => !this.missaoConcluida(m.id) && this.missaoDisponivel(m)) ?? null;
   }
 
-  /**
-   * Devolve todas as missões de um capítulo com seu estado atual.
-   */
   estadoDasMissoes(
     capitulo: Capitulo,
     todas: Missao[],

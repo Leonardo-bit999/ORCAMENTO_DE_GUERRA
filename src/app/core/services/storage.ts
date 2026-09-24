@@ -28,7 +28,12 @@ export class StorageService {
     try {
       const json = localStorage.getItem(CHAVE_ESTADO_JOGO);
       if (!json) return null;
-      return JSON.parse(json) as EstadoJogo;
+      const estado = JSON.parse(json) as EstadoJogo;
+      // Fallback pra estados antigos sem o campo conquistas
+      if (!estado.progressao.conquista) {
+        estado.progressao.conquista = [];
+      }
+      return estado;
     } catch (erro) {
       console.error('[StorageService] Erro ao carregar estado:', erro);
       return null;
