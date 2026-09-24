@@ -65,6 +65,7 @@ export class GameStateService {
         xp: 0,
         missoesConcluidas: [],
         licoesDesbloqueadas: [],
+        conquista: [],
       },
       flags: [],
       pendencia: null,

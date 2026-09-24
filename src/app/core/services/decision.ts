@@ -1,16 +1,10 @@
-/* =========================================================
-   DecisionService — motor de decisão do jogo
-   ========================================================= */
-
 import { Injectable } from '@angular/core';
 import { EstadoJogo } from '../models/estado-jogo.model';
 import { Missao } from '../models/missao.model';
 import { Opcao } from '../models/opcao.model';
 import { HistoricoEntry } from '../models/historico-entry.model';
+import { conquistaDaMissao } from '../../data/conquistas/conquistas';
 
-/**
- * Resultado do processamento de uma decisão.
- */
 export interface ResultadoDecisao {
   sucesso: boolean;
   motivo?: string;
@@ -21,9 +15,6 @@ export interface ResultadoDecisao {
 
 @Injectable({ providedIn: 'root' })
 export class DecisionService {
-  // =========================================================
-  // API principal
-  // =========================================================
 
   processar(missao: Missao, opcao: Opcao, estadoAtual: EstadoJogo): ResultadoDecisao {
     // 1. Validar
@@ -56,6 +47,9 @@ export class DecisionService {
     // 9. Desbloquear lição
     this.desbloquearLicao(novo, missao);
 
+    // 10. Desbloquear conquista (se houver)
+    this.desbloquearConquista(novo, missao);
+
     // 10. Gerar histórico
     const historicoEntry = this.gerarHistorico(novo, missao, opcao);
     novo.historico.push(historicoEntry);
@@ -68,9 +62,12 @@ export class DecisionService {
     };
   }
 
-  // =========================================================
-  // Validação
-  // =========================================================
+  private desbloquearConquista(estado: EstadoJogo, missao: Missao): void {
+    const conquista = conquistaDaMissao(missao.id);
+    if (!conquista) return;
+    if (estado.progressao.conquista.includes(conquista.id)) return;
+    estado.progressao.conquista.push(conquista.id);
+  }
 
   private validar(opcao: Opcao, estado: EstadoJogo): string | null {
     // Condição customizada

@@ -1,7 +1,3 @@
-/* =========================================================
-   EstadoJogo — objeto raiz do jogo
-   ========================================================= */
-
 import { Perfil } from './perfil.model';
 import { Pendencia } from './pendencia.model';
 import { HistoricoEntry } from './historico-entry.model';
@@ -31,6 +27,7 @@ export interface Progressao {
   xp: number;
   missoesConcluidas: string[]; // ids das missões concluídas
   licoesDesbloqueadas: string[]; // ids das lições desbloqueadas
+  conquista: string[];
 }
 
 /**
