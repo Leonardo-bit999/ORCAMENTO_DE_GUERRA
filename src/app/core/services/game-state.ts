@@ -1,7 +1,3 @@
-/* =========================================================
-   GameStateService — fonte única de verdade do EstadoJogo
-   ========================================================= */
-
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { Character } from '../models/character.model';
 import { EstadoJogo } from '../models/estado-jogo.model';
@@ -13,15 +9,8 @@ import { StorageService } from './storage';
 export class GameStateService {
   private storage = inject(StorageService);
 
-  /** Estado interno (signal). Ninguém fora do serviço mexe nele direto. */
   private _estado = signal<EstadoJogo | null>(null);
-
-  /** Leitura pública (readonly). */
   readonly estado = this._estado.asReadonly();
-
-  // =========================================================
-  // Sinais derivados (helpers para leitura)
-  // =========================================================
 
   readonly temEstado = computed(() => this._estado() !== null);
   readonly perfil = computed(() => this._estado()?.perfil ?? null);
@@ -34,13 +23,10 @@ export class GameStateService {
   readonly licoesDesbloqueadas = computed(
     () => this._estado()?.progressao.licoesDesbloqueadas ?? [],
   );
+  readonly conquistas = computed(() => this._estado()?.progressao.conquistas ?? []);
   readonly flags = computed(() => this._estado()?.flags ?? []);
   readonly pendencia = computed(() => this._estado()?.pendencia ?? null);
   readonly historico = computed(() => this._estado()?.historico ?? []);
-
-  // =========================================================
-  // Ciclo de vida
-  // =========================================================
 
   carregar(): void {
     const salvo = this.storage.carregarEstado();
@@ -65,7 +51,7 @@ export class GameStateService {
         xp: 0,
         missoesConcluidas: [],
         licoesDesbloqueadas: [],
-        conquista: [],
+        conquistas: [],
       },
       flags: [],
       pendencia: null,
@@ -91,10 +77,6 @@ export class GameStateService {
     this.storage.limparTudoDoJogo();
   }
 
-  // =========================================================
-  // Helpers de consulta
-  // =========================================================
-
   temFlag(flag: string): boolean {
     return this._estado()?.flags.includes(flag) ?? false;
   }
@@ -107,6 +89,10 @@ export class GameStateService {
     return this._estado()?.progressao.licoesDesbloqueadas.includes(licaoId) ?? false;
   }
 
+  temConquista(conquistaId: string): boolean {
+    return this._estado()?.progressao.conquistas.includes(conquistaId) ?? false;
+  }
+
   temPendencia(): boolean {
     return this._estado()?.pendencia !== null;
   }
@@ -114,33 +100,6 @@ export class GameStateService {
   estadoAtual(): EstadoJogo | null {
     return this._estado();
   }
-
-  // =========================================================
-  // Conquistas
-  // =========================================================
-
-  readonly conquistas = computed(() => this._estado()?.progressao.conquista ?? []);
-
-  temConquista(conquistaId: string): boolean {
-    return this._estado()?.progressao.conquista.includes(conquistaId) ?? false;
-  }
-
-  // =========================================================
-  // Progressão — atualização
-  // =========================================================
-
-  /**
-   * Verifica se uma conquista foi desbloqueada na última decisão.
-   * Usado pra mostrar o alerta.
-   */
-  ultimaConquistaDesbloqueada(): string | null {
-    const conquistas = this.conquistas();
-    return conquistas.length > 0 ? conquistas[conquistas.length - 1] : null;
-  }
-
-  // =========================================================
-  // Progressão
-  // =========================================================
 
   missaoDisponivel(missao: Missao): boolean {
     if (this.missaoConcluida(missao.id)) return false;
@@ -185,11 +144,13 @@ export class GameStateService {
       }));
   }
 
-  /**
-   * Devolve a última lição desbloqueada.
-   */
   ultimaLicaoDesbloqueada(): string | null {
     const licoes = this._estado()?.progressao.licoesDesbloqueadas ?? [];
     return licoes.length > 0 ? licoes[licoes.length - 1] : null;
+  }
+
+  ultimaConquistaDesbloqueada(): string | null {
+    const conquistas = this._estado()?.progressao.conquistas ?? [];
+    return conquistas.length > 0 ? conquistas[conquistas.length - 1] : null;
   }
 }

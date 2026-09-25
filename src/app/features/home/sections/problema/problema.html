@@ -1,47 +1,72 @@
-<section class="destaques" aria-labelledby="destaques-titulo">
-  <div class="container">
-    <div class="destaques__cabecalho">
-      <span class="eyebrow">CHOQUE DE REALIDADE</span>
-      <h2 id="destaques-titulo">Os dados do jogo que milhões de brasileiros estão perdendo</h2>
-      <p>Números públicos, com fonte e ano. Nenhum deles é opinião — é a régua da vida real.</p>
-    </div>
+<section class="choque" aria-labelledby="choque-titulo">
+  <div class="choque-container">
+    <header class="choque-cabecalho">
+      <span class="eyebrow">Choque de Realidade</span>
+      <h2 id="choque-titulo" class="choque-titulo">
+        Esses números existem.<br />
+        E eles têm nome, idade e história.
+      </h2>
+      <p class="choque-subtitulo">
+        Dados públicos, com fonte e ano. Nenhum deles é opinião — é a régua da vida real.
+      </p>
+    </header>
 
-    <div
-      class="carousel"
-      role="region"
-      aria-label="Dados sobre a realidade financeira brasileira"
-      (mouseenter)="pausar()"
-      (mouseleave)="retomar()"
-      (focusin)="pausar()"
-      (focusout)="retomar()"
-      (keydown)="onCarouselKeydown($event)"
-    >
-      @for (slide of slides; track slide.title; let index = $index) {
-        <article
-          class="slide"
-          [class.is-active]="activeIndex() === index"
-          [attr.aria-hidden]="activeIndex() !== index"
-        >
-          <img class="slide__image" [src]="slide.image" [alt]="slide.alt" />
-          <div class="slide__overlay" aria-hidden="true"></div>
+    <div class="choque-grid">
+      <article class="card card-destaque">
+        <div class="card-imagem-wrap">
+          <img class="card-imagem" [src]="destaque.image" [alt]="destaque.alt" loading="lazy" />
+          <div class="card-imagem-overlay" aria-hidden="true"></div>
+        </div>
 
-          <div class="slide__content">
-            <h3>{{ slide.title }}</h3>
-            <p class="slide__description">{{ slide.description }}</p>
-            <p class="slide__text">{{ slide.text }}</p>
+        <div class="card-conteudo">
+          <span class="card-numero">{{ destaque.title }}</span>
+          <p class="card-descricao">{{ destaque.description }}</p>
+          <p class="card-texto">{{ destaque.text }}</p>
 
-            <div class="slide__source">
-              <span class="slide__source-label">Fonte: {{ slide.source }}</span>
+          <div class="card-fonte">
+            <span class="card-fonte-label">Fonte: {{ destaque.source }}</span>
+            <a
+              class="card-fonte-link"
+              [href]="destaque.link"
+              target="_blank"
+              rel="noopener noreferrer"
+              [attr.aria-label]="'Abrir fonte: ' + destaque.source"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <div class="cards-secundarios">
+        @for (dado of secundarios; track dado.id) {
+          <article class="card card-secundario">
+            <span class="card-numero card-numero-secundario">{{ dado.title }}</span>
+            <p class="card-descricao">{{ dado.description }}</p>
+            <p class="card-texto">{{ dado.text }}</p>
+
+            <div class="card-fonte">
+              <span class="card-fonte-label">{{ dado.source }}</span>
               <a
-                class="slide__source-link"
-                [href]="slide.link"
+                class="card-fonte-link"
+                [href]="dado.link"
                 target="_blank"
                 rel="noopener noreferrer"
-                [attr.aria-label]="'Abrir fonte: ' + slide.source"
+                [attr.aria-label]="'Abrir fonte: ' + dado.source"
               >
                 <svg
-                  width="14"
-                  height="14"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -50,75 +75,22 @@
                   stroke-linejoin="round"
                   aria-hidden="true"
                 >
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                  <polyline points="15 3 21 3 21 9"></polyline>
-                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
                 </svg>
               </a>
             </div>
-          </div>
-        </article>
-      }
-
-      <div class="carousel__footer">
-        <button
-          class="carousel__nav carousel__nav--prev"
-          type="button"
-          aria-label="Destaque anterior"
-          (click)="anterior()"
-        >
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <polyline points="15 18 9 12 15 6"></polyline>
-          </svg>
-        </button>
-
-        <div class="carousel__indicators" aria-label="Selecionar destaque">
-          @for (slide of slides; track slide.title; let index = $index) {
-            <button
-              type="button"
-              [class.is-active]="activeIndex() === index"
-              [attr.aria-label]="'Ver destaque ' + (index + 1)"
-              [attr.aria-current]="activeIndex() === index ? 'true' : null"
-              (click)="irPara(index)"
-            >
-              @if (activeIndex() === index) {
-                <span class="carousel__indicator-progress" [attr.data-index]="index"></span>
-              }
-            </button>
-          }
-        </div>
-
-        <button
-          class="carousel__nav carousel__nav--next"
-          type="button"
-          aria-label="Próximo destaque"
-          (click)="proximo()"
-        >
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-        </button>
+          </article>
+        }
       </div>
     </div>
+
+    <p class="choque-fechamento">
+      Esses problemas existem no mundo real.
+      <span class="destaque">
+        O jogo coloca você diante de decisões parecidas para você errar antes de errar de verdade.
+      </span>
+    </p>
   </div>
 </section>

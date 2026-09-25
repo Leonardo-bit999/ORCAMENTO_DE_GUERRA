@@ -1,34 +1,28 @@
-<section class="cta-final-section">
-  <div class="container">
-    <div class="cta-content">
-      <h2 class="headline">
-        A VIDA REAL JÁ TEM <br />
-        <span class="highlight-green">IMPREVISTOS.</span>
+<section class="cta-final" aria-labelledby="cta-titulo">
+  <div class="cta-final-container">
+    <div class="cta-final-conteudo">
+      <span class="eyebrow">Sua vez</span>
+
+      <h2 id="cta-titulo" class="cta-titulo">
+        Sua jornada começa<br />
+        com <span class="highlight">uma decisão.</span>
       </h2>
 
-      <p class="subtext">
-        Tome suas decisões antes que eles aconteçam. Teste suas estratégias, erre sem consequências
-        reais e aprenda na prática.
-      </p>
+      <p class="cta-subtitulo">Não existe escolha certa. Existe o caminho que você constrói.</p>
 
-      <div class="cta-actions">
-        <button type="button" class="btn-primary" (click)="iniciarSimulacao()">
-          COMEÇAR JOGO
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
+      <a routerLink="/entrar" [queryParams]="{ tab: 'cadastro' }" class="cta-btn">
+        Começar minha jornada
+        <svg viewBox="0 0 24 24" class="cta-btn-seta" aria-hidden="true">
+          <path
+            d="M5 12h14M13 6l6 6-6 6"
             fill="none"
             stroke="currentColor"
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-          >
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </button>
-      </div>
+          />
+        </svg>
+      </a>
     </div>
   </div>
 </section>

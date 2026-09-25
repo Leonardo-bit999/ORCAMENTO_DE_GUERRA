@@ -1,33 +1,35 @@
 <app-auth-layout>
-<div class="entrar-card">
-  <div class="tabs" role="tablist" aria-label="Acessar conta">
-    <button
-      type="button"
-      role="tab"
-      class="tab"
-      [class.ativa]="tab() === 'login'"
-      [attr.aria-selected]="tab() === 'login'"
-      (click)="trocar('login')">
-      Entrar
-    </button>
-    <button
-      type="button"
-      role="tab"
-      class="tab"
-      [class.ativa]="tab() === 'cadastro'"
-      [attr.aria-selected]="tab() === 'cadastro'"
-      (click)="trocar('cadastro')">
-      Criar conta
-    </button>
-    <span class="tab-indicador" [class.direita]="tab() === 'cadastro'"></span>
-  </div>
+  <div class="entrar-card">
+    <div class="tabs" role="tablist" aria-label="Acessar conta">
+      <button
+        type="button"
+        role="tab"
+        class="tab"
+        [class.ativa]="tab() === 'login'"
+        [attr.aria-selected]="tab() === 'login'"
+        (click)="trocar('login')"
+      >
+        Entrar
+      </button>
+      <button
+        type="button"
+        role="tab"
+        class="tab"
+        [class.ativa]="tab() === 'cadastro'"
+        [attr.aria-selected]="tab() === 'cadastro'"
+        (click)="trocar('cadastro')"
+      >
+        Criar conta
+      </button>
+      <span class="tab-indicador" [class.direita]="tab() === 'cadastro'"></span>
+    </div>
 
-  <div class="tab-painel" [class.oculto]="tab() !== 'login'">
-    <app-login *ngIf="tab() === 'login'"></app-login>
-  </div>
+    <div class="tab-painel" [class.oculto]="tab() !== 'login'">
+      <app-login *ngIf="tab() === 'login'"></app-login>
+    </div>
 
-  <div class="tab-painel" [class.oculto]="tab() !== 'cadastro'">
-    <app-cadastro *ngIf="tab() === 'cadastro'"></app-cadastro>
+    <div class="tab-painel" [class.oculto]="tab() !== 'cadastro'">
+      <app-cadastro *ngIf="tab() === 'cadastro'"></app-cadastro>
+    </div>
   </div>
-</div>
 </app-auth-layout>

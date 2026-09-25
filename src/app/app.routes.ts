@@ -30,40 +30,40 @@ export const routes: Routes = [
   {
     path: 'missao/:id',
     canActivate: [authGuard, hasCharacterGuard],
-    loadComponent: () =>
-      import('./features/jogo/missao/missao').then((m) => m.Missao),
+    loadComponent: () => import('./features/jogo/missao/missao').then((m) => m.Missao),
   },
   {
     path: 'resultado/:missaoId',
     canActivate: [authGuard, hasCharacterGuard],
-    loadComponent: () =>
-      import('./features/jogo/resultado/resultado').then((m) => m.Resultado),
+    loadComponent: () => import('./features/jogo/resultado/resultado').then((m) => m.Resultado),
   },
   {
     path: 'licao/:licaoId',
     canActivate: [authGuard, hasCharacterGuard],
-    loadComponent: () =>
-      import('./features/jogo/licao/licao').then((m) => m.Licao),
+    loadComponent: () => import('./features/jogo/licao/licao').then((m) => m.Licao),
   },
   {
     path: 'caderno',
     canActivate: [authGuard, hasCharacterGuard],
-    loadComponent: () =>
-      import('./features/jogo/caderno/caderno').then((m) => m.Caderno),
+    loadComponent: () => import('./features/jogo/caderno/caderno').then((m) => m.Caderno),
+  },
+  {
+    path: 'conquistas',
+    canActivate: [authGuard, hasCharacterGuard],
+    loadComponent: () => import('./features/jogo/conquistas/conquistas').then((m) => m.Conquistas),
   },
   {
     path: 'jornada-financeira',
     canActivate: [authGuard, hasCharacterGuard],
     loadComponent: () =>
       import('./features/jogo/jornada-financeira/jornada-financeira').then(
-        (m) => m.JornadaFinanceira
+        (m) => m.JornadaFinanceira,
       ),
   },
   {
     path: 'perfil',
     canActivate: [authGuard, hasCharacterGuard],
-    loadComponent: () =>
-    import('./features/jogo/perfil/perfil').then((m) => m.Perfil),
+    loadComponent: () => import('./features/jogo/perfil/perfil').then((m) => m.Perfil),
   },
 
   { path: '**', redirectTo: '' },

@@ -1,17 +1,9 @@
-/* =========================================================
-   Missão 3 — O imprevisto (evento surpresa)
-   ========================================================= */
-
 import { Missao } from '../../core/models/missao.model';
 import { EstadoJogo } from '../../core/models/estado-jogo.model';
 
 const CUSTO_CONSERTO = 120;
 const CUSTO_ALTERNATIVA = 60;
 
-/**
- * Abertura: reconhece o estado da reserva + a última flag dominante.
- * Demonstra que o jogo lembra o caminho do jogador.
- */
 function aberturaImprevisto(estado: EstadoJogo): string {
   const reserva = estado.financeiro.reserva;
   const disponivel = estado.financeiro.disponivel;
@@ -39,9 +31,6 @@ function aberturaImprevisto(estado: EstadoJogo): string {
   return `${parteReserva} ${parteDisponivel}`;
 }
 
-/**
- * Corpo: a situação concreta.
- */
 function corpoImprevisto(estado: EstadoJogo): string {
   const disponivel = estado.financeiro.disponivel;
   const reserva = estado.financeiro.reserva;
@@ -57,9 +46,6 @@ function corpoImprevisto(estado: EstadoJogo): string {
   ].join('\n');
 }
 
-/**
- * Pensamento: varia conforme a capacidade de pagar.
- */
 function pensamentoImprevisto(estado: EstadoJogo): string {
   const total = estado.financeiro.disponivel + estado.financeiro.reserva;
 
@@ -87,9 +73,6 @@ export const MISSAO_3: Missao = {
   },
 
   opcoes: [
-    // =========================================================
-    // A — CONSERTAR AGORA
-    // =========================================================
     {
       id: 'consertar-agora',
       titulo: 'Conserto agora',
@@ -97,9 +80,6 @@ export const MISSAO_3: Missao = {
       custo: CUSTO_CONSERTO,
       fonte: 'disponivel-depois-reserva',
       impacto: {
-        // O impacto real (quanto sai de cada um) é calculado
-        // no DecisionService, mas aqui deixamos explícito:
-        // sai 120 do total (disponível primeiro).
         disponivel: 0,
         reserva: 0,
         bemEstar: +2,
@@ -112,9 +92,6 @@ export const MISSAO_3: Missao = {
       ancoragemLicao: 'Você escolheu resolver o problema agora.',
     },
 
-    // =========================================================
-    // B — ADIAR O CONSERTO
-    // =========================================================
     {
       id: 'adiar-conserto',
       titulo: 'Adio o conserto',
@@ -138,9 +115,6 @@ export const MISSAO_3: Missao = {
       ancoragemLicao: 'Você escolheu adiar o conserto.',
     },
 
-    // =========================================================
-    // C — ALTERNATIVA MAIS BARATA
-    // =========================================================
     {
       id: 'alternativa-barata',
       titulo: 'Procuro uma alternativa mais barata',

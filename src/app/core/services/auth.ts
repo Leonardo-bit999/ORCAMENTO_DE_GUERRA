@@ -62,7 +62,7 @@ export class Auth {
         localStorage.setItem(KEY_SESSAO, JSON.stringify(publico));
         this._usuario.set(publico);
         resolve(publico);
-      }, 500); // latência fake pra ver o spinner
+      }, 500);
     });
   }
 

@@ -8,9 +8,8 @@ describe('OpcaoTile', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OpcaoTile]
-    })
-    .compileComponents();
+      imports: [OpcaoTile],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(OpcaoTile);
     component = fixture.componentInstance;

@@ -1,82 +1,95 @@
-.destaques {
+:host {
+  display: block;
+  width: 100%;
+}
+
+.choque {
   position: relative;
-  padding: 5rem 0 6rem;
+  padding: 6rem 0;
   background: var(--bg-base);
   overflow: hidden;
 }
 
-.destaques .container {
-  position: relative;
-  z-index: 1;
-  max-width: 1100px;
+.choque-container {
+  max-width: 1280px;
   margin: 0 auto;
   padding: 0 2rem;
 }
 
-.destaques__cabecalho {
-  max-width: 720px;
-  margin-bottom: 2.5rem;
+/* =========================================================
+   Cabeçalho
+   ========================================================= */
+.choque-cabecalho {
+  max-width: 780px;
+  margin-bottom: 3rem;
 }
 
 .eyebrow {
   display: inline-block;
-  margin-bottom: 0.9rem;
+  margin-bottom: 1rem;
   color: var(--green);
+  font-family: var(--font-mono);
   font-size: 0.7rem;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
 }
 
-.destaques h2 {
-  margin: 0 0 0.9rem;
+.choque-titulo {
+  margin: 0 0 1rem;
   color: var(--text-primary);
-  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+  font-family: var(--font-sans);
+  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 1.15;
   letter-spacing: -0.02em;
-  text-transform: uppercase;
 }
 
-.destaques__cabecalho p {
+.choque-subtitulo {
   margin: 0;
   color: var(--text-secondary);
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1.55;
+  max-width: 620px;
 }
 
-.carousel {
+/* =========================================================
+   Grid editorial (destaque + secundários)
+   ========================================================= */
+.choque-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+/* =========================================================
+   Card destaque
+   ========================================================= */
+.card {
   position: relative;
+  background: var(--bg-surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
-  background: var(--bg-surface);
-  box-shadow:
-    0 0 0 1px rgba(244, 245, 242, 0.02) inset,
-    0 20px 60px -20px rgba(0, 0, 0, 0.8),
-    0 0 80px -20px rgba(168, 240, 0, 0.06);
   overflow: hidden;
-  min-height: 440px;
 }
 
-.slide {
-  position: absolute;
-  inset: 0 0 64px 0;
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.6s ease, visibility 0.6s ease;
+.card-destaque {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  min-height: 520px;
 }
 
-.slide.is-active {
-  visibility: visible;
-  opacity: 1;
+.card-imagem-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 220px;
+  overflow: hidden;
 }
 
-.slide__image {
+.card-imagem {
   position: absolute;
   inset: 0;
-  z-index: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -84,82 +97,125 @@
   filter: saturate(0.7) contrast(1.05) brightness(0.65);
 }
 
-.slide__overlay {
+.card-imagem-overlay {
   position: absolute;
   inset: 0;
-  z-index: 1;
-  background:
-    linear-gradient(90deg,
-      rgba(11, 13, 15, 0.96) 0%,
-      rgba(11, 13, 15, 0.88) 35%,
-      rgba(11, 13, 15, 0.5) 60%,
-      rgba(11, 13, 15, 0.1) 90%,
-      transparent 100%),
-    linear-gradient(0deg,
-      rgba(11, 13, 15, 0.9) 0%,
-      rgba(11, 13, 15, 0.4) 12%,
-      transparent 35%),
-    linear-gradient(135deg,
-      rgba(168, 240, 0, 0.04) 0%,
-      transparent 55%);
+  background: linear-gradient(
+    0deg,
+    var(--bg-surface) 0%,
+    var(--bg-surface) 15%,
+    rgba(23, 27, 31, 0.85) 45%,
+    rgba(23, 27, 31, 0.4) 75%,
+    transparent 100%
+  );
 }
 
-.slide__content {
+.card-conteudo {
   position: relative;
-  z-index: 2;
+  z-index: 1;
+  padding: 1.75rem 2rem 2rem;
   display: flex;
   flex-direction: column;
-  max-width: 620px;
-  padding: 3rem 3.5rem 2.5rem 4rem;
-  color: var(--text-primary);
+  gap: 0.75rem;
+  margin-top: -4rem;
 }
 
-.slide h3 {
-  margin: 0;
+/* =========================================================
+   Cards secundários
+   ========================================================= */
+.cards-secundarios {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.card-secundario {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.5rem 1.5rem 1.25rem;
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.card-secundario:hover {
+  border-color: var(--border-green-strong);
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   Conteúdo dos cards
+   ========================================================= */
+.card-numero {
   font-family: var(--font-mono);
-  color: var(--green);
-  font-size: clamp(2.6rem, 5.5vw, 3.8rem);
+  font-size: clamp(2.2rem, 4vw, 3rem);
   font-weight: 800;
+  color: var(--green);
   line-height: 1;
   letter-spacing: -0.03em;
   text-shadow: 0 0 40px rgba(168, 240, 0, 0.35);
   font-variant-numeric: tabular-nums;
 }
 
-.slide__description {
-  margin: 0.75rem 0 0;
+.card-numero-secundario {
+  font-size: clamp(1.6rem, 2.5vw, 2rem);
+  text-shadow: 0 0 24px rgba(168, 240, 0, 0.25);
+}
+
+.card-descricao {
+  margin: 0;
   color: var(--text-primary);
-  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  font-size: 0.95rem;
   font-weight: 600;
   line-height: 1.35;
 }
 
-.slide__text {
-  margin: 0.85rem 0 1.5rem;
-  color: var(--text-secondary);
-  font-size: 0.85rem;
-  line-height: 1.65;
+.card-secundario .card-descricao {
+  font-size: 0.88rem;
 }
 
-.slide__source {
+.card-texto {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.card-secundario .card-texto {
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
+/* =========================================================
+   Fonte
+   ========================================================= */
+.card-fonte {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  padding-top: 1rem;
+  gap: 0.75rem;
+  padding-top: 0.9rem;
+  margin-top: auto;
   border-top: 1px solid var(--border);
 }
 
-.slide__source-label {
+.card-fonte-label {
   color: var(--text-muted);
-  font-size: 0.62rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  letter-spacing: 0.1em;
   line-height: 1.4;
+  text-transform: uppercase;
 }
 
-.slide__source-link {
+.card-secundario .card-fonte-label {
+  font-size: 0.56rem;
+  letter-spacing: 0.06em;
+}
+
+.card-fonte-link {
   display: inline-grid;
   place-items: center;
   width: 28px;
@@ -169,310 +225,142 @@
   border-radius: 50%;
   background: var(--glow-green-soft);
   color: var(--green);
-  transition: all 0.25s ease;
   text-decoration: none;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.2s ease,
+    box-shadow 0.25s ease;
 }
 
-.slide__source-link:hover,
-.slide__source-link:focus-visible {
+.card-fonte-link svg {
+  width: 14px;
+  height: 14px;
+}
+
+.card-fonte-link:hover,
+.card-fonte-link:focus-visible {
   background: rgba(168, 240, 0, 0.18);
   border-color: var(--green);
   color: var(--green-hover);
   transform: scale(1.08);
   box-shadow: 0 0 16px var(--glow-green);
+  outline: none;
 }
 
-.carousel__footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 3;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  padding: 1rem 1.5rem;
-
-  background: linear-gradient(0deg, rgba(11, 13, 15, 0.98) 0%, rgba(11, 13, 15, 0.75) 100%);
-  border-top: 1px solid var(--border);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-.carousel__nav {
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  padding: 0;
-  flex-shrink: 0;
-
-  border: 1px solid var(--border-strong);
-  border-radius: 50%;
-  background: rgba(244, 245, 242, 0.03);
+/* =========================================================
+   Frase de fechamento
+   ========================================================= */
+.choque-fechamento {
+  margin: 3rem 0 0;
+  max-width: 780px;
   color: var(--text-secondary);
-  cursor: pointer;
-  transition: all 0.25s ease;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
-.carousel__nav:hover,
-.carousel__nav:focus-visible {
-  background: rgba(168, 240, 0, 0.12);
-  border-color: var(--green);
-  color: var(--green);
-  box-shadow: 0 0 20px var(--glow-green);
+.choque-fechamento .destaque {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--text-primary);
+  font-weight: 600;
 }
 
-.carousel__nav:focus-visible {
-  outline: 2px solid var(--green);
-  outline-offset: 2px;
-}
-
-.carousel__indicators {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-.carousel__indicators button {
-  position: relative;
-  width: 24px;
-  height: 3px;
-  padding: 0;
-  border: 0;
-  border-radius: 2px;
-  background: var(--border-strong);
-  cursor: pointer;
-  overflow: hidden;
-  transition: width 0.3s ease, background 0.3s ease;
-}
-
-.carousel__indicators button::before {
-  content: '';
-  position: absolute;
-  inset: -12px -3px;
-}
-
-.carousel__indicators button:hover {
-  background: var(--text-muted);
-}
-
-.carousel__indicators button.is-active {
-  width: 48px;
-  background: rgba(168, 240, 0, 0.15);
-}
-
-.carousel__indicator-progress {
-  position: absolute;
-  inset: 0;
-  background: var(--green);
-  transform-origin: left center;
-  transform: scaleX(0);
-  animation: progress 10s linear forwards;
-  box-shadow: 0 0 10px var(--glow-green);
-}
-
-@keyframes progress {
-  from { transform: scaleX(0); }
-  to   { transform: scaleX(1); }
-}
-
-@media (max-width: 768px) {
-  .destaques {
-    padding: 3rem 0 4rem;
+/* =========================================================
+   Responsivo — tablet (≤968px)
+   ========================================================= */
+@media (max-width: 968px) {
+  .choque {
+    padding: 5rem 0;
   }
 
-  .destaques .container {
+  .choque-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-destaque {
+    min-height: 400px;
+  }
+
+  .cards-secundarios {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* =========================================================
+   Responsivo — mobile (≤640px)
+   ========================================================= */
+@media (max-width: 640px) {
+  .choque {
+    padding: 4rem 0;
+  }
+
+  .choque-container {
     padding: 0 1.25rem;
   }
 
-  .destaques__cabecalho {
-    margin-bottom: 1.8rem;
+  .choque-cabecalho {
+    margin-bottom: 2rem;
   }
 
-  .destaques h2 {
-    font-size: clamp(1.5rem, 6vw, 2rem);
+  .choque-subtitulo {
+    font-size: 0.92rem;
   }
 
-  .carousel {
-    min-height: 460px;
-    border-radius: var(--radius-lg);
+  .card-destaque {
+    min-height: 360px;
   }
 
-  .slide {
-    inset: 0 0 60px 0;
-    align-items: flex-end;
+  .card-conteudo {
+    padding: 1.25rem 1.5rem 1.5rem;
+    margin-top: -3rem;
   }
 
-  .slide__content {
-    max-width: 100%;
-    padding: 2rem 1.75rem 2rem;
+  .card-numero {
+    font-size: 2rem;
   }
 
-  .slide h3 {
-    font-size: clamp(2rem, 8vw, 2.6rem);
+  .card-numero-secundario {
+    font-size: 1.4rem;
   }
 
-  .slide__description {
-    font-size: 0.95rem;
+  /* No mobile, os secundários viram scroll horizontal com snap */
+  .cards-secundarios {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    margin-inline: -1.25rem;
+    padding: 0.25rem 1.25rem 0.75rem;
+    -webkit-overflow-scrolling: touch;
   }
 
-  .slide__text {
-    font-size: 0.82rem;
-    margin-bottom: 1rem;
+  .card-secundario {
+    flex: 0 0 82%;
+    scroll-snap-align: start;
   }
 
-  .carousel__footer {
-    padding: 0.85rem 1rem;
-    gap: 0.6rem;
+  /* Esconde a scrollbar no mobile */
+  .cards-secundarios::-webkit-scrollbar {
+    display: none;
   }
 
-  .carousel__nav {
-    width: 32px;
-    height: 32px;
+  .cards-secundarios {
+    scrollbar-width: none;
   }
 
-  .carousel__indicators button {
-    width: 20px;
-  }
-
-  .carousel__indicators button.is-active {
-    width: 36px;
-  }
-}
-
-@media (max-width: 480px) {
-  .destaques {
-    padding: 2.5rem 0 3rem;
-  }
-
-  .destaques .container {
-    padding: 0 1rem;
-  }
-
-  .destaques__cabecalho {
-    margin-bottom: 1.5rem;
-  }
-
-  .eyebrow {
-    font-size: 0.62rem;
-    letter-spacing: 0.16em;
-  }
-
-  .destaques h2 {
-    font-size: clamp(1.35rem, 6.5vw, 1.7rem);
-    line-height: 1.15;
-  }
-
-  .destaques__cabecalho p {
-    font-size: 0.9rem;
-  }
-
-  .carousel {
-    min-height: 440px;
-    border-radius: var(--radius-md);
-  }
-
-  .slide {
-    inset: 0 0 56px 0;
-    align-items: flex-end;
-  }
-
-  .slide__overlay {
-    background:
-      linear-gradient(180deg,
-        rgba(11, 13, 15, 0.5) 0%,
-        transparent 25%),
-      linear-gradient(0deg,
-        rgba(11, 13, 15, 0.98) 0%,
-        rgba(11, 13, 15, 0.85) 40%,
-        rgba(11, 13, 15, 0.4) 70%,
-        transparent 100%),
-      linear-gradient(135deg,
-        rgba(168, 240, 0, 0.06) 0%,
-        transparent 60%);
-  }
-
-  .slide__image {
-    filter: saturate(0.8) contrast(1.05) brightness(0.75);
-  }
-
-  .slide__content {
-    max-width: 100%;
-    padding: 1.5rem 1.25rem 1.25rem;
-    justify-content: flex-end;
-  }
-
-  .slide h3 {
-    font-size: clamp(1.75rem, 8.5vw, 2.2rem);
-    line-height: 1;
-  }
-
-  .slide__description {
-    margin-top: 0.5rem;
-    font-size: 0.9rem;
-    line-height: 1.3;
-  }
-
-  .slide__text {
-    margin: 0.6rem 0 0.9rem;
-    font-size: 0.78rem;
-    line-height: 1.55;
-  }
-
-  .slide__source {
-    padding-top: 0.7rem;
-    gap: 0.5rem;
-  }
-
-  .slide__source-label {
-    font-size: 0.58rem;
-    letter-spacing: 0.08em;
-  }
-
-  .slide__source-link {
-    width: 26px;
-    height: 26px;
-  }
-
-  .carousel__footer {
-    padding: 0.6rem 0.9rem;
-    gap: 0.4rem;
-  }
-
-  .carousel__nav {
-    width: 28px;
-    height: 28px;
-  }
-
-  .carousel__nav svg {
-    width: 14px;
-    height: 14px;
-  }
-
-  .carousel__indicators {
-    gap: 0.25rem;
-  }
-
-  .carousel__indicators button {
-    width: 14px;
-    height: 3px;
-  }
-
-  .carousel__indicators button.is-active {
-    width: 26px;
+  .choque-fechamento {
+    font-size: 0.92rem;
+    margin-top: 2.5rem;
   }
 }
 
+/* =========================================================
+   Acessibilidade
+   ========================================================= */
 @media (prefers-reduced-motion: reduce) {
-  .slide {
+  .card-secundario {
     transition: none;
-  }
-
-  .carousel__indicator-progress {
-    animation: none;
-    transform: scaleX(1);
   }
 }

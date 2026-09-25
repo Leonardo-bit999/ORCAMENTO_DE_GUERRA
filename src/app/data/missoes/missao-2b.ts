@@ -1,17 +1,9 @@
-/* =========================================================
-   Missão 2B — O rolê
-   ========================================================= */
-
 import { Missao } from '../../core/models/missao.model';
 import { EstadoJogo } from '../../core/models/estado-jogo.model';
 
 const CUSTO_COMPLETO = 180;
 const CUSTO_ADAPTADO = 90;
 
-/**
- * Abertura: reconhece o estado financeiro atual.
- * Mesma lógica da M2A — o texto combina com a situação real do jogador.
- */
 function aberturaPorEstado(estado: EstadoJogo): string {
   const reserva = estado.financeiro.reserva;
 
@@ -26,9 +18,6 @@ function aberturaPorEstado(estado: EstadoJogo): string {
   return 'Você tem pouca margem. E seus amigos chamaram pra sair.';
 }
 
-/**
- * Corpo: a situação do rolê.
- */
 function corpoRole(estado: EstadoJogo): string {
   const disponivel = estado.financeiro.disponivel;
   const reserva = estado.financeiro.reserva;
@@ -44,9 +33,6 @@ function corpoRole(estado: EstadoJogo): string {
   ].join('\n');
 }
 
-/**
- * Pensamento: varia conforme a reserva.
- */
 function pensamentoRole(estado: EstadoJogo): string {
   const reserva = estado.financeiro.reserva;
 
@@ -74,9 +60,6 @@ export const MISSAO_2B: Missao = {
   },
 
   opcoes: [
-    // =========================================================
-    // A — IR NO PROGRAMA COMPLETO
-    // =========================================================
     {
       id: 'participar-completo',
       titulo: 'Vou no programa inteiro',
@@ -96,9 +79,6 @@ export const MISSAO_2B: Missao = {
       ancoragemLicao: 'Você escolheu participar do programa inteiro.',
     },
 
-    // =========================================================
-    // B — ADAPTAR O GASTO
-    // =========================================================
     {
       id: 'adaptar-role',
       titulo: 'Vou adaptar o que dá',
@@ -117,9 +97,6 @@ export const MISSAO_2B: Missao = {
       ancoragemLicao: 'Você escolheu adaptar o gasto.',
     },
 
-    // =========================================================
-    // C — NÃO IR
-    // =========================================================
     {
       id: 'recusar-role',
       titulo: 'Não vou desta vez',

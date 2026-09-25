@@ -6,6 +6,4 @@ import { Component } from '@angular/core';
   templateUrl: './capitulo-bloqueado.html',
   styleUrl: './capitulo-bloqueado.css',
 })
-export class CapituloBloqueado {
-
-}
+export class CapituloBloqueado {}

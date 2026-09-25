@@ -8,9 +8,8 @@ describe('EtapaEstilo', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EtapaEstilo]
-    })
-    .compileComponents();
+      imports: [EtapaEstilo],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(EtapaEstilo);
     component = fixture.componentInstance;

@@ -1,16 +1,15 @@
-/* =========================================================
-   Resultado — tela de resultado de uma decisão
-   ========================================================= */
-
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameLayout } from '../../../shared/components/game-layout/game-layout';
+import { ConquistaAlerta } from '../../../shared/components/conquista-alerta/conquista-alerta';
 import { GameStateService } from '../../../core/services/game-state';
 import { MISSOES_POR_ID } from '../../../data/missoes/missao.registry';
+import { buscarConquista } from '../../../data/conquistas/conquistas';
 import { HistoricoEntry } from '../../../core/models/historico-entry.model';
 import { Missao as MissaoModel } from '../../../core/models/missao.model';
 import { Opcao } from '../../../core/models/opcao.model';
+import { Conquista } from '../../../core/models/conquista.model';
 
 interface Delta {
   disponivel: number;
@@ -23,7 +22,7 @@ interface Delta {
 @Component({
   selector: 'app-resultado',
   standalone: true,
-  imports: [CommonModule, GameLayout],
+  imports: [CommonModule, GameLayout, ConquistaAlerta],
   templateUrl: './resultado.html',
   styleUrl: './resultado.css',
 })
@@ -32,22 +31,20 @@ export class Resultado {
   private router = inject(Router);
   private gameState = inject(GameStateService);
 
-  /** Id da missão (via rota). */
   missaoId = '';
 
-  /** Missão (pra pegar o id da lição e as opções). */
+  conquistaNova = signal<Conquista | null>(null);
+
   missao = computed<MissaoModel | null>(() => {
     if (!this.missaoId) return null;
     return MISSOES_POR_ID[this.missaoId] ?? null;
   });
 
-  /** Entrada do histórico desta decisão. */
   entry = computed<HistoricoEntry | null>(() => {
     const historico = this.gameState.historico();
     return historico.length > 0 ? historico[historico.length - 1] : null;
   });
 
-  /** Opção escolhida (pra pegar o resultado/ancoragem). */
   opcaoEscolhida = computed<Opcao | null>(() => {
     const m = this.missao();
     const e = this.entry();
@@ -55,15 +52,12 @@ export class Resultado {
     return m.opcoes.find((o) => o.id === e.decisao) ?? null;
   });
 
-  /** Deltas calculados (antes vs depois). */
   deltas = computed<Delta | null>(() => {
     const e = this.entry();
     if (!e) return null;
 
     const historico = this.gameState.historico();
     const index = historico.length - 1;
-
-    // Valores "antes"
     const antes = this.valoresAntes(index);
 
     return {
@@ -75,10 +69,8 @@ export class Resultado {
     };
   });
 
-  /** Se é a M1 (tem "E se..."). */
   temESe = computed(() => this.missaoId === 'missao-1-primeiro-orcamento');
 
-  /** Opção alternativa pro "E se..." (a mais contrastante). */
   opcaoAlternativa = computed<Opcao | null>(() => {
     const m = this.missao();
     const escolhida = this.opcaoEscolhida();
@@ -87,7 +79,6 @@ export class Resultado {
     const outras = m.opcoes.filter((o) => o.id !== escolhida.id);
     if (outras.length === 0) return null;
 
-    // Regra: A ↔ C, B → A, C → A
     if (escolhida.id === 'criar-equilibrio') {
       return m.opcoes.find((o) => o.id === 'priorizar-seguranca') ?? outras[0];
     }
@@ -100,7 +91,6 @@ export class Resultado {
     return outras[0];
   });
 
-  /** Estado do "E se..." aberto ou fechado. */
   eSeAberto = false;
 
   constructor() {
@@ -112,31 +102,55 @@ export class Resultado {
     this.missaoId = id;
   }
 
-  /** Formata número com sinal (+/-). */
+  private detectarConquistaNova(): Conquista | null {
+    const conquistas = this.gameState.conquistas();
+    if (conquistas.length === 0) return null;
+
+    const ultimaId = conquistas[conquistas.length - 1];
+    const conquista = buscarConquista(ultimaId);
+
+    if (conquista && conquista.missoesIds.includes(this.missaoId)) {
+      return conquista;
+    }
+    return null;
+  }
+
   formatarDelta(valor: number): string {
     if (valor > 0) return `+${valor}`;
     return `${valor}`;
   }
 
-  /** Formata dinheiro. */
   formatarMoeda(valor: number): string {
     return `R$ ${valor.toLocaleString('pt-BR')}`;
   }
 
-  /** Formata moeda com sinal. */
   formatarMoedaDelta(valor: number): string {
     const sinal = valor >= 0 ? '+' : '-';
     const abs = Math.abs(valor);
     return `${sinal}R$ ${abs.toLocaleString('pt-BR')}`;
   }
 
-  /** Abre/fecha o "E se...". */
   toggleESe() {
     this.eSeAberto = !this.eSeAberto;
   }
 
-  /** Continuar pra lição. */
   continuar() {
+    const conquista = this.detectarConquistaNova();
+
+    if (conquista) {
+      this.conquistaNova.set(conquista);
+      return;
+    }
+
+    this.irParaLicao();
+  }
+
+  fecharAlertaConquista() {
+    this.conquistaNova.set(null);
+    this.irParaLicao();
+  }
+
+  private irParaLicao() {
     const m = this.missao();
     if (!m) {
       this.router.navigate(['/jornada']);
@@ -145,25 +159,14 @@ export class Resultado {
     this.router.navigate(['/licao', m.licaoId]);
   }
 
-  /** Volta pra jornada (se não houver lição — fallback). */
   voltarJornada() {
     this.router.navigate(['/jornada']);
   }
 
-  // =========================================================
-  // Helpers privados
-  // =========================================================
-
-  /**
-   * Devolve os valores do estado "antes" desta decisão.
-   * - Se é a primeira decisão, usa os valores iniciais do perfil.
-   * - Senão, usa o entry anterior do histórico.
-   */
   private valoresAntes(index: number): Delta {
     const historico = this.gameState.historico();
 
     if (index === 0) {
-      // Antes da primeira decisão = valores iniciais do perfil
       const perfil = this.gameState.perfil();
       const renda = perfil?.rendaMensal ?? 0;
       const despesas = perfil?.despesasPrevistas ?? 0;

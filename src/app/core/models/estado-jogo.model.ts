@@ -2,38 +2,20 @@ import { Perfil } from './perfil.model';
 import { Pendencia } from './pendencia.model';
 import { HistoricoEntry } from './historico-entry.model';
 
-/**
- * Dinheiro real do jogo.
- * Não existem outros valores financeiros no MVP.
- */
 export interface EstadoFinanceiro {
-  disponivel: number; // renda mensal - despesas - gastos
-  reserva: number; // dinheiro guardado separadamente
+  disponivel: number;
+  reserva: number;
 }
-
-/**
- * Indicadores emocionais / narrativos.
- * Não bloqueiam nada. Apenas refletem a situação.
- */
 export interface Indicadores {
-  bemEstar: number; // 0-100
-  estresse: number; // 0-100
+  bemEstar: number;
+  estresse: number;
 }
-
-/**
- * Progresso do jogador.
- */
 export interface Progressao {
   xp: number;
-  missoesConcluidas: string[]; // ids das missões concluídas
-  licoesDesbloqueadas: string[]; // ids das lições desbloqueadas
-  conquista: string[];
+  missoesConcluidas: string[];
+  licoesDesbloqueadas: string[];
+  conquistas: string[];
 }
-
-/**
- * EstadoJogo — objeto central que representa tudo o que o jogador construiu.
- * É persistido no localStorage após cada decisão.
- */
 export interface EstadoJogo {
   perfil: Perfil;
   financeiro: EstadoFinanceiro;

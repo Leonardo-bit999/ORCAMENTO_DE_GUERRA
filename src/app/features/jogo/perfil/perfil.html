@@ -1,7 +1,6 @@
 <app-game-layout>
   @if (perfil()) {
-    <section class="perfil">
-      <!-- Identidade -->
+    <section class="perfil animar-entrada">
       <header class="perfil-header">
         @if (perfilId(); as pid) {
           <span class="perfil-icone" aria-hidden="true">
@@ -19,7 +18,6 @@
         </div>
       </header>
 
-      <!-- Situação atual -->
       <section class="perfil-secao" aria-label="Situação atual">
         <h2 class="secao-titulo">Situação atual</h2>
         <div class="cards-grid cards-grid-3">
@@ -38,7 +36,6 @@
         </div>
       </section>
 
-      <!-- Indicadores -->
       <section class="perfil-secao" aria-label="Indicadores">
         <h2 class="secao-titulo">Como você está</h2>
 
@@ -46,32 +43,29 @@
           <div class="indicador">
             <div class="indicador-topo">
               <span class="indicador-label">Bem-estar</span>
-              <span class="indicador-valor">{{ bemEstar() }}</span>
+              <span class="indicador-valor">
+                {{ bemEstar() }}<span class="indicador-valor-max">/100</span>
+              </span>
             </div>
             <div class="indicador-trilha">
-              <div
-                class="indicador-preenchido indicador-bem"
-                [style.width.%]="bemEstar()"
-              ></div>
+              <div class="indicador-preenchido indicador-bem" [style.width.%]="bemEstar()"></div>
             </div>
           </div>
 
           <div class="indicador">
             <div class="indicador-topo">
               <span class="indicador-label">Estresse</span>
-              <span class="indicador-valor">{{ estresse() }}</span>
+              <span class="indicador-valor">
+                {{ estresse() }}<span class="indicador-valor-max">/100</span>
+              </span>
             </div>
             <div class="indicador-trilha">
-              <div
-                class="indicador-preenchido indicador-est"
-                [style.width.%]="estresse()"
-              ></div>
+              <div class="indicador-preenchido indicador-est" [style.width.%]="estresse()"></div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Objetivo -->
       @if (objetivoLabel()) {
         <section class="perfil-secao" aria-label="Objetivo">
           <h2 class="secao-titulo">Objetivo</h2>
@@ -79,7 +73,6 @@
         </section>
       }
 
-      <!-- Cenário -->
       <section class="perfil-secao" aria-label="Cenário">
         <h2 class="secao-titulo">Cenário</h2>
 
@@ -120,7 +113,6 @@
         }
       </section>
 
-      <!-- Comportamento -->
       @if (estiloLabel() || vibeLabel()) {
         <section class="perfil-secao" aria-label="Comportamento">
           <h2 class="secao-titulo">Comportamento</h2>

@@ -1,7 +1,6 @@
 <app-game-layout>
   @if (entry()) {
-    <section class="resultado">
-      <!-- Cabeçalho -->
+    <section class="resultado animar-entrada">
       <header class="resultado-header">
         <span class="resultado-tag">Sua decisão</span>
         <h1 class="resultado-titulo">{{ entry()!.titulo }}</h1>
@@ -10,7 +9,6 @@
         }
       </header>
 
-      <!-- Impacto -->
       @if (deltas(); as d) {
         <section class="resultado-impacto" aria-label="Impacto da decisão">
           <h2 class="impacto-titulo">Impacto</h2>
@@ -124,7 +122,6 @@
         </section>
       }
 
-      <!-- Consequência narrativa -->
       @if (opcaoEscolhida(); as opcao) {
         <section class="resultado-consequencia" aria-label="O que isso significa">
           <h2 class="consequencia-titulo">O que isso significa</h2>
@@ -132,7 +129,6 @@
         </section>
       }
 
-      <!-- "E se..." (só na M1) -->
       @if (temESe() && opcaoAlternativa(); as alternativa) {
         <section class="resultado-ese">
           <button
@@ -169,7 +165,6 @@
         </section>
       }
 
-      <!-- Ações -->
       <footer class="resultado-acoes">
         @if (missao()) {
           <button type="button" class="btn-primario" (click)="continuar()">
@@ -192,5 +187,9 @@
         }
       </footer>
     </section>
+  }
+
+  @if (conquistaNova(); as conquista) {
+    <app-conquista-alerta [conquista]="conquista" (fechar)="fecharAlertaConquista()" />
   }
 </app-game-layout>

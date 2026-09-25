@@ -1,13 +1,6 @@
-/* =========================================================
-   Missão 1 — Seu primeiro salário
-   ========================================================= */
-
 import { Missao } from '../../core/models/missao.model';
 import { EstadoJogo } from '../../core/models/estado-jogo.model';
 
-/**
- * Abertura dinâmica: muda conforme o perfil do personagem.
- */
 function aberturaPorPerfil(estado: EstadoJogo): string {
   const perfilId = estado.perfil.perfilId;
 
@@ -25,9 +18,6 @@ function aberturaPorPerfil(estado: EstadoJogo): string {
   }
 }
 
-/**
- * Pensamento do personagem: varia conforme o perfil.
- */
 function pensamentoPorPerfil(estado: EstadoJogo): string {
   const perfilId = estado.perfil.perfilId;
 
@@ -45,10 +35,6 @@ function pensamentoPorPerfil(estado: EstadoJogo): string {
   }
 }
 
-/**
- * Corpo da missão — o mesmo texto pra todos os perfis.
- * Mostra salário, despesas fixas e o que sobra.
- */
 function corpoPrimeiroOrcamento(estado: EstadoJogo): string {
   const renda = estado.perfil.rendaMensal ?? 0;
   const despesas = estado.perfil.despesasPrevistas;
@@ -81,9 +67,6 @@ export const MISSAO_1: Missao = {
   },
 
   opcoes: [
-    // =========================================================
-    // A — PRIORIZAR SEGURANÇA
-    // =========================================================
     {
       id: 'priorizar-seguranca',
       titulo: 'Coloco a maior parte na reserva',
@@ -103,9 +86,6 @@ export const MISSAO_1: Missao = {
       ancoragemLicao: 'Você escolheu priorizar segurança. Guardou R$ 500 dos R$ 700 disponíveis.',
     },
 
-    // =========================================================
-    // B — CRIAR EQUILÍBRIO
-    // =========================================================
     {
       id: 'criar-equilibrio',
       titulo: 'Guardo uma parte, uso uma parte',
@@ -125,9 +105,6 @@ export const MISSAO_1: Missao = {
       ancoragemLicao: 'Você escolheu equilibrar. Guardou R$ 300 e ficou com R$ 400 pra você.',
     },
 
-    // =========================================================
-    // C — PRIORIZAR O PRESENTE
-    // =========================================================
     {
       id: 'priorizar-presente',
       titulo: 'Trabalhei pra isso. Vou viver agora.',

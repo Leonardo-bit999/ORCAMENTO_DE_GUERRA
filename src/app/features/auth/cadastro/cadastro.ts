@@ -10,7 +10,6 @@ import {
 import { Router, RouterLink } from '@angular/router';
 import { Auth } from '../../../core/services/auth';
 
-
 function senhasIguais(group: AbstractControl): ValidationErrors | null {
   const s = group.get('senha')?.value;
   const c = group.get('confirmarSenha')?.value;

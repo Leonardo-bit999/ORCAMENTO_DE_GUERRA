@@ -1,23 +1,45 @@
-<header class="navbar">
-  <a routerLink="/" class="navbar-brand" aria-label="Ir para a home">
-    <img
-      src="/images/logo_Orcamento_de_Guerra_Horizontal.png"
-      alt="Orçamento de Guerra"
-      class="navbar-logo"
-    />
-  </a>
-
-  <a routerLink="/" class="navbar-voltar">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path
-        d="M19 12H5M11 18l-6-6 6-6"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+<header class="site-header">
+  <nav class="site-nav" aria-label="Navegação principal">
+    <a class="brand" routerLink="/" aria-label="Orçamento de Guerra, início" (click)="closeMenu()">
+      <img
+        class="brand-logo"
+        src="/images/logo_Orcamento_de_Guerra_Horizontal.png"
+        alt="Logo Orçamento de Guerra"
       />
-    </svg>
-    <span>Voltar ao site</span>
-  </a>
+    </a>
+
+    <button
+      class="menu-toggle"
+      type="button"
+      (click)="toggleMenu()"
+      [attr.aria-expanded]="menuOpen()"
+      aria-controls="main-menu"
+      aria-label="Abrir menu"
+    >
+      <span class="sr-only">Abrir menu</span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div id="main-menu" class="nav-acoes" [class.is-open]="menuOpen()">
+      @if (modo === 'home') {
+        <a class="acao acao-primaria" routerLink="/entrar" (click)="closeMenu()"> Entrar </a>
+      } @else {
+        <a class="acao acao-secundaria" routerLink="/" (click)="closeMenu()">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M19 12H5M11 18l-6-6 6-6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <span>Voltar ao site</span>
+        </a>
+      }
+    </div>
+  </nav>
 </header>

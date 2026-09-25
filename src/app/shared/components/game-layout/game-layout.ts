@@ -1,7 +1,3 @@
-/* =========================================================
-   GameLayout — moldura visual das telas do jogo
-   ========================================================= */
-
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
@@ -11,7 +7,7 @@ import { Auth } from '../../../core/services/auth';
 interface ItemMenu {
   rota: string;
   label: string;
-  icone: 'jornada' | 'caderno' | 'timeline' | 'perfil';
+  icone: 'jornada' | 'caderno' | 'conquistas' | 'timeline' | 'perfil';
 }
 
 @Component({
@@ -30,6 +26,7 @@ export class GameLayout {
   itensMenu: ItemMenu[] = [
     { rota: '/jornada', label: 'Jornada', icone: 'jornada' },
     { rota: '/caderno', label: 'Caderno', icone: 'caderno' },
+    { rota: '/conquistas', label: 'Conquistas', icone: 'conquistas' },
     { rota: '/jornada-financeira', label: 'Sua Jornada', icone: 'timeline' },
     { rota: '/perfil', label: 'Perfil', icone: 'perfil' },
   ];
@@ -43,7 +40,6 @@ export class GameLayout {
   }
 
   sair() {
-    // Faz logout e volta pra home do site
     this.auth.logout();
     this.router.navigate(['/']);
   }

@@ -1,39 +1,40 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
-interface Compromisso {
-  categoria: string;
-  valor: number;
+interface OpcaoMissao {
+  id: string;
+  icone: 'aceitar' | 'negociar' | 'recusar';
+  titulo: string;
+  descricao: string;
 }
 
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './hero.html',
-  styleUrls: ['./hero.css']
+  styleUrl: './hero.css',
 })
 export class Hero {
-
-  protected readonly saldoDisponivel = 1240;
-
-  protected readonly impactoRecente = -480;
-
-  protected readonly bemEstar = 72;
-  protected readonly estresse = 34;
-  protected readonly financeiro = 55;
-
-  protected readonly compromissos: Compromisso[] = [
-    { categoria: 'Moradia', valor: 900 },
-    { categoria: 'Alimentação', valor: 600 },
-    { categoria: 'Transporte', valor: 350 }
+  protected readonly opcoes: OpcaoMissao[] = [
+    {
+      id: 'aceitar',
+      icone: 'aceitar',
+      titulo: 'Aceitar e trabalhar',
+      descricao: 'O dinheiro faz diferença.',
+    },
+    {
+      id: 'negociar',
+      icone: 'negociar',
+      titulo: 'Negociar uma parte',
+      descricao: 'Faço metade, ganho metade.',
+    },
+    {
+      id: 'recusar',
+      icone: 'recusar',
+      titulo: 'Recusar e descansar',
+      descricao: 'Meu tempo também vale.',
+    },
   ];
-
-  protected formatarMoeda(valor: number): string {
-    return valor.toLocaleString('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-      minimumFractionDigits: 0
-    });
-  }
 }

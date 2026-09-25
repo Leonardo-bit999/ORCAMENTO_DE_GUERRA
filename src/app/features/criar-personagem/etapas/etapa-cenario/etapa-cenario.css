@@ -1,144 +1,140 @@
 :host {
-    display: block;
+  display: block;
 }
 
 .etapa {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 /* =========================================================
    Grids
    ========================================================= */
 .grid-tiles {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 14px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
 }
 
 .grid-tiles-4 {
-    grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .grid-tiles-3 {
-    grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .grid-tiles li {
-    min-width: 0;
+  min-width: 0;
 }
 
 .grid-chips {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 /* =========================================================
    Painel de renda
    ========================================================= */
 .renda-painel {
-    margin-top: 16px;
-    padding: 20px 22px;
-    border: 1px solid var(--border-green);
-    border-radius: var(--radius-md);
-    background: linear-gradient(180deg,
-            rgba(168, 240, 0, 0.04) 0%,
-            transparent 100%);
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    animation: surgir 0.22s ease;
+  margin-top: 16px;
+  padding: 20px 22px;
+  border: 1px solid var(--border-green);
+  border-radius: var(--radius-md);
+  background: linear-gradient(180deg, rgba(168, 240, 0, 0.04) 0%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: surgir 0.22s ease;
 }
 
 @keyframes surgir {
-    from {
-        opacity: 0;
-        transform: translateY(-4px);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .renda-info {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 12px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .renda-label {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--text-primary);
-    opacity: 0.75;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  opacity: 0.75;
 }
 
 .renda-valor {
-    font-family: var(--font-mono);
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--green);
-    letter-spacing: 0.02em;
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--green);
+  letter-spacing: 0.02em;
 }
 
 .renda-opcoes {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .renda-custom {
-    margin-top: 4px;
+  margin-top: 4px;
 }
 
 /* =========================================================
    Aviso perfil personalizado
    ========================================================= */
 .aviso-personalizado {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    line-height: 1.55;
-    color: var(--text-primary);
-    opacity: 0.9;
-    background: var(--bg-base);
-    border: 1px dashed var(--border-strong);
-    border-radius: var(--radius-md);
-    padding: 14px 18px;
-    margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--text-primary);
+  opacity: 0.9;
+  background: var(--bg-base);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  margin: 0;
 }
 
 .aviso-personalizado strong {
-    color: var(--green);
-    font-weight: 700;
+  color: var(--green);
+  font-weight: 700;
 }
 
 /* =========================================================
    Responsivo
    ========================================================= */
 @media (max-width: 900px) {
-
-    .grid-tiles-4,
-    .grid-tiles-3 {
-        grid-template-columns: repeat(2, 1fr);
-    }
+  .grid-tiles-4,
+  .grid-tiles-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 520px) {
-
-    .grid-tiles-4,
-    .grid-tiles-3 {
-        grid-template-columns: 1fr;
-    }
+  .grid-tiles-4,
+  .grid-tiles-3 {
+    grid-template-columns: 1fr;
+  }
 }

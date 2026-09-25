@@ -8,9 +8,8 @@ describe('IconeVibe', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [IconeVibe]
-    })
-    .compileComponents();
+      imports: [IconeVibe],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(IconeVibe);
     component = fixture.componentInstance;

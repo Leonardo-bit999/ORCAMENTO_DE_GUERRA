@@ -1,7 +1,3 @@
-/* =========================================================
-   Lições do Caderno de Aprendizado
-   ========================================================= */
-
 import { Licao } from '../../core/models/licao.model';
 
 export const LICOES: Licao[] = [
@@ -42,9 +38,6 @@ export const LICOES: Licao[] = [
   },
 ];
 
-/**
- * Devolve uma lição pelo id.
- */
 export function buscarLicao(id: string): Licao | undefined {
   return LICOES.find((l) => l.id === id);
 }

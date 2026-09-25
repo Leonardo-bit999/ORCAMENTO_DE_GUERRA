@@ -6,7 +6,6 @@
     </p>
   </header>
 
-  <!-- MORADIA -->
   <section class="grupo" aria-labelledby="moradia-label">
     <span id="moradia-label" class="grupo-label">Moradia</span>
 
@@ -23,73 +22,53 @@
     </ul>
   </section>
 
-  <!-- FONTE DE RENDA -->
-    <section class="grupo" aria-labelledby="renda-label">
-      <span id="renda-label" class="grupo-label">Fonte de renda</span>
+  <section class="grupo" aria-labelledby="renda-label">
+    <span id="renda-label" class="grupo-label">Fonte de renda</span>
 
-      <ul class="grid-tiles grid-tiles-3">
-        @for (f of fontesRenda; track f.id) {
-          <li>
-            <app-opcao-tile
-              [titulo]="f.label"
-              [sub]="
-                f.valor > 0 ? 'Sugerido: ' + formatarMoeda(f.valor) + '/mês' : 'Você define o valor'
-              "
-              [selecionado]="draft().fonteRenda === f.id"
-              (selecionar)="selecionarFonte(f.id)"
+    <ul class="grid-tiles grid-tiles-3">
+      @for (f of fontesRenda; track f.id) {
+        <li>
+          <app-opcao-tile
+            [titulo]="f.label"
+            [sub]="
+              f.valor > 0 ? 'Sugerido: ' + formatarMoeda(f.valor) + '/mês' : 'Você define o valor'
+            "
+            [selecionado]="draft().fonteRenda === f.id"
+            (selecionar)="selecionarFonte(f.id)"
+          />
+        </li>
+      }
+    </ul>
+
+    @if (fonteAtual(); as fonte) {
+      @if (fonte.id !== 'personalizado') {
+        <article class="renda-painel">
+          <header class="renda-info">
+            <span class="renda-label">Renda mensal</span>
+            <span class="renda-valor">
+              {{ formatarMoeda(draft().rendaMensal ?? fonte.valor) }}
+            </span>
+          </header>
+
+          <div class="renda-opcoes">
+            <app-opcao-chip
+              label="Usar valor sugerido"
+              [selecionado]="draft().usarRendaSugerida"
+              (selecionar)="usarValorSugerido()"
             />
-          </li>
-        }
-      </ul>
+            <app-opcao-chip
+              label="Personalizar"
+              [selecionado]="!draft().usarRendaSugerida"
+              (selecionar)="personalizarRenda()"
+            />
+          </div>
 
-      <!-- Painel de renda (aparece só quando escolheu uma fonte não-personalizada) -->
-      @if (fonteAtual(); as fonte) {
-        @if (fonte.id !== 'personalizado') {
-          <article class="renda-painel">
-            <header class="renda-info">
-              <span class="renda-label">Renda mensal</span>
-              <span class="renda-valor">
-                {{ formatarMoeda(draft().rendaMensal ?? fonte.valor) }}
-              </span>
-            </header>
-
-            <div class="renda-opcoes">
-              <app-opcao-chip
-                label="Usar valor sugerido"
-                [selecionado]="draft().usarRendaSugerida"
-                (selecionar)="usarValorSugerido()"
-              />
-              <app-opcao-chip
-                label="Personalizar"
-                [selecionado]="!draft().usarRendaSugerida"
-                (selecionar)="personalizarRenda()"
-              />
-            </div>
-
-            @if (!draft().usarRendaSugerida) {
-              <div class="campo renda-custom">
-                <label for="renda-custom">Valor personalizado (R$/mês)</label>
-                <div class="input-wrap">
-                  <input
-                    id="renda-custom"
-                    type="number"
-                    min="0"
-                    step="50"
-                    [value]="draft().rendaMensal ?? ''"
-                    (input)="setRendaCustom($any($event.target).value)"
-                    placeholder="1200"
-                  />
-                </div>
-              </div>
-            }
-          </article>
-        } @else {
-          <article class="renda-painel">
-            <div class="campo">
-              <label for="renda-personalizada">Renda mensal personalizada (R$/mês)</label>
+          @if (!draft().usarRendaSugerida) {
+            <div class="campo renda-custom">
+              <label for="renda-custom">Valor personalizado (R$/mês)</label>
               <div class="input-wrap">
                 <input
-                  id="renda-personalizada"
+                  id="renda-custom"
                   type="number"
                   min="0"
                   step="50"
@@ -99,12 +78,29 @@
                 />
               </div>
             </div>
-          </article>
-        }
+          }
+        </article>
+      } @else {
+        <article class="renda-painel">
+          <div class="campo">
+            <label for="renda-personalizada">Renda mensal personalizada (R$/mês)</label>
+            <div class="input-wrap">
+              <input
+                id="renda-personalizada"
+                type="number"
+                min="0"
+                step="50"
+                [value]="draft().rendaMensal ?? ''"
+                (input)="setRendaCustom($any($event.target).value)"
+                placeholder="1200"
+              />
+            </div>
+          </div>
+        </article>
       }
-    </section>
+    }
+  </section>
 
-  <!-- CUSTO DE VIDA -->
   <section class="grupo" aria-labelledby="custo-label">
     <span id="custo-label" class="grupo-label">Custo de vida</span>
 
@@ -122,7 +118,6 @@
     </ul>
   </section>
 
-  <!-- RESPONSABILIDADES -->
   <section class="grupo" aria-labelledby="resp-label">
     <span id="resp-label" class="grupo-label">Responsabilidades</span>
     <p class="grupo-ajuda">

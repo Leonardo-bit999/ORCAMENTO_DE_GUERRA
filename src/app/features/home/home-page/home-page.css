@@ -1,0 +1,67 @@
+/* =========================================================
+   Home Page — composição geral
+   ========================================================= */
+
+:host {
+  display: block;
+  width: 100%;
+  scroll-behavior: smooth;
+}
+
+/* =========================================================
+   Alternância de fundos entre seções
+   Cria ritmo visual sem mudar a identidade (dark + verde).
+   ========================================================= */
+
+/* Hero — fundo base (preto) */
+:host ::ng-deep app-hero {
+  display: block;
+  background: var(--bg-base);
+}
+
+/* Como você joga — fundo surface (levemente mais claro) */
+:host ::ng-deep app-como-funciona {
+  display: block;
+  background: var(--bg-surface);
+}
+
+/* Choque de Realidade — fundo base (preto de novo) */
+:host ::ng-deep app-problema {
+  display: block;
+  background: var(--bg-base);
+}
+
+/* CTA final — fundo base (o glow verde já dá vida) */
+:host ::ng-deep app-cta-final {
+  display: block;
+  background: var(--bg-base);
+}
+
+/* =========================================================
+   Divisores sutis entre seções
+   Uma linha de gradiente que separa visualmente, sem ser dura.
+   ========================================================= */
+:host ::ng-deep app-como-funciona,
+:host ::ng-deep app-problema {
+  position: relative;
+}
+
+:host ::ng-deep app-como-funciona::before,
+:host ::ng-deep app-problema::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--border-strong) 50%, transparent 100%);
+  pointer-events: none;
+}
+
+/* =========================================================
+   Scroll suave pra âncora
+   ========================================================= */
+:host ::ng-deep html,
+:host ::ng-deep body {
+  scroll-behavior: smooth;
+}

@@ -1,0 +1,110 @@
+<app-game-layout>
+  <section class="conquistas animar-entrada">
+    <header class="conquistas-header">
+      <span class="conquistas-tag">Conquistas</span>
+      <h1 class="conquistas-titulo">O que você já conquistou</h1>
+      <p class="conquistas-sub">Cada conquista representa um marco da sua jornada.</p>
+
+      <div class="conquistas-progresso">
+        <span class="progresso-label">
+          {{ progresso().desbloqueadas }} de {{ progresso().total }} conquistas
+        </span>
+        <div class="progresso-trilha">
+          <div
+            class="progresso-preenchido"
+            [style.width.%]="(progresso().desbloqueadas / progresso().total) * 100"
+          ></div>
+        </div>
+      </div>
+    </header>
+
+    <ul class="conquistas-lista">
+      @for (item of itens(); track item.conquista.id; let i = $index) {
+        <li class="animar-entrada" [style.animation-delay]="i * 0.06 + 's'">
+          <article
+            class="conquista-card"
+            [class.desbloqueada]="item.desbloqueada"
+            [class.bloqueada]="!item.desbloqueada"
+          >
+            <span class="conquista-icone" aria-hidden="true">
+              @switch (item.conquista.icone) {
+                @case ('primeiros-passos') {
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M12 21v-8" />
+                    <path d="M12 13c0-3 2-5 5-5 0 3-2 5-5 5Z" />
+                    <path d="M12 13c0-2.5-1.8-4-4.5-4 0 2.5 1.8 4 4.5 4Z" />
+                    <path d="M8 21h8" />
+                  </svg>
+                }
+                @case ('reserva') {
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M12 3 4 6v6c0 5 3.4 9.4 8 10 4.6-.6 8-5 8-10V6l-8-3Z" />
+                    <path d="m9 12 2 2 4-4" />
+                  </svg>
+                }
+                @case ('planejador') {
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="m15.5 8.5-2 5-5 2 2-5 5-2Z" />
+                  </svg>
+                }
+                @case ('anti-impulso') {
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M12 3 4 6v6c0 5 3.4 9.4 8 10 4.6-.6 8-5 8-10V6l-8-3Z" />
+                    <path d="M9 13h6" />
+                  </svg>
+                }
+              }
+            </span>
+
+            <span class="conquista-conteudo">
+              <span class="conquista-status">
+                @if (item.desbloqueada) {
+                  Desbloqueada
+                } @else {
+                  Bloqueada
+                }
+              </span>
+              <span class="conquista-titulo">{{ item.conquista.titulo }}</span>
+              <span class="conquista-descricao">
+                @if (item.desbloqueada) {
+                  {{ item.conquista.descricao }}
+                } @else {
+                  Continue a jornada para descobrir.
+                }
+              </span>
+            </span>
+          </article>
+        </li>
+      }
+    </ul>
+  </section>
+</app-game-layout>

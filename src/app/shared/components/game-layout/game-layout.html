@@ -1,7 +1,5 @@
 <div class="layout">
-  <!-- Sidebar -->
   <aside class="sidebar" [class.aberta]="menuAberto()" aria-label="Menu do jogo">
-    <!-- Topo: logo -->
     <a routerLink="/" class="sidebar-logo" aria-label="Ir para a home do site">
       <img
         src="/images/logo_Orcamento_de_Guerra_principal.png"
@@ -10,7 +8,6 @@
       />
     </a>
 
-    <!-- Meio: menu -->
     <nav class="sidebar-nav">
       <ul class="sidebar-lista">
         @for (item of itensMenu; track item.rota) {
@@ -53,6 +50,19 @@
                       <path d="M13 9h3M13 13h3" />
                     </svg>
                   }
+                  @case ('conquistas') {
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="12" cy="9" r="6" />
+                      <path d="M9 14.5 7 22l5-3 5 3-2-7.5" />
+                    </svg>
+                  }
                   @case ('timeline') {
                     <svg
                       viewBox="0 0 24 24"
@@ -88,7 +98,6 @@
       </ul>
     </nav>
 
-    <!-- Base: sair -->
     <button type="button" class="sidebar-sair" (click)="sair()">
       <span class="sidebar-icone" aria-hidden="true">
         <svg
@@ -108,30 +117,27 @@
     </button>
   </aside>
 
-  <!-- Overlay mobile -->
   @if (menuAberto()) {
     <div class="sidebar-overlay" (click)="fecharMenu()" aria-hidden="true"></div>
   }
 
-  <!-- Área principal -->
   <div class="layout-principal">
-    <!-- HUD no topo -->
     <app-game-hud></app-game-hud>
 
-    <!-- Conteúdo da tela -->
     <main class="layout-conteudo">
-      <!-- Botão hamburguer mobile -->
-      <button type="button" class="btn-menu" aria-label="Abrir menu" (click)="toggleMenu()">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path
-            d="M4 6h16M4 12h16M4 18h16"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-          />
-        </svg>
-      </button>
+      <header class="topbar-mobile">
+        <button type="button" class="btn-menu" aria-label="Abrir menu" (click)="toggleMenu()">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M4 6h16M4 12h16M4 18h16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+        </button>
+      </header>
 
       <ng-content></ng-content>
     </main>

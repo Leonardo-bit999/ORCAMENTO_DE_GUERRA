@@ -1,37 +1,37 @@
 :root {
   /* Superfícies */
-  --bg-base: #0B0D0F;
+  --bg-base: #0b0d0f;
   /* Preto carvão — fundo principal */
-  --bg-surface: #171B1F;
+  --bg-surface: #171b1f;
   /* Grafite — cards */
-  --bg-elevated: #242A2F;
+  --bg-elevated: #242a2f;
   /* Cinza chumbo — superfícies elevadas */
 
   /* Destaques */
-  --green: #A8F000;
+  --green: #a8f000;
   /* Verde-limão — destaque principal */
-  --green-hover: #C4F53D;
+  --green-hover: #c4f53d;
   /* hover do verde */
-  --green-dim: #7AB800;
+  --green-dim: #7ab800;
   /* verde escuro para pressed */
-  --yellow: #FFC928;
+  --yellow: #ffc928;
   /* Amarelo solar — destaque secundário */
-  --yellow-hover: #FFD75C;
+  --yellow-hover: #ffd75c;
 
   /* Texto */
-  --text-primary: #F4F5F2;
+  --text-primary: #f4f5f2;
   /* Branco gelo */
-  --text-secondary: #A8B0B7;
+  --text-secondary: #a8b0b7;
   /* Cinza claro */
-  --text-muted: #6B7280;
+  --text-muted: #6b7280;
   /* Cinza mais escuro para labels */
 
   /* Semânticas */
-  --danger: #F0523A;
+  --danger: #f0523a;
   /* Vermelho queimado */
-  --success: #35D17A;
+  --success: #35d17a;
   /* Verde positivo */
-  --info: #5EB8FF;
+  --info: #5eb8ff;
   /* Azul informativo */
 
   /* Bordas e superfícies sutis */
@@ -102,4 +102,88 @@ app-root {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+/* =========================================================
+   Animações globais de transição entre telas
+   ========================================================= */
+
+/**
+ * Fade + slide sutil usado em todas as telas do jogo.
+ * Aplicar a classe `.animar-entrada` num container principal
+ * faz ele aparecer suavemente.
+ */
+@keyframes animarEntrada {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animar-entrada {
+  animation: animarEntrada 0.35s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/**
+ * Delays escalonados — útil para listas de cards.
+ * Cada item aparece 60ms depois do anterior.
+ */
+.delay-1 {
+  animation-delay: 0.04s;
+}
+
+.delay-2 {
+  animation-delay: 0.08s;
+}
+
+.delay-3 {
+  animation-delay: 0.12s;
+}
+
+.delay-4 {
+  animation-delay: 0.16s;
+}
+
+.delay-5 {
+  animation-delay: 0.2s;
+}
+
+.delay-6 {
+  animation-delay: 0.24s;
+}
+
+/**
+ * Pulso suave no HUD quando um valor muda.
+ * Aplicado via classe temporária pelo componente.
+ */
+@keyframes pulsarValor {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.08);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.valor-mudou {
+  animation: pulsarValor 0.4s ease;
+}
+
+/**
+ * Acessibilidade: respeita quem prefere menos movimento.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .animar-entrada,
+  .valor-mudou {
+    animation: none !important;
+  }
 }

@@ -1,0 +1,78 @@
+<div class="alerta-overlay" (click)="fecharModal()">
+  <div
+    class="alerta-card"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="conquista-titulo"
+    (click)="$event.stopPropagation()"
+  >
+    <div class="alerta-icone" aria-hidden="true">
+      @switch (conquista.icone) {
+        @case ('primeiros-passos') {
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 21v-8" />
+            <path d="M12 13c0-3 2-5 5-5 0 3-2 5-5 5Z" />
+            <path d="M12 13c0-2.5-1.8-4-4.5-4 0 2.5 1.8 4 4.5 4Z" />
+            <path d="M8 21h8" />
+          </svg>
+        }
+        @case ('reserva') {
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 3 4 6v6c0 5 3.4 9.4 8 10 4.6-.6 8-5 8-10V6l-8-3Z" />
+            <path d="m9 12 2 2 4-4" />
+          </svg>
+        }
+        @case ('planejador') {
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="9" />
+            <path d="m15.5 8.5-2 5-5 2 2-5 5-2Z" />
+          </svg>
+        }
+        @case ('anti-impulso') {
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
+            <path d="M13.7 21a2 2 0 0 1-3.4 0" />
+          </svg>
+        }
+      }
+    </div>
+
+    <span class="alerta-eyebrow">Nova conquista</span>
+
+    <h2 id="conquista-titulo" class="alerta-titulo">
+      {{ conquista.titulo }}
+    </h2>
+
+    <p class="alerta-descricao">{{ conquista.descricao }}</p>
+
+    <button type="button" class="alerta-btn" (click)="fecharModal()">Legal!</button>
+  </div>
+</div>

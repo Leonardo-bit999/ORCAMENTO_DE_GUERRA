@@ -1,12 +1,9 @@
 <section class="etapa">
   <header class="etapa-header">
     <h1 class="etapa-titulo">Crie seu personagem</h1>
-    <p class="etapa-sub">
-      Monte o personagem que vai enfrentar esta campanha.
-    </p>
+    <p class="etapa-sub">Monte o personagem que vai enfrentar esta campanha.</p>
   </header>
 
-  <!-- NOME -->
   <section class="grupo" aria-labelledby="perfil-nome-label">
     <div class="campo" [class.invalido]="nomeInvalido">
       <label id="perfil-nome-label" for="perfil-nome">Nome do personagem</label>
@@ -27,11 +24,8 @@
     </div>
   </section>
 
-  <!-- PONTO DE PARTIDA -->
   <section class="grupo" aria-labelledby="perfil-partida-label">
-    <span id="perfil-partida-label" class="grupo-label">
-      Escolha seu ponto de partida
-    </span>
+    <span id="perfil-partida-label" class="grupo-label"> Escolha seu ponto de partida </span>
 
     <ul class="lista-perfis">
       @for (p of perfis; track p.id) {
@@ -52,12 +46,8 @@
               <span class="perfil-frase">{{ p.frase }}</span>
 
               <span class="perfil-valores">
-                <span class="perfil-valor">
-                  Saldo: {{ formatarMoeda(p.saldoInicial) }}
-                </span>
-                <span class="perfil-valor">
-                  Reserva: {{ formatarMoeda(p.reservaInicial) }}
-                </span>
+                <span class="perfil-valor"> Saldo: {{ formatarMoeda(p.saldoInicial) }} </span>
+                <span class="perfil-valor"> Reserva: {{ formatarMoeda(p.reservaInicial) }} </span>
               </span>
 
               <span class="perfil-objetivo">

@@ -1,12 +1,9 @@
 <app-game-layout>
-  <section class="caderno">
-    <!-- Cabeçalho -->
+  <section class="caderno animar-entrada">
     <header class="caderno-header">
       <span class="caderno-tag">Caderno de Aprendizado</span>
       <h1 class="caderno-titulo">O que você já aprendeu</h1>
-      <p class="caderno-sub">
-        Cada missão deixa uma lição. Aqui elas ficam guardadas.
-      </p>
+      <p class="caderno-sub">Cada missão deixa uma lição. Aqui elas ficam guardadas.</p>
 
       <div class="caderno-progresso">
         <span class="progresso-label">
@@ -21,10 +18,9 @@
       </div>
     </header>
 
-    <!-- Lista -->
     <ul class="licoes-lista">
       @for (item of itens(); track item.licao.id; let i = $index) {
-        <li>
+        <li class="animar-entrada" [style.animation-delay]="i * 0.04 + 's'">
           <button
             type="button"
             class="licao-card"
@@ -42,12 +38,8 @@
                 <span class="licao-titulo">{{ item.licao.titulo }}</span>
                 <span class="licao-preview">{{ preview(item.licao) }}</span>
               } @else {
-                <span class="licao-titulo bloqueado">
-                  Lição ainda não desbloqueada
-                </span>
-                <span class="licao-preview bloqueado">
-                  Continue a jornada para revelar.
-                </span>
+                <span class="licao-titulo bloqueado"> Lição ainda não desbloqueada </span>
+                <span class="licao-preview bloqueado"> Continue a jornada para revelar. </span>
               }
             </span>
 
@@ -62,12 +54,7 @@
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   />
-                  <path
-                    d="M9 4v18"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.6"
-                  />
+                  <path d="M9 4v18" fill="none" stroke="currentColor" stroke-width="1.6" />
                   <path
                     d="M13 9h3M13 13h3"
                     fill="none"

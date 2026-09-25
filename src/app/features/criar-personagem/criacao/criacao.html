@@ -1,22 +1,24 @@
 <app-navbar />
 
-<!-- Aviso compacto, centralizado, entre navbar e corpo -->
 <aside class="criacao-aviso-wrap" aria-label="Aviso sobre o personagem">
   <p class="aviso-ficticio">
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6" />
-      <path d="M12 7v6M12 16.5v.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+      <path
+        d="M12 7v6M12 16.5v.5"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+      />
     </svg>
     <span>
-      Este personagem é fictício. As informações abaixo servem para definir o
-      cenário do jogo e não precisam representar sua vida real.
+      Este personagem é fictício. As informações abaixo servem para definir o cenário do jogo e não
+      precisam representar sua vida real.
     </span>
   </p>
 </aside>
 
-<!-- Corpo: split de 2 colunas -->
 <div class="criacao-corpo">
-  <!-- Coluna esquerda: barra + etapa + navegação -->
   <main class="criacao-esquerda">
     <div class="criacao-esquerda-inner">
       <app-barra-progresso
@@ -26,17 +28,23 @@
         (irPara)="irPara($event)"
       />
 
-      <!-- Etapa atual (com animação de fade) -->
       @for (etapa of [etapaAtual()]; track etapa) {
         <section class="etapa-wrapper">
-          @if (etapa === 1) { <app-etapa-perfil /> }
-          @if (etapa === 2) { <app-etapa-cenario /> }
-          @if (etapa === 3) { <app-etapa-objetivo /> }
-          @if (etapa === 4) { <app-etapa-estilo /> }
+          @if (etapa === 1) {
+            <app-etapa-perfil />
+          }
+          @if (etapa === 2) {
+            <app-etapa-cenario />
+          }
+          @if (etapa === 3) {
+            <app-etapa-objetivo />
+          }
+          @if (etapa === 4) {
+            <app-etapa-estilo />
+          }
         </section>
       }
 
-      <!-- Navegação -->
       <footer class="criacao-nav">
         @if (!ehPrimeira()) {
           <button type="button" class="btn-ghost" (click)="voltar()">
@@ -99,7 +107,6 @@
     </div>
   </main>
 
-  <!-- Coluna direita: resumo -->
   <aside class="criacao-direita" aria-label="Resumo do personagem">
     <div class="criacao-direita-inner">
       <app-etapa-resumo />
@@ -107,7 +114,6 @@
   </aside>
 </div>
 
-<!-- Drawer mobile (só aparece em telas pequenas) -->
 <button
   type="button"
   class="resumo-fab"
@@ -126,12 +132,8 @@
   Ver resumo
 </button>
 
-<app-drawer-resumo
-  [aberto]="drawerAberto()"
-  (fechar)="fecharDrawer()"
-/>
+<app-drawer-resumo [aberto]="drawerAberto()" (fechar)="fecharDrawer()" />
 
-<!-- Modal -->
 @if (modalAberto()) {
   <app-modal-confirmar
     [nome]="nome()"
@@ -143,4 +145,3 @@
     (cancelar)="fecharModal()"
   />
 }
-

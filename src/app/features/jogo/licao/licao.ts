@@ -1,7 +1,3 @@
-/* =========================================================
-   Licao — tela de lição do Caderno de Aprendizado
-   ========================================================= */
-
 import { Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -26,31 +22,24 @@ export class Licao {
 
   licaoId = '';
 
-  /** Lição carregada. */
   licao = computed<LicaoModel | null>(() => {
     if (!this.licaoId) return null;
     return buscarLicao(this.licaoId) ?? null;
   });
 
-  /** Missão que desbloqueou essa lição. */
   missao = computed<Missao | null>(() => {
     const l = this.licao();
     if (!l) return null;
     return MISSOES.find((m) => m.id === l.missaoId) ?? null;
   });
 
-  /** Frase de ancoragem personalizada da decisão do jogador. */
   ancoragem = computed<string | null>(() => {
     const m = this.missao();
     if (!m) return null;
 
-    // Pega o histórico dessa missão
-    const entry = this.gameState
-      .historico()
-      .find((e) => e.missaoId === m.id);
+    const entry = this.gameState.historico().find((e) => e.missaoId === m.id);
     if (!entry) return null;
 
-    // Acha a opção escolhida
     const opcao = m.opcoes.find((o) => o.id === entry.decisao);
     return opcao?.ancoragemLicao ?? null;
   });
@@ -68,7 +57,6 @@ export class Licao {
       return;
     }
 
-    // Só permite acesso se a lição foi desbloqueada
     if (!this.gameState.licaoDesbloqueada(id)) {
       this.router.navigate(['/jornada']);
       return;
@@ -77,7 +65,6 @@ export class Licao {
     this.licaoId = id;
   }
 
-  /** Parágrafos do conceito. */
   paragrafos = computed<string[]>(() => {
     const l = this.licao();
     if (!l) return [];
@@ -87,12 +74,10 @@ export class Licao {
       .filter((p) => p.length > 0);
   });
 
-  /** Volta pra jornada. */
   voltar() {
     this.router.navigate(['/jornada']);
   }
 
-  /** Vai pro caderno (lista todas as lições). */
   irParaCaderno() {
     this.router.navigate(['/caderno']);
   }

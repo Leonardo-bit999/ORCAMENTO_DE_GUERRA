@@ -8,9 +8,8 @@ describe('IconePerfil', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [IconePerfil]
-    })
-    .compileComponents();
+      imports: [IconePerfil],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(IconePerfil);
     component = fixture.componentInstance;

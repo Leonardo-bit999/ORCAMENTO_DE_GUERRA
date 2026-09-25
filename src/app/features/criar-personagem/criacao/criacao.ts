@@ -120,13 +120,10 @@ export class Criacao {
     await new Promise((r) => setTimeout(r, 900));
 
     try {
-      // 1. Cria o Character (a partir do wizard)
       const character = this.svc.finalizar();
 
-      // 2. Inicializa o EstadoJogo com esse Character
       this.gameState.inicializar(character);
 
-      // 3. Navega pra Jornada
       this.router.navigate(['/jornada']);
     } catch (e) {
       this.carregando.set(false);

@@ -1,7 +1,6 @@
 <app-game-layout>
   @if (licao()) {
-    <section class="licao">
-      <!-- Cabeçalho -->
+    <section class="licao animar-entrada">
       <header class="licao-header">
         <span class="licao-tag">
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -34,14 +33,12 @@
         <h1 class="licao-titulo">{{ licao()!.titulo }}</h1>
       </header>
 
-      <!-- Conceito -->
       <article class="licao-conceito">
         @for (p of paragrafos(); track $index) {
           <p class="licao-paragrafo">{{ p }}</p>
         }
       </article>
 
-      <!-- Ancoragem personalizada -->
       @if (ancoragem()) {
         <aside class="licao-ancoragem">
           <span class="ancoragem-label">No seu caso:</span>
@@ -49,11 +46,8 @@
         </aside>
       }
 
-      <!-- Ações -->
       <footer class="licao-acoes">
-        <button type="button" class="btn-ghost" (click)="irParaCaderno()">
-          Ver o Caderno
-        </button>
+        <button type="button" class="btn-ghost" (click)="irParaCaderno()">Ver o Caderno</button>
 
         <button type="button" class="btn-primario" (click)="voltar()">
           Voltar pra Jornada

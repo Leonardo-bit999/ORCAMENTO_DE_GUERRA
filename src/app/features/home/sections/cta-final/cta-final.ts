@@ -1,20 +1,12 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router'; // Importe o Router
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-cta-final',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './cta-final.html',
-  styleUrls: ['./cta-final.css'],
+  styleUrl: './cta-final.css',
 })
-export class CtaFinal {
-  // Injeção de dependência moderna usando inject()
-  private router = inject(Router);
-
-  iniciarSimulacao(): void {
-    // Opção 1: Navegar para uma rota específica do jogo
-    this.router.navigate(['/simulacao']);
-  }
-}
+export class CtaFinal {}

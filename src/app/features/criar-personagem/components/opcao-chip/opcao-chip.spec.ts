@@ -8,9 +8,8 @@ describe('OpcaoChip', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OpcaoChip]
-    })
-    .compileComponents();
+      imports: [OpcaoChip],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(OpcaoChip);
     component = fixture.componentInstance;

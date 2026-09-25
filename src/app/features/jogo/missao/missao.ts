@@ -1,7 +1,3 @@
-/* =========================================================
-   Missao — tela de missão do jogo
-   ========================================================= */
-
 import { Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -26,13 +22,10 @@ export class Missao {
   private gameState = inject(GameStateService);
   private decision = inject(DecisionService);
 
-  /** Erro ao tentar processar a decisão. */
   erro = signal<string | null>(null);
 
-  /** Missão carregada. */
   missao = signal<MissaoModel | null>(null);
 
-  /** Estado atual (readonly). */
   estadoAtual = computed<EstadoJogo | null>(() => this.gameState.estado());
 
   constructor() {
@@ -49,7 +42,6 @@ export class Missao {
       return;
     }
 
-    // Valida se a missão está disponível
     if (!this.gameState.missaoDisponivel(missao)) {
       this.router.navigate(['/jornada']);
       return;
@@ -58,14 +50,12 @@ export class Missao {
     this.missao.set(missao);
   }
 
-  /** Título da missão (com prefixo se for evento). */
   tituloComPrefixo = computed(() => {
     const m = this.missao();
     if (!m) return '';
     return m.tipo === 'evento' ? `⚡ ${m.titulo}` : m.titulo;
   });
 
-  /** Abertura resolvida (executa função ou usa string). */
   abertura = computed<string>(() => {
     const m = this.missao();
     const e = this.estadoAtual();
@@ -73,7 +63,6 @@ export class Missao {
     return this.resolverTexto(m.contexto.abertura, e);
   });
 
-  /** Corpo resolvido. */
   corpo = computed<string>(() => {
     const m = this.missao();
     const e = this.estadoAtual();
@@ -81,7 +70,6 @@ export class Missao {
     return this.resolverTexto(m.contexto.corpo, e);
   });
 
-  /** Pensamento resolvido (pode ser undefined). */
   pensamento = computed<string | null>(() => {
     const m = this.missao();
     const e = this.estadoAtual();
@@ -89,7 +77,6 @@ export class Missao {
     return this.resolverTexto(m.contexto.pensamento, e);
   });
 
-  /** Opções filtradas por condicao. */
   opcoesDisponiveis = computed<Opcao[]>(() => {
     const m = this.missao();
     const e = this.estadoAtual();
@@ -97,17 +84,14 @@ export class Missao {
     return m.opcoes.filter((o) => !o.condicao || o.condicao(e));
   });
 
-  /** Formata dinheiro. */
   formatarMoeda(valor: number): string {
     return `R$ ${valor.toLocaleString('pt-BR')}`;
   }
 
-  /** Verifica se a opção tem custo pra mostrar. */
   mostrarCusto(opcao: Opcao): boolean {
     return opcao.custo > 0;
   }
 
-  /** Escolhe uma opção. */
   escolher(opcao: Opcao) {
     const m = this.missao();
     const e = this.estadoAtual();
@@ -124,10 +108,9 @@ export class Missao {
     this.router.navigate(['/resultado', m.id]);
   }
 
-  /** Resolve um TextoContexto (string ou função). */
   private resolverTexto(
     texto: string | ((estado: EstadoJogo) => string),
-    estado: EstadoJogo
+    estado: EstadoJogo,
   ): string {
     return typeof texto === 'function' ? texto(estado) : texto;
   }

@@ -78,7 +78,10 @@
   background: var(--bg-base);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-md);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
 }
 
 .input-wrap:hover {
@@ -153,8 +156,12 @@
   font-weight: 700;
   letter-spacing: 0.04em;
   cursor: pointer;
-  transition: color 0.18s ease, border-color 0.18s ease,
-    background 0.18s ease, box-shadow 0.2s ease, transform 0.12s ease;
+  transition:
+    color 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease,
+    box-shadow 0.2s ease,
+    transform 0.12s ease;
 }
 
 .btn-primario {
@@ -166,7 +173,8 @@
 .btn-primario:hover:not(:disabled) {
   background: var(--green-hover);
   border-color: var(--green-hover);
-  box-shadow: 0 0 0 6px var(--glow-green-soft),
+  box-shadow:
+    0 0 0 6px var(--glow-green-soft),
     0 8px 30px -10px var(--glow-green);
 }
 

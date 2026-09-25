@@ -8,9 +8,8 @@ describe('EtapaPerfil', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EtapaPerfil]
-    })
-    .compileComponents();
+      imports: [EtapaPerfil],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(EtapaPerfil);
     component = fixture.componentInstance;

@@ -1,7 +1,3 @@
-/* =========================================================
-   Tipos base
-   ========================================================= */
-
 export type PerfilId = 'planejador' | 'reorganizador' | 'independente' | 'iniciante';
 
 export type Moradia = 'familia' | 'sozinho' | 'divide' | 'republica';
@@ -33,10 +29,6 @@ export type Objetivo =
 export type EstiloVida = 'economico' | 'equilibrado' | 'confortavel';
 
 export type Vibe = 'social' | 'caseiro' | 'fitness' | 'geek' | 'criativo';
-
-/* =========================================================
-   Tabelas fixas
-   ========================================================= */
 
 export const RENDA_MENSAL_POR_FONTE: Record<FonteRenda, number> = {
   'jovem-aprendiz': 800,
@@ -70,11 +62,6 @@ export const MODIFICADOR_MORADIA: Record<Moradia, number> = {
   divide: 0.7,
   republica: 0.8,
 };
-
-/* =========================================================
-   Presets de perfil (4 perfis fixos)
-   ========================================================= */
-
 export interface PerfilPreset {
   id: PerfilId;
   titulo: string;
@@ -125,10 +112,6 @@ export const PERFIS: PerfilPreset[] = [
       'Aprender os fundamentos da organização financeira e construir os primeiros hábitos.',
   },
 ];
-
-/* =========================================================
-   Listas de opções
-   ========================================================= */
 
 export const MORADIAS: { id: Moradia; label: string }[] = [
   { id: 'familia', label: 'Mora com a família' },
@@ -206,17 +189,10 @@ export const VIBES: { id: Vibe; label: string; descricao: string }[] = [
   { id: 'geek', label: 'Geek', descricao: 'Tecnologia, jogos e cultura digital.' },
   { id: 'criativo', label: 'Criativo', descricao: 'Arte, música e projetos pessoais.' },
 ];
-
-/* =========================================================
-   Draft e Character final
-   ========================================================= */
-
 export interface CharacterDraft {
-  // Etapa 1
   nome: string;
   perfilId: PerfilId | null;
 
-  // Etapa 2
   moradia: Moradia | null;
   fonteRenda: FonteRenda | null;
   usarRendaSugerida: boolean;
@@ -224,11 +200,9 @@ export interface CharacterDraft {
   custoVida: CustoVida | null;
   responsabilidades: Responsabilidade[];
 
-  // Etapa 3
   objetivo: Objetivo | null;
   objetivoOutroTexto: string;
 
-  // Etapa 4
   estiloVida: EstiloVida | null;
   vibe: Vibe | null;
 }

@@ -28,7 +28,7 @@ export class BarraProgresso {
 
   clicar(numero: number) {
     if (!this.clicavel) return;
-    if (numero >= this.atual) return; // só volta pra etapas já visitadas
+    if (numero >= this.atual) return;
     this.irPara.emit(numero);
   }
 }

@@ -8,9 +8,8 @@ describe('BarraProgresso', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BarraProgresso]
-    })
-    .compileComponents();
+      imports: [BarraProgresso],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(BarraProgresso);
     component = fixture.componentInstance;

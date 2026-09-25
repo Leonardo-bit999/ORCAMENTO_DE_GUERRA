@@ -1,7 +1,3 @@
-/* =========================================================
-   Caderno — lista de lições do Caderno de Aprendizado
-   ========================================================= */
-
 import { Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -26,7 +22,6 @@ export class Caderno {
   private router = inject(Router);
   private gameState = inject(GameStateService);
 
-  /** Lições com estado (desbloqueada ou não). */
   itens = computed<ItemCaderno[]>(() => {
     return LICOES.map((licao) => ({
       licao,
@@ -34,7 +29,6 @@ export class Caderno {
     }));
   });
 
-  /** Quantidade desbloqueada / total. */
   progresso = computed(() => {
     const itens = this.itens();
     return {
@@ -43,14 +37,12 @@ export class Caderno {
     };
   });
 
-  /** Primeiro trecho do conceito (pra preview no card). */
   preview(licao: Licao): string {
     const texto = licao.conceito.split('\n\n')[0] ?? '';
     if (texto.length <= 140) return texto;
     return texto.slice(0, 140).trim() + '...';
   }
 
-  /** Abre a lição. */
   abrir(item: ItemCaderno) {
     if (!item.desbloqueada) return;
     this.router.navigate(['/licao', item.licao.id]);

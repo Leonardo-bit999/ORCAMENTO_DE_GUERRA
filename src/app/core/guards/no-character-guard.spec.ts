@@ -4,8 +4,8 @@ import { CanActivateFn } from '@angular/router';
 import { noCharacterGuard } from './no-character-guard';
 
 describe('noCharacterGuard', () => {
-  const executeGuard: CanActivateFn = (...guardParameters) => 
-      TestBed.runInInjectionContext(() => noCharacterGuard(...guardParameters));
+  const executeGuard: CanActivateFn = (...guardParameters) =>
+    TestBed.runInInjectionContext(() => noCharacterGuard(...guardParameters));
 
   beforeEach(() => {
     TestBed.configureTestingModule({});

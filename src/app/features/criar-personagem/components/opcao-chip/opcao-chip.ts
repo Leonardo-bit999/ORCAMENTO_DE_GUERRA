@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 })
 export class OpcaoChip {
   @Input({ required: true }) label = '';
-  @Input() sub = ''; // descrição curta embaixo (opcional)
+  @Input() sub = '';
   @Input() selecionado = false;
   @Input() disabled = false;
 

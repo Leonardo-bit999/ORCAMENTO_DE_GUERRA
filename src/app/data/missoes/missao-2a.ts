@@ -1,16 +1,8 @@
-/* =========================================================
-   Missão 2A — Uma chance de crescer
-   ========================================================= */
-
 import { Missao } from '../../core/models/missao.model';
 import { EstadoJogo } from '../../core/models/estado-jogo.model';
 
 const CUSTO_CURSO = 250;
 
-/**
- * Abertura dinâmica: reconhece o estado da reserva do jogador.
- * Diferente da M1, aqui a leitura é sobre o DINHEIRO, não o perfil.
- */
 function aberturaPorEstado(estado: EstadoJogo): string {
   const reserva = estado.financeiro.reserva;
 
@@ -25,9 +17,6 @@ function aberturaPorEstado(estado: EstadoJogo): string {
   return 'Você tem pouca margem. Apareceu uma oportunidade que exige uma decisão cuidadosa.';
 }
 
-/**
- * Corpo da missão — a situação.
- */
 function corpoCurso(estado: EstadoJogo): string {
   const disponivel = estado.financeiro.disponivel;
   const reserva = estado.financeiro.reserva;
@@ -43,9 +32,6 @@ function corpoCurso(estado: EstadoJogo): string {
   ].join('\n');
 }
 
-/**
- * Pensamento do personagem — varia conforme a reserva.
- */
 function pensamentoCurso(estado: EstadoJogo): string {
   const reserva = estado.financeiro.reserva;
 
@@ -73,9 +59,6 @@ export const MISSAO_2A: Missao = {
   },
 
   opcoes: [
-    // =========================================================
-    // A — PAGAR COM O DISPONÍVEL
-    // =========================================================
     {
       id: 'pagar-com-disponivel',
       titulo: 'Pago com o que tenho',
@@ -95,9 +78,6 @@ export const MISSAO_2A: Missao = {
       ancoragemLicao: 'Você escolheu manter a reserva e ajustar os gastos.',
     },
 
-    // =========================================================
-    // B — USAR A RESERVA
-    // =========================================================
     {
       id: 'usar-reserva',
       titulo: 'Uso parte da reserva',
@@ -117,9 +97,6 @@ export const MISSAO_2A: Missao = {
       ancoragemLicao: 'Você escolheu usar parte da reserva.',
     },
 
-    // =========================================================
-    // C — ADIAR
-    // =========================================================
     {
       id: 'adiar-curso',
       titulo: 'Adio o curso',

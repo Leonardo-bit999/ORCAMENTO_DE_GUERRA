@@ -1,83 +1,114 @@
 <aside class="hud" aria-label="Indicadores do jogador">
-  <!-- Financeiro -->
   <div class="hud-item">
     <span class="hud-icone" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-           stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
         <circle cx="12" cy="12" r="9" />
         <path d="M12 7v10M9 9.5h5a1.5 1.5 0 0 1 0 3h-4a1.5 1.5 0 0 0 0 3h5" />
       </svg>
     </span>
     <div class="hud-conteudo">
       <span class="hud-label">Disponível</span>
-      <span class="hud-valor">{{ formatarMoeda(disponivel()) }}</span>
+      <span class="hud-valor" [class.valor-mudou]="disponivelPulsou()">
+        {{ formatarMoeda(disponivel()) }}
+      </span>
     </div>
   </div>
 
   <div class="hud-item">
     <span class="hud-icone" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-           stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
         <path d="M12 3 4 6v6c0 5 3.4 9.4 8 10 4.6-.6 8-5 8-10V6l-8-3Z" />
         <path d="m9 12 2 2 4-4" />
       </svg>
     </span>
     <div class="hud-conteudo">
       <span class="hud-label">Reserva</span>
-      <span class="hud-valor">{{ formatarMoeda(reserva()) }}</span>
+      <span class="hud-valor" [class.valor-mudou]="reservaPulsou()">
+        {{ formatarMoeda(reserva()) }}
+      </span>
     </div>
   </div>
 
   <span class="hud-divisor" aria-hidden="true"></span>
 
-  <!-- Emocionais -->
   <div class="hud-item">
     <span class="hud-icone hud-icone-bem" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-           stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
         <path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10Z" />
       </svg>
     </span>
     <div class="hud-conteudo">
       <span class="hud-label">Bem-estar</span>
-      <span class="hud-valor">{{ bemEstar() }}</span>
+      <span class="hud-valor"> {{ bemEstar() }}<span class="hud-valor-max">/100</span> </span>
       <div class="hud-barra">
-        <div class="hud-barra-preenchida hud-barra-bem"
-             [style.width.%]="bemEstar()"></div>
+        <div class="hud-barra-preenchida hud-barra-bem" [style.width.%]="bemEstar()"></div>
       </div>
     </div>
   </div>
 
   <div class="hud-item">
     <span class="hud-icone hud-icone-est" aria-hidden="true">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-       stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M13 2 4.5 13.5h6L9 22l8.5-11.5h-6L13 2Z" />
-  </svg>
-</span>
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M13 2 4.5 13.5h6L9 22l8.5-11.5h-6L13 2Z" />
+      </svg>
+    </span>
     <div class="hud-conteudo">
       <span class="hud-label">Estresse</span>
-      <span class="hud-valor">{{ estresse() }}</span>
+      <span class="hud-valor"> {{ estresse() }}<span class="hud-valor-max">/100</span> </span>
       <div class="hud-barra">
-        <div class="hud-barra-preenchida hud-barra-est"
-             [style.width.%]="estresse()"></div>
+        <div class="hud-barra-preenchida hud-barra-est" [style.width.%]="estresse()"></div>
       </div>
     </div>
   </div>
 
   <span class="hud-divisor" aria-hidden="true"></span>
 
-  <!-- XP -->
   <div class="hud-item">
     <span class="hud-icone" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-           stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
         <path d="m12 3 2.6 5.6 6.4.8-4.7 4.4 1.3 6.2L12 17l-5.6 3 1.3-6.2L3 9.4l6.4-.8L12 3Z" />
       </svg>
     </span>
     <div class="hud-conteudo">
       <span class="hud-label">XP</span>
-      <span class="hud-valor">{{ xp() }}</span>
+      <span class="hud-valor" [class.valor-mudou]="xpPulsou()">
+        {{ xp() }}
+      </span>
     </div>
   </div>
 </aside>

@@ -1,6 +1,5 @@
 <app-game-layout>
-  <section class="jornada">
-    <!-- Cabeçalho do capítulo -->
+  <section class="jornada animar-entrada">
     <header class="capitulo-header">
       <div class="capitulo-info">
         <span class="capitulo-tag">Capítulo {{ capituloAtual().ordem }}</span>
@@ -13,15 +12,11 @@
           {{ progresso().concluidas }} de {{ progresso().total }} missões
         </span>
         <div class="progresso-trilha">
-          <div
-            class="progresso-preenchido"
-            [style.width.%]="progresso().percentual"
-          ></div>
+          <div class="progresso-preenchido" [style.width.%]="progresso().percentual"></div>
         </div>
       </div>
     </header>
 
-    <!-- Trilha de missões -->
     <section class="trilha" aria-label="Missões do capítulo">
       <ol class="trilha-lista">
         @for (item of missoesDoCapitulo(); track item.missao.id; let i = $index) {
@@ -55,10 +50,22 @@
                   </svg>
                 } @else {
                   <svg viewBox="0 0 24 24">
-                    <rect x="5" y="11" width="14" height="9" rx="2"
-                          fill="none" stroke="currentColor" stroke-width="2" />
-                    <path d="M8 11V8a4 4 0 0 1 8 0v3"
-                          fill="none" stroke="currentColor" stroke-width="2" />
+                    <rect
+                      x="5"
+                      y="11"
+                      width="14"
+                      height="9"
+                      rx="2"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    />
+                    <path
+                      d="M8 11V8a4 4 0 0 1 8 0v3"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    />
                   </svg>
                 }
               </span>
@@ -86,7 +93,6 @@
       </ol>
     </section>
 
-    <!-- CTA -->
     <footer class="jornada-cta">
       @if (capitulo1Concluido()) {
         <button type="button" class="btn-primario" (click)="verJornadaFinanceira()">
@@ -119,26 +125,59 @@
       }
     </footer>
 
-    <!-- Capítulos bloqueados -->
     @if (capitulosBloqueados().length > 0) {
       <section class="capitulos-bloqueados" aria-label="Próximos capítulos">
-        <span class="bloqueado-label">Em breve</span>
+        <span class="bloqueado-label">
+          @if (capitulo1Concluido()) {
+            Próximos capítulos
+          } @else {
+            Em breve
+          }
+        </span>
+
         @for (cap of capitulosBloqueados(); track cap.id) {
-          <article class="capitulo-bloqueado">
+          <article
+            class="capitulo-bloqueado"
+            [class.liberado]="cap.id === 'cap-2' && capitulo1Concluido()"
+          >
             <div class="capitulo-bloqueado-topo">
               <span class="capitulo-bloqueado-cadeado" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                     stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="5" y="11" width="14" height="9" rx="2" />
-                  <path d="M8 11V8a4 4 0 0 1 8 0v3" />
-                </svg>
+                @if (cap.id === 'cap-2' && capitulo1Concluido()) {
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M5 12h14M13 6l6 6-6 6" />
+                  </svg>
+                } @else {
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect x="5" y="11" width="14" height="9" rx="2" />
+                    <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+                  </svg>
+                }
               </span>
-              <span class="capitulo-bloqueado-numero">
-                Capítulo {{ cap.ordem }}
-              </span>
+              <span class="capitulo-bloqueado-numero"> Capítulo {{ cap.ordem }} </span>
             </div>
+
             <h2 class="capitulo-bloqueado-titulo">{{ cap.titulo }}</h2>
             <p class="capitulo-bloqueado-descricao">{{ cap.descricao }}</p>
+
+            @if (cap.id === 'cap-2' && capitulo1Concluido()) {
+              <span class="capitulo-bloqueado-badge">
+                Novo capítulo desbloqueado — em construção
+              </span>
+            }
           </article>
         }
       </section>

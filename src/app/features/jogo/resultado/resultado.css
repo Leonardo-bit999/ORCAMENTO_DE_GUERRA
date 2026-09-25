@@ -38,7 +38,7 @@
   font-family: var(--font-mono);
   font-size: clamp(1.4rem, 2.6vw, 1.8rem);
   font-weight: 700;
-  color: #F4F5F2;
+  color: #f4f5f2;
   letter-spacing: -0.01em;
   line-height: 1.2;
   margin: 0;
@@ -48,7 +48,7 @@
   font-family: var(--font-mono);
   font-size: 1rem;
   font-style: italic;
-  color: #F4F5F2;
+  color: #f4f5f2;
   opacity: 0.75;
   line-height: 1.5;
   margin: 0;
@@ -75,7 +75,7 @@
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #F4F5F2;
+  color: #f4f5f2;
   opacity: 0.6;
   margin: 0;
 }
@@ -121,24 +121,24 @@
 }
 
 .impacto-icone-bem {
-  color: #5EB8FF;
+  color: #5eb8ff;
   background: rgba(94, 184, 255, 0.1);
 }
 
 .impacto-icone-est {
-  color: #FFC928;
+  color: #ffc928;
   background: rgba(255, 201, 40, 0.1);
 }
 
 .impacto-icone-xp {
-  color: #B57BFF;
+  color: #b57bff;
   background: rgba(181, 123, 255, 0.1);
 }
 
 .impacto-label {
   font-family: var(--font-mono);
   font-size: 0.88rem;
-  color: #F4F5F2;
+  color: #f4f5f2;
   opacity: 0.85;
 }
 
@@ -176,7 +176,7 @@
 .consequencia-texto {
   font-family: var(--font-mono);
   font-size: 0.95rem;
-  color: #F4F5F2;
+  color: #f4f5f2;
   line-height: 1.65;
   margin: 0;
 }
@@ -200,12 +200,15 @@
   background: var(--bg-surface);
   border: 1px dashed var(--border-strong);
   border-radius: var(--radius-md);
-  color: #F4F5F2;
+  color: #f4f5f2;
   font-family: var(--font-mono);
   font-size: 0.88rem;
   font-weight: 600;
   cursor: pointer;
-  transition: border-color 0.18s ease, color 0.18s ease, background 0.18s ease;
+  transition:
+    border-color 0.18s ease,
+    color 0.18s ease,
+    background 0.18s ease;
 }
 
 .ese-botao:hover {
@@ -252,7 +255,7 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #F4F5F2;
+  color: #f4f5f2;
   opacity: 0.7;
   margin: 0;
 }
@@ -268,7 +271,7 @@
 .ese-texto {
   font-family: var(--font-mono);
   font-size: 0.9rem;
-  color: #F4F5F2;
+  color: #f4f5f2;
   line-height: 1.6;
   margin: 0;
 }
@@ -276,7 +279,7 @@
 .ese-nota {
   font-family: var(--font-mono);
   font-size: 0.8rem;
-  color: #F4F5F2;
+  color: #f4f5f2;
   opacity: 0.6;
   line-height: 1.55;
   margin: 0;
@@ -308,13 +311,18 @@
   font-weight: 700;
   letter-spacing: 0.04em;
   cursor: pointer;
-  transition: background 0.18s ease, box-shadow 0.2s ease, transform 0.12s ease;
+  transition:
+    background 0.18s ease,
+    box-shadow 0.2s ease,
+    transform 0.12s ease;
 }
 
 .btn-primario:hover {
   background: var(--green-hover);
   border-color: var(--green-hover);
-  box-shadow: 0 0 0 6px var(--glow-green-soft), 0 8px 30px -10px var(--glow-green);
+  box-shadow:
+    0 0 0 6px var(--glow-green-soft),
+    0 8px 30px -10px var(--glow-green);
 }
 
 .btn-primario:active {

@@ -27,7 +27,6 @@ export class CharacterService {
   private _draft = signal<CharacterDraft>(this.carregarDraftInicial());
   readonly draft = this._draft.asReadonly();
 
-  // ---------- Helpers ----------
   private userId(): string | null {
     return this.auth.usuario()?.id ?? null;
   }
@@ -51,7 +50,6 @@ export class CharacterService {
     localStorage.setItem(KEY_DRAFT(uid), JSON.stringify(this._draft()));
   }
 
-  // ---------- Mutação ----------
   atualizar(parcial: Partial<CharacterDraft>) {
     this._draft.update((d) => ({ ...d, ...parcial }));
     this.persistir();
@@ -63,7 +61,6 @@ export class CharacterService {
     if (uid) localStorage.removeItem(KEY_DRAFT(uid));
   }
 
-  // ---------- Ações específicas ----------
   selecionarPerfil(perfilId: PerfilId) {
     this.atualizar({ perfilId });
   }
@@ -90,7 +87,6 @@ export class CharacterService {
     this.atualizar({ responsabilidades: novas });
   }
 
-  // ---------- Validação por etapa ----------
   etapaValida(etapa: EtapaId): boolean {
     const d = this._draft();
     switch (etapa) {
@@ -123,7 +119,6 @@ export class CharacterService {
     return this.etapaValida(1) && this.etapaValida(2) && this.etapaValida(3) && this.etapaValida(4);
   }
 
-  // ---------- Cálculos ----------
   saldoInicial(): number {
     const d = this._draft();
     const preset = PERFIS.find((p) => p.id === d.perfilId);
@@ -156,7 +151,6 @@ export class CharacterService {
     return Math.round(somaBase * multCusto * multMoradia);
   }
 
-  // ---------- Finalização ----------
   finalizar(): Character {
     const d = this._draft();
     const uid = this.userId();

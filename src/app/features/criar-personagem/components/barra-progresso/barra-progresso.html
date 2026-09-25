@@ -41,19 +41,13 @@
     </li>
   </ol>
 
-  <!-- Versão mobile -->
   <div class="barra-mobile">
-    <span class="barra-mobile-label">
-      ETAPA {{ atual }} DE {{ etapas.length }}
-    </span>
+    <span class="barra-mobile-label"> ETAPA {{ atual }} DE {{ etapas.length }} </span>
     <span class="barra-mobile-nome">
       {{ etapas[atual - 1]?.label }}
     </span>
     <div class="barra-mobile-trilha">
-      <span
-        class="barra-mobile-progresso"
-        [style.width.%]="(atual / etapas.length) * 100"
-      ></span>
+      <span class="barra-mobile-progresso" [style.width.%]="(atual / etapas.length) * 100"></span>
     </div>
   </div>
 </nav>

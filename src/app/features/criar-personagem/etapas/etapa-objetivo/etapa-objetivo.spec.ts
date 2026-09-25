@@ -8,9 +8,8 @@ describe('EtapaObjetivo', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EtapaObjetivo]
-    })
-    .compileComponents();
+      imports: [EtapaObjetivo],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(EtapaObjetivo);
     component = fixture.componentInstance;

@@ -1,13 +1,6 @@
-/* =========================================================
-   Missão 4 — O que ficou (retrospectiva + decisão final)
-   ========================================================= */
-
 import { Missao } from '../../core/models/missao.model';
 import { EstadoJogo } from '../../core/models/estado-jogo.model';
 
-/**
- * Mapeia o objetivo do jogador pra uma frase curta.
- */
 function objetivoFrase(estado: EstadoJogo): string {
   const objetivo = estado.perfil.objetivo;
 
@@ -33,16 +26,11 @@ function objetivoFrase(estado: EstadoJogo): string {
   }
 }
 
-/**
- * Abertura: reconhece objetivo + estado + pendência.
- */
 function aberturaFechamento(estado: EstadoJogo): string {
   const partes: string[] = [];
 
-  // 1. Objetivo
   partes.push(objetivoFrase(estado));
 
-  // 2. Estado atual
   const disponivel = estado.financeiro.disponivel;
   const reserva = estado.financeiro.reserva;
 
@@ -50,7 +38,6 @@ function aberturaFechamento(estado: EstadoJogo): string {
     `E olhando agora, sua reserva tá em R$ ${reserva} e seu disponível tá em R$ ${disponivel}.`,
   );
 
-  // 3. Pendência
   if (estado.pendencia) {
     partes.push(estado.pendencia.descricao);
   }
@@ -58,9 +45,6 @@ function aberturaFechamento(estado: EstadoJogo): string {
   return partes.join('\n\n');
 }
 
-/**
- * Corpo: situação final do capítulo.
- */
 function corpoFechamento(estado: EstadoJogo): string {
   const disponivel = estado.financeiro.disponivel;
 
@@ -87,9 +71,6 @@ function corpoFechamento(estado: EstadoJogo): string {
   ].join('\n');
 }
 
-/**
- * Pensamento: varia conforme a situação.
- */
 function pensamentoFechamento(estado: EstadoJogo): string {
   if (estado.pendencia) {
     return 'Tem uma coisa que ficou em aberto. Vou decidir se vale voltar nela.';
@@ -115,9 +96,6 @@ export const MISSAO_4: Missao = {
   },
 
   opcoes: [
-    // =========================================================
-    // A — CONSOLIDAR
-    // =========================================================
     {
       id: 'consolidar',
       titulo: 'Vou consolidar o que construí',
@@ -135,9 +113,6 @@ export const MISSAO_4: Missao = {
       ancoragemLicao: 'Você fechou o capítulo consolidando.',
     },
 
-    // =========================================================
-    // B — REVISITAR UMA DECISÃO ANTERIOR
-    // =========================================================
     {
       id: 'revisitar',
       titulo: 'Vou revisitar uma decisão',
@@ -158,9 +133,6 @@ export const MISSAO_4: Missao = {
       ancoragemLicao: 'Você fechou o capítulo revisitando uma decisão.',
     },
 
-    // =========================================================
-    // C — ENCERRAR SEM MEXER
-    // =========================================================
     {
       id: 'encerrar',
       titulo: 'Vou deixar como está',

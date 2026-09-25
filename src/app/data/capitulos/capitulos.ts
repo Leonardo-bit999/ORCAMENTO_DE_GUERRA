@@ -1,7 +1,3 @@
-/* =========================================================
-   Capítulos da Jornada
-   ========================================================= */
-
 import { Capitulo } from '../../core/models/capitulo.model';
 
 export const CAPITULOS: Capitulo[] = [
@@ -31,9 +27,6 @@ export const CAPITULOS: Capitulo[] = [
   },
 ];
 
-/**
- * Devolve o capítulo pelo id.
- */
 export function buscarCapitulo(id: string): Capitulo | undefined {
   return CAPITULOS.find((c) => c.id === id);
 }

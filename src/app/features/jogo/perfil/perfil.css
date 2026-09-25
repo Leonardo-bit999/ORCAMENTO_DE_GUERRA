@@ -56,7 +56,7 @@
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #F4F5F2;
+  color: #f4f5f2;
   opacity: 0.5;
 }
 
@@ -64,7 +64,7 @@
   font-family: var(--font-mono);
   font-size: 1.7rem;
   font-weight: 700;
-  color: #F4F5F2;
+  color: #f4f5f2;
   letter-spacing: -0.01em;
   margin: 0;
   line-height: 1.2;
@@ -84,7 +84,7 @@
 .perfil-frase {
   font-family: var(--font-mono);
   font-size: 0.85rem;
-  color: #F4F5F2;
+  color: #f4f5f2;
   opacity: 0.7;
   line-height: 1.55;
   margin: 0;
@@ -112,7 +112,7 @@
 .secao-destaque {
   font-family: var(--font-mono);
   font-size: 1rem;
-  color: #F4F5F2;
+  color: #f4f5f2;
   line-height: 1.6;
   margin: 0;
 }
@@ -145,7 +145,7 @@
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #F4F5F2;
+  color: #f4f5f2;
   opacity: 0.55;
 }
 
@@ -182,7 +182,7 @@
 .indicador-label {
   font-family: var(--font-mono);
   font-size: 0.85rem;
-  color: #F4F5F2;
+  color: #f4f5f2;
   opacity: 0.8;
 }
 
@@ -190,7 +190,7 @@
   font-family: var(--font-mono);
   font-size: 1rem;
   font-weight: 700;
-  color: #F4F5F2;
+  color: #f4f5f2;
 }
 
 .indicador-trilha {
@@ -207,11 +207,11 @@
 }
 
 .indicador-bem {
-  background: #5EB8FF;
+  background: #5eb8ff;
 }
 
 .indicador-est {
-  background: #FFC928;
+  background: #ffc928;
 }
 
 /* =========================================================
@@ -243,7 +243,7 @@
 .dado-chave {
   font-family: var(--font-mono);
   font-size: 0.85rem;
-  color: #F4F5F2;
+  color: #f4f5f2;
   opacity: 0.65;
 }
 
@@ -251,7 +251,7 @@
   font-family: var(--font-mono);
   font-size: 0.9rem;
   font-weight: 600;
-  color: #F4F5F2;
+  color: #f4f5f2;
   text-align: right;
 }
 
@@ -267,7 +267,7 @@
 .dados-chips-label {
   font-family: var(--font-mono);
   font-size: 0.78rem;
-  color: #F4F5F2;
+  color: #f4f5f2;
   opacity: 0.65;
 }
 
@@ -280,7 +280,7 @@
 .chip {
   font-family: var(--font-mono);
   font-size: 0.78rem;
-  color: #F4F5F2;
+  color: #f4f5f2;
   background: var(--bg-surface);
   border: 1px solid var(--border-strong);
   padding: 6px 14px;
@@ -325,4 +325,12 @@
   .dado-valor {
     text-align: left;
   }
+}
+
+.indicador-valor-max {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #f4f5f2;
+  opacity: 0.45;
+  margin-left: 2px;
 }

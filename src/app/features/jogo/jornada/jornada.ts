@@ -1,7 +1,3 @@
-/* =========================================================
-   Jornada — tela principal do jogo
-   ========================================================= */
-
 import { Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -79,5 +75,11 @@ export class Jornada {
 
   verJornadaFinanceira() {
     this.router.navigate(['/jornada-financeira']);
+  }
+
+  abrirCapituloBloqueado(capitulo: Capitulo) {
+    if (capitulo.id === 'cap-2' && this.capitulo1Concluido()) {
+      return;
+    }
   }
 }
