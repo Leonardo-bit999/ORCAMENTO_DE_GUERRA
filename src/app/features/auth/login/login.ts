@@ -20,6 +20,9 @@ export class Login {
   carregando = signal(false);
   erroServidor = signal<string | null>(null);
 
+  /** Feedback do "esqueci minha senha". */
+  mensagemEsqueci = signal<string | null>(null);
+
   form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     senha: ['', [Validators.required, Validators.minLength(8)]],
@@ -50,5 +53,20 @@ export class Login {
     } finally {
       this.carregando.set(false);
     }
+  }
+
+  esqueciSenha() {
+    const email = this.form.get('email')?.value?.trim();
+
+    if (!email) {
+      this.mensagemEsqueci.set('Preencha seu e-mail primeiro para receber as instruções.');
+      this.erroServidor.set(null);
+      return;
+    }
+
+    this.mensagemEsqueci.set(
+      `Se existisse uma conta com ${email}, enviaríamos um link de recuperação. Como este é um MVP local, use a opção "Criar conta" para fazer um novo cadastro.`,
+    );
+    this.erroServidor.set(null);
   }
 }

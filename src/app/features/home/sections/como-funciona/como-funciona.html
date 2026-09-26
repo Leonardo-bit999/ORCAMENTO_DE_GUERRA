@@ -34,11 +34,13 @@
       <div class="carrossel-trilha">
         @for (slide of slides; track slide.id; let i = $index) {
           <article
-            class="slide"
-            [class.ativo]="indiceAtual() === i"
-            [attr.aria-hidden]="indiceAtual() !== i"
-            [attr.aria-label]="slide.numero + ' — ' + slide.eyebrow"
-          >
+  class="slide"
+  [class.ativo]="indiceAtual() === i"
+  [class.anterior]="i < indiceAtual()"
+  [class.proximo]="i > indiceAtual()"
+  [attr.aria-hidden]="indiceAtual() !== i"
+  [attr.aria-label]="slide.numero + ' — ' + slide.eyebrow"
+>
             <div class="slide-texto">
               <span class="slide-eyebrow">
                 <span class="slide-numero">{{ slide.numero }}</span>

@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { INTERVALO_AUTOPLAY_MS, SLIDES_COMO_JOGA, SlideComoJoga } from './como-funciona.data';
 
+type Direcao = 'proximo' | 'anterior';
+
 @Component({
   selector: 'app-como-funciona',
   standalone: true,
@@ -14,6 +16,9 @@ export class ComoFunciona implements OnInit, OnDestroy {
 
   protected readonly indiceAtual = signal(0);
   protected readonly totalSlides = SLIDES_COMO_JOGA.length;
+
+  /** Direção da última transição (pra animar corretamente). */
+  protected readonly direcao = signal<Direcao>('proximo');
 
   protected readonly slideAtual = computed<SlideComoJoga>(() => this.slides[this.indiceAtual()]);
 
@@ -33,21 +38,37 @@ export class ComoFunciona implements OnInit, OnDestroy {
     this.pararAutoplay();
   }
 
-  protected irPara(index: number): void {
+  // =========================================================
+  // Navegação
+  // =========================================================
+
+  protected irPara(index: number, direcao?: Direcao): void {
     if (index < 0 || index >= this.totalSlides) return;
+    if (index === this.indiceAtual()) return;
+
+    // Detecta direção automaticamente se não foi passada
+    if (!direcao) {
+      direcao = index > this.indiceAtual() ? 'proximo' : 'anterior';
+    }
+
+    this.direcao.set(direcao);
     this.indiceAtual.set(index);
     this.reiniciarAutoplay();
   }
 
   protected anterior(): void {
     const novo = (this.indiceAtual() - 1 + this.totalSlides) % this.totalSlides;
-    this.irPara(novo);
+    this.irPara(novo, 'anterior');
   }
 
   protected proximo(): void {
     const novo = (this.indiceAtual() + 1) % this.totalSlides;
-    this.irPara(novo);
+    this.irPara(novo, 'proximo');
   }
+
+  // =========================================================
+  // Hover / foco (pausa autoplay)
+  // =========================================================
 
   protected pausar(): void {
     this.pausado = true;
@@ -61,6 +82,10 @@ export class ComoFunciona implements OnInit, OnDestroy {
     }
   }
 
+  // =========================================================
+  // Teclado
+  // =========================================================
+
   protected aoPressionarTecla(evento: KeyboardEvent): void {
     switch (evento.key) {
       case 'ArrowRight':
@@ -72,20 +97,25 @@ export class ComoFunciona implements OnInit, OnDestroy {
         evento.preventDefault();
         break;
       case 'Home':
-        this.irPara(0);
+        this.irPara(0, 'anterior');
         evento.preventDefault();
         break;
       case 'End':
-        this.irPara(this.totalSlides - 1);
+        this.irPara(this.totalSlides - 1, 'proximo');
         evento.preventDefault();
         break;
     }
   }
 
+  // =========================================================
+  // Autoplay
+  // =========================================================
+
   private iniciarAutoplay(): void {
     if (this.autoplayId || this.pausado) return;
     this.autoplayId = setInterval(() => {
       const novo = (this.indiceAtual() + 1) % this.totalSlides;
+      this.direcao.set('proximo');
       this.indiceAtual.set(novo);
     }, INTERVALO_AUTOPLAY_MS);
   }

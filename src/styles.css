@@ -21,9 +21,9 @@
   /* Texto */
   --text-primary: #f4f5f2;
   /* Branco gelo */
-  --text-secondary: #a8b0b7;
+  --text-secondary: #d4d8dc;
   /* Cinza claro */
-  --text-muted: #6b7280;
+  --text-muted: #9ca3af;
   /* Cinza mais escuro para labels */
 
   /* Semânticas */
@@ -66,6 +66,7 @@
   --font-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
 }
 
+
 /*RESET*/
 * {
   margin: 0;
@@ -103,15 +104,8 @@ app-root {
   white-space: nowrap;
   border: 0;
 }
-/* =========================================================
-   Animações globais de transição entre telas
-   ========================================================= */
+/*Animações globais de transição entre telas */
 
-/**
- * Fade + slide sutil usado em todas as telas do jogo.
- * Aplicar a classe `.animar-entrada` num container principal
- * faz ele aparecer suavemente.
- */
 @keyframes animarEntrada {
   from {
     opacity: 0;
@@ -128,10 +122,6 @@ app-root {
   animation: animarEntrada 0.35s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
-/**
- * Delays escalonados — útil para listas de cards.
- * Cada item aparece 60ms depois do anterior.
- */
 .delay-1 {
   animation-delay: 0.04s;
 }
@@ -156,10 +146,6 @@ app-root {
   animation-delay: 0.24s;
 }
 
-/**
- * Pulso suave no HUD quando um valor muda.
- * Aplicado via classe temporária pelo componente.
- */
 @keyframes pulsarValor {
   0% {
     transform: scale(1);
@@ -178,9 +164,6 @@ app-root {
   animation: pulsarValor 0.4s ease;
 }
 
-/**
- * Acessibilidade: respeita quem prefere menos movimento.
- */
 @media (prefers-reduced-motion: reduce) {
   .animar-entrada,
   .valor-mudou {

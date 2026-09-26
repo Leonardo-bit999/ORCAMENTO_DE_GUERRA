@@ -1,7 +1,7 @@
 <form class="auth-form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
   <header class="form-header">
     <h1 class="form-titulo">Entrar</h1>
-    <p class="form-sub">Acesse sua conta para continuar a campanha.</p>
+    <p class="form-sub">Acesse sua conta para continuar a jornada.</p>
   </header>
 
   <div class="campo" [class.invalido]="f.email.touched && f.email.invalid">
@@ -123,9 +123,30 @@
     <small class="erro" *ngIf="f.senha.touched && f.senha.errors?.['minlength']">
       A senha precisa ter ao menos 8 caracteres.
     </small>
+
+    <!-- NOVO: link esqueci senha -->
+    <div class="linha-esqueci">
+      <button type="button" class="link-esqueci" (click)="esqueciSenha()">
+        Esqueci minha senha
+      </button>
+    </div>
   </div>
 
   <p class="erro-servidor" *ngIf="erroServidor()">
+    @if (mensagemEsqueci()) {
+  <p class="mensagem-info">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6" />
+      <path
+        d="M12 8v6M12 16.5v.5"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+      />
+    </svg>
+    <span>{{ mensagemEsqueci() }}</span>
+  </p>
+}
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6" />
       <path

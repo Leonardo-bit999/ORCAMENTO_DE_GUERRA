@@ -8,7 +8,6 @@
   gap: 28px;
 }
 
-/* ---------- Header ---------- */
 .resumo-header {
   display: flex;
   flex-direction: column;
@@ -42,7 +41,6 @@
   font-size: 1.15rem;
 }
 
-/* ---------- Perfil ---------- */
 .resumo-perfil {
   display: flex;
   align-items: center;
