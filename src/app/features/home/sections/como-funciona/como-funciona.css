@@ -1,6 +1,10 @@
 :host {
   display: block;
   width: 100%;
+
+  /* Tokens locais (reduzem repetição) */
+  --label-size: 0.65rem;
+  --label-tracking: 0.14em;
 }
 
 .como-joga {
@@ -16,9 +20,6 @@
   padding: 0 2rem;
 }
 
-/* =========================================================
-   Cabeçalho
-   ========================================================= */
 .como-joga-cabecalho {
   max-width: 780px;
   margin-bottom: 3rem;
@@ -70,7 +71,6 @@
   outline-offset: 4px;
 }
 
-/* Progresso no topo */
 .carrossel-progresso {
   height: 3px;
   background: var(--bg-elevated);
@@ -85,13 +85,10 @@
   transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Trilha */
 .carrossel-trilha {
   position: relative;
 }
 
-/* Slide */
-/* Slide */
 .slide {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -111,26 +108,21 @@
   will-change: transform, opacity;
 }
 
-/* Slide que já passou (à esquerda) */
 .slide.anterior {
   transform: translateX(-100%);
-  opacity: 0;
 }
 
-/* Slide que ainda vai aparecer (à direita) */
 .slide.proximo {
   transform: translateX(100%);
-  opacity: 0;
 }
 
-/* Slide ativo (no centro) */
 .slide.ativo {
   position: relative;
-  opacity: 1;
   transform: translateX(0);
+  opacity: 1;
   pointer-events: auto;
 }
-/* ---------- Coluna esquerda: texto ---------- */
+
 .slide-texto {
   display: flex;
   flex-direction: column;
@@ -155,14 +147,14 @@
   font-weight: 800;
 }
 
+.slide-etiqueta {
+  color: var(--text-secondary);
+}
+
 .slide-divisor {
   width: 24px;
   height: 1px;
   background: var(--border-strong);
-}
-
-.slide-etiqueta {
-  color: var(--text-secondary);
 }
 
 .slide-titulo {
@@ -182,7 +174,6 @@
   line-height: 1.6;
 }
 
-/* ---------- Coluna direita: mockup ---------- */
 .slide-mockup {
   position: relative;
   display: flex;
@@ -191,7 +182,7 @@
   min-height: 280px;
 }
 
-/* Base dos mockups */
+/* Base compartilhada dos mockups */
 .mockup {
   width: 100%;
   max-width: 380px;
@@ -207,7 +198,19 @@
     0 0 40px -20px rgba(168, 240, 0, 0.15);
 }
 
-/* ---------- Mockup: missão ---------- */
+/* Tipografia mono reutilizada em várias partes do mockup */
+.mockup-tag,
+.mockup-step,
+.mockup-resultado-tag,
+.mockup-licao-tag {
+  font-family: var(--font-mono);
+  font-size: var(--label-size);
+  font-weight: 700;
+  letter-spacing: var(--label-tracking);
+  text-transform: uppercase;
+}
+
+/* ---------- Missão ---------- */
 .mockup-missao .mockup-header {
   display: flex;
   align-items: center;
@@ -215,13 +218,6 @@
 }
 
 .mockup-tag {
-  display: inline-flex;
-  align-items: center;
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
   color: var(--green);
   background: var(--glow-green-soft);
   border: 1px solid var(--border-green);
@@ -230,10 +226,6 @@
 }
 
 .mockup-step {
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
   color: var(--text-muted);
 }
 
@@ -259,11 +251,7 @@
   font-weight: 700;
 }
 
-/* ---------- Mockup: decisão ---------- */
-.mockup-decisao {
-  gap: 1rem;
-}
-
+/* ---------- Decisão ---------- */
 .mockup-pergunta {
   font-family: var(--font-mono);
   font-size: 0.82rem;
@@ -316,18 +304,13 @@
   color: var(--text-primary);
 }
 
-/* ---------- Mockup: resultado ---------- */
+/* ---------- Resultado ---------- */
 .mockup-resultado {
   gap: 0.75rem;
 }
 
 .mockup-resultado-tag {
   align-self: flex-start;
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
   color: var(--green);
 }
 
@@ -374,7 +357,7 @@
   font-weight: 700;
 }
 
-/* ---------- Mockup: lição ---------- */
+/* ---------- Lição ---------- */
 .mockup-licao {
   gap: 0.9rem;
   border-left: 3px solid var(--green);
@@ -384,11 +367,6 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
   color: var(--green);
 }
 
@@ -473,6 +451,7 @@
   transition: background 0.25s ease;
 }
 
+/* Área clicável invisível (acessibilidade) */
 .carrossel-dot::before {
   content: '';
   position: absolute;
@@ -497,6 +476,7 @@
 .carrossel-dot.ativo .carrossel-dot-preenchimento {
   transform: scaleX(1);
 }
+
 
 @media (max-width: 968px) {
   .como-joga {
@@ -601,6 +581,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .carrossel-progresso-fill,
   .slide,
   .carrossel-dot-preenchimento {
